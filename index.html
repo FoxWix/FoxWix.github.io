@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="./js/Preview.js"></script>
+    <script src="./js/OrbitControls.js"></script>
+    <script src="./js/Design.js"></script>
+
+    <!-- アップロードボタン -->
+    <input type="file" onchange="Resize(0), RePreview(0)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+    <input type="file" onchange="Resize(1), RePreview(1)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+    <input type="file" onchange="Resize(2), RePreview(2)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+    <input type="file" onchange="Resize(3), RePreview(3)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+    <input type="file" onchange="Resize(4), RePreview(4)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+    <input type="file" onchange="Resize(5), RePreview(5)" accept=".jpg,.png,image/jpeg,image/png"; id="face">
+
+    <!-- 画像のプレビュー -->
+    <h3>face1</h3>
+    <div id="preview0"></div>
+    <h3>face2</h3>
+    <div id="preview1"></div>
+    <h3>face3</h3>
+    <div id="preview2"></div>
+    <h3>face4</h3>
+    <div id="preview3"></div>
+    <h3>face5</h3>
+    <div id="preview4"></div>
+    <h3>face6</h3>
+    <div id="preview5"></div>
+
+    <!-- サイズ -->
+    <input type="radio" name="outside" checked="true">外寸
+    <input type="radio" name="inside">内寸
+    <p>長さ</p><input type="text" id="width" min="100" max="2000" value="500" onchange="ResizeAll(), RePreviewAll()">mm
+    <br>
+    <p>幅</p><input type="text" id="height" min="100" max="2000" value="500" onchange="ResizeAll(), RePreviewAll()">mm
+    <br>
+    <p>高さ</p><input type="text" id="depth" min="100" max="2000" value="500" onchange="RePreviewAll()">mm
+    
+    
+    <!-- カメラ・ボックス位置リセットボタン -->
+    <input type="button" value="すべてリセット" onclick="ResetAll()">
+	<input type="button" value="画像をリセット" onclick="ResetImage()">
+	
+    <!-- プレビュー -->
+    <style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		canvas {
+			display: block;
+		}
+    html, body, #wrapper{
+      width: 100%;
+      height: 100%;
+    }
+	</style>
+    <div id="wrapper">
+        <canvas id="canvas" width="" height=""></canvas>
+    </div>
+
+</body>
+</html>
