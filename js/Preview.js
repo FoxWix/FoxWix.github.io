@@ -12,8 +12,8 @@ window.addEventListener('DOMContentLoaded', init);
 function GetColor( face_id ){
 
   //指定サイズを取得
-  const w = parseInt(document.getElementById("width").value);
-  const h = parseInt(document.getElementById("height").value);
+  const w = parseInt(document.getElementById('length').value);
+  const h = parseInt(document.getElementById('width').value);
 
   //canvasの設定
   const place = document.createElement('canvas');
@@ -97,8 +97,8 @@ function Resize( face_id ){
   if ( face_id > 5 ) return;
 
   //長さ、幅を取得
-  const new_width = parseInt(document.getElementById("width").value);
-  const new_height = parseInt(document.getElementById("height").value);
+  const new_width = parseInt(document.getElementById("length").value);
+  const new_height = parseInt(document.getElementById("width").value);
 
   //画像の取得
   const file = document.querySelectorAll('#face')[face_id].files[0];
@@ -135,6 +135,7 @@ function Resize( face_id ){
         //新しいサイズで画像を描画
         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, new_width, new_height);
 
+        document.getElementById('preview' + face_id).src = canvas.toDataURL();
       }
 
   }, false );
@@ -179,9 +180,9 @@ var camera, controls, stats, box, scene, textures;
 var currentCameraPos = 2000;
 var X = 1500;
 var Y = 1000;
-var InitWidth = 1000;
-var InitHeight = 500;
-var InitDepth = 500;
+var InitWidth = 300;
+var InitHeight = 330;
+var InitDepth = 200;
 //
 //  プレビュー表示
 //
@@ -218,12 +219,12 @@ function init() {
   //テクスチャの設定
   const loadPic = new THREE.TextureLoader();
   textures = [
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/1.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/2.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/3.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/4.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/5.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../img/6.jpg' )})
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/1.jpg' )}),
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/2.jpg' )}),
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/3.jpg' )}),
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/4.jpg' )}),
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/5.jpg' )}),
+    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/6.jpg' )})
   ];
 
   let material = textures;
@@ -260,8 +261,8 @@ function RePreview( face_id ){
   scene.clear();
   
   //指定サイズを取得
-  const width = parseInt(document.getElementById('width').value);
-  const height = parseInt(document.getElementById('height').value);
+  const width = parseInt(document.getElementById('length').value);
+  const height = parseInt(document.getElementById('width').value);
   const depth = parseInt(document.getElementById('depth').value);
 
   //ボックスを再生成
@@ -308,7 +309,7 @@ function RePreview( face_id ){
   } else {
     
     //画像が選択されていない面は初期画像を設定
-    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../img/' + (face_id + 1) + '.jpg' )});
+    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (face_id + 1) + '.jpg' )});
   
   }
 
@@ -341,8 +342,8 @@ function ResetImage(){
 	scene.clear();
 	
 	//指定サイズを取得
-  const width = parseInt(document.getElementById('width').value);
-  const height = parseInt(document.getElementById('height').value);
+  const width = parseInt(document.getElementById('length').value);
+  const height = parseInt(document.getElementById('width').value);
   const depth = parseInt(document.getElementById('depth').value);
 
   //ボックスを再生成
@@ -367,7 +368,7 @@ function ResetImage(){
     GetColor(index);
 		
 		//初期画像を設定
-		textures[index] = new THREE.MeshBasicMaterial({map: loadPic.load( '../img/' + (index + 1) + '.jpg' )});
+		textures[index] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (index + 1) + '.jpg' )});
 		
 		//新しいテクスチャの設定
   	let material = textures;
