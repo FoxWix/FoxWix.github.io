@@ -12,8 +12,8 @@ window.addEventListener('DOMContentLoaded', init);
 function GetColor( face_id ){
 
   //指定サイズを取得
-  const w = parseInt(document.getElementById('length').value);
-  const h = parseInt(document.getElementById('width').value);
+  const l = GetLength();
+  const w = GetWidth();
 
   //canvasの設定
   const place = document.createElement('canvas');
@@ -32,6 +32,7 @@ function GetColor( face_id ){
   
   }
   preview.appendChild(place);
+  AppendPreview(face_id, place);
 
   //選択された色を取得
   let selectvalue = document.getElementById('face' + face_id).value;
@@ -68,12 +69,12 @@ function GetColor( face_id ){
   img.onload = function () {
 
     //canvasの初期化
-    place.width = w;
-    place.height = h;
-    ctx.clearRect(0, 0, w, h);
+    place.width = l;
+    place.height = w;
+    ctx.clearRect(0, 0, l, w);
     
     //新しいサイズで画像を描画
-    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h);
+    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, l, w);
 
     //ボックスのテクスチャに設定
     textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( path )});
@@ -90,15 +91,12 @@ function GetColor( face_id ){
 ///////////////////////////////////////////////////
 
 //
-//  指定された幅、高さで画像を整形し、アップロード
+//  300 * 330で画像を表示
 //
-function Resize( face_id ){
+function ShowPreview( face_id ){
 
-  if ( face_id > 5 ) return;
-
-  //長さ、幅を取得
-  const new_width = parseInt(document.getElementById("length").value);
-  const new_height = parseInt(document.getElementById("width").value);
+  const new_length = 300;
+  const new_width = 330;
 
   //画像の取得
   const file = document.querySelectorAll('#face')[face_id].files[0];
@@ -112,14 +110,7 @@ function Resize( face_id ){
   const ctx = canvas.getContext('2d');
   
   //プレビューの設定
-  const preview = document.getElementById('preview' + face_id);
-  if (  preview.firstChild  ) {
-
-    preview.removeChild(preview.firstChild);
-
-  }
-  preview.appendChild(canvas);
-
+  AppendPreview(face_id, canvas);
 
   reader.addEventListener("load", function () {
 
@@ -128,14 +119,15 @@ function Resize( face_id ){
       img.onload = function () {
 
         //canvasの初期化
-        canvas.width = new_width;
-        canvas.height = new_height;
-        ctx.clearRect(0, 0, new_width, new_height);
+        canvas.width = new_length;
+        canvas.height = new_width;
+        ctx.clearRect(0, 0, new_length, new_width);
 
         //新しいサイズで画像を描画
-        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, new_width, new_height);
+        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, new_length, new_width);
 
         document.getElementById('preview' + face_id).src = canvas.toDataURL();
+
       }
 
   }, false );
@@ -147,25 +139,57 @@ function Resize( face_id ){
   
   }
 
+  RePreview(face_id);
+  
 }
 
 //
-//  画像がアップロードされている面をリサイズする
+//  指定された幅、高さで画像を整形し、アップロード
 //
-function ResizeAll(){
+function DrawImage( width, height, face_id ){
 
-  for ( let faceno = 0; faceno < 6; ++faceno ){
+  //アップロードファイル取得
+  const file = GetImage(face_id);
 
-    let file = document.querySelectorAll('#face')[faceno].files[0];
+  //リサイズの準備
+  const img = new Image();
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
 
-    if ( file != null ){
+  const loadPic = new THREE.TextureLoader();
 
-      Resize(faceno);
+  const reader = new FileReader();
+  reader.addEventListener("load", function () {
+
+    img.src = reader.result;
     
+    img.onload = function () {
+
+      //canvasの初期化
+      canvas.width = width;
+      canvas.height = height;
+      ctx.clearRect(0, 0, width,  height);
+
+      //新しいサイズで画像を描画
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, width, height);
+
+      //対応する面に表示
+      textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( canvas.toDataURL() )});
+
     }
+  }, false );
+
+  if( file ){
+
+    //アップロードファイル読み込み
+    reader.readAsDataURL( file );
+
+  } else {
+    
+    //画像が選択されていない面は初期画像を設定
+    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (face_id + 1) + '.jpg' )});
   
   }
-
 }
 
 ///////////////////////////////////////////////////
@@ -180,18 +204,22 @@ var camera, controls, stats, box, scene, textures;
 var currentCameraPos = 2000;
 var X = 1500;
 var Y = 1000;
-var InitWidth = 300;
-var InitHeight = 330;
+var InitLength = 300;
+var InitWidth = 330;
 var InitDepth = 200;
+var InitScaleX = 2;
+var InitScaleY = 2;
+var InitScaleZ = 2;
+var InitAxesLength = 700;
 //
 //  プレビュー表示
 //
 function init() {
 
   //wrapperタグから画面の大きさを設定
-  let wrapper = document.getElementById('wrapper');
-  const width = wrapper.offsetWidth;
-  const height = wrapper.offsetHeight;
+  let offsetsize = GetOffsetSize('wrapper');
+  const width = offsetsize['width'];
+  const height = offsetsize['height'];
 
   //レンダラーを作成
   const renderer = new THREE.WebGLRenderer({
@@ -201,11 +229,11 @@ function init() {
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
-
+  
   //シーンを作成
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0x707070 );
-  
+
   //カメラを作成
   camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
   camera.position.set(X, Y, +currentCameraPos);
@@ -214,22 +242,29 @@ function init() {
   controls = new THREE.OrbitControls( camera, renderer.domElement );
   
   //箱を作成
-  const geometry = new THREE.BoxGeometry(InitWidth, InitHeight, InitDepth);
+  const geometry = new THREE.BoxGeometry(InitWidth, InitDepth, InitLength);
   
   //テクスチャの設定
   const loadPic = new THREE.TextureLoader();
   textures = [
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/1.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/2.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/3.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/4.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/5.jpg' )}),
-    	new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/6.jpg' )})
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/1.jpg' )}),
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/2.jpg' )}),
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/3.jpg' )}),
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/4.jpg' )}),
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/5.jpg' )}),
+    new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/6.jpg' )})
   ];
-
+    
   let material = textures;
   box = new THREE.Mesh(geometry, material);
+  //ボックスのスケールを2倍に設定
+  box.scale.set(InitScaleX, InitScaleY, InitScaleZ);
   scene.add(box);
+
+  //XYZ軸を追加
+  const currentSize = GetSize();
+  let axes = new THREE.AxesHelper(InitAxesLength);
+  scene.add(axes);
 
   //光源
 	var light = new THREE.AmbientLight(0xffffff);
@@ -261,62 +296,41 @@ function RePreview( face_id ){
   scene.clear();
   
   //指定サイズを取得
-  const width = parseInt(document.getElementById('length').value);
-  const height = parseInt(document.getElementById('width').value);
-  const depth = parseInt(document.getElementById('depth').value);
+  let currentSize = GetSize();
+  const length = currentSize['length'];
+  const width = currentSize['width'];
+  const depth = currentSize['depth'];
 
   //ボックスを再生成
-  const geometry = new THREE.BoxGeometry(width, height, depth);
+  const geometry = new THREE.BoxGeometry(width, depth, length);
   
-  //指定画像を取得
-  const loadPic = new THREE.TextureLoader();
-  const reader = new FileReader();
-  const file = document.querySelectorAll('#face')[face_id].files[0];
+  //サイズに応じてテクスチャをリサイズ
+  if(face_id < 2){
 
-  //新しい画像、描画準備
-  const img = new Image();
-  const place = document.createElement('canvas');
-  const ctx = place.getContext('2d');
-
+    DrawImage(length, depth, face_id);
+    DrawImage(length, depth, face_id);
   
-  reader.addEventListener("load", function () {
-
-    img.src = reader.result;
-
-    //画像の描画
-    img.onload = function () {
-
-      //canvasの初期化
-      place.width = width;
-      place.height = height;
-      ctx.clearRect(0, 0, width, height);
-
-      //新しいサイズで画像を描画
-      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, width, height);
-      
-      //指定された面に画像を設定
-      textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( place.toDataURL() )});
-
-    }
-
-  }, false );
-  
-  if ( file ) {
+  }else if(face_id > 1 && face_id < 4){
     
-    //アップロードファイル読み込み
-    reader.readAsDataURL( file );
+    DrawImage(width, length, face_id);
+    DrawImage(width, length, face_id);
   
-  } else {
+  }else if(face_id > 3 && face_id < 6){
     
-    //画像が選択されていない面は初期画像を設定
-    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (face_id + 1) + '.jpg' )});
+    DrawImage(width, depth, face_id);
+    DrawImage(width, depth, face_id);
   
   }
 
   //テクスチャの設定
   let material = textures;
   box = new THREE.Mesh(geometry, material);
+  box.scale.set(InitScaleX, InitScaleY, InitScaleZ);
   scene.add(box);
+
+  //XYZ軸の追加
+  let axes = new THREE.AxesHelper(InitAxesLength);
+  scene.add(axes);
 
 }
 
@@ -342,12 +356,13 @@ function ResetImage(){
 	scene.clear();
 	
 	//指定サイズを取得
-  const width = parseInt(document.getElementById('length').value);
-  const height = parseInt(document.getElementById('width').value);
-  const depth = parseInt(document.getElementById('depth').value);
+  let currentSize = GetSize();
+  const length = currentSize['length'];
+  const width = currentSize['width'];
+  const depth = currentSize['depth'];
 
   //ボックスを再生成
-  const geometry = new THREE.BoxGeometry(width,height,depth);
+  const geometry = new THREE.BoxGeometry(length, width, depth);
     
 	const loadPic = new THREE.TextureLoader();
 

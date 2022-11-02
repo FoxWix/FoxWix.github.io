@@ -14,7 +14,8 @@
 	<script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="./js/Preview.js"></script>
-    <script src="./js/OrbitControls.js"></script>
+    <script src="./js/controls/OrbitControls.js"></script>
+	<script src="./js/common/CommonHTML.js"></script>
 
 <header id="header">
   <h1><img src="images/Logo.png" alt="ブロック・デコ" height="60px"></h1><span>最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
@@ -79,7 +80,7 @@
 			  <img src="images/Box-1.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview0">
 
               <!--TN31--画像アップロードボタンタグ編集・formタグ削除  -->
-			  <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(0), RePreview(0)" id="face">
+			  <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(0)" id="face">
 		  
 		</div>
 		  <div class="Image_selection_box">
@@ -88,7 +89,7 @@
 			  <img src="images/Box-2.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview1">
 
 			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(1), RePreview(1)" id="face">
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(1)" id="face">
 		  			
 			</div>
 		  <div class="Image_selection_box">
@@ -97,7 +98,7 @@
 			  <img src="images/Box-3.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview2">
 
 			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(2), RePreview(2)" id="face">
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(2)" id="face">
 
 		  </div>
 		  <div class="Image_selection_box">
@@ -106,7 +107,7 @@
 			  <img src="images/Box-4.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview3">
 
 			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(3), RePreview(3)" id="face">
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(3)" id="face">
 
 		  </div>
 		  <div class="Image_selection_box">
@@ -115,7 +116,7 @@
 			  <img src="images/Box-5.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview4">
 
 			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(4), RePreview(4)" id="face">
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(4)" id="face">
 
 		  </div>
 		  <div class="Image_selection_box">
@@ -124,7 +125,7 @@
 			  <img src="images/Box-6.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview5">
 
 			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="Resize(5), RePreview(5)" id="face">
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(5)" id="face">
 
 		  </div>
         </div>
@@ -197,14 +198,14 @@
 			<label for="number">長さ</label><br>
 
 			<!-- TN31--タグ情報追加・formタグ削除 -->
-			<input type="number" name="length" placeholder="300" required class="Size_number" id="length" value="300" onchange="ResizeAll(), RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
+			<input type="number" name="length" placeholder="300" required class="Size_number" id="length" value="300" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
 		  
 		</div>
 	      <div class="Size_input">
 			<label for="number">幅</label><br>
 
 			<!-- TN31--タグ情報追加・formタグ削除 -->
-			<input type="number" name="width" placeholder="330" required class="Size_number" id="width" value="330" onchange="ResizeAll(), RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
+			<input type="number" name="width" placeholder="330" required class="Size_number" id="width" value="330" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
 		  
 		</div>
 		  <div class="Size_input">
