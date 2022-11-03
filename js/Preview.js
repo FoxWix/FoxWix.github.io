@@ -11,9 +11,67 @@ window.addEventListener('DOMContentLoaded', init);
 // 
 function GetColor( face_id ){
 
-  //指定サイズを取得
-  const l = GetLength();
-  const w = GetWidth();
+  let droname = 'DropColor' + face_id;
+  let prename = 'preview' + face_id;
+
+  if ( DropListIsNone( droname ) ){
+  
+    //
+    //  「選択なし」が選ばれている場合
+    //
+
+    //画像プレビューを未選択に初期化
+    ImagePreviewClear(prename);
+
+    //3Dプレビューのテクスチャを初期化
+    const loadPic = new THREE.TextureLoader();
+    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (face_id + 1) + '.jpg' )});
+
+  } else {
+
+    //
+    //  色が選択されている場合
+    //
+
+    //アップロードされているファイルをクリア
+    document.querySelectorAll('#face')[face_id].value = '';
+
+    //色画像の相対パスを取得
+    let path = GetColorImagePath( droname );
+
+    //画像のプレビューを表示
+    document.getElementById(prename).src = path;
+
+    //3Dプレビューの対応する面に画像を設定
+    let size = GetSize();
+    let l = size['length'];
+    let w = size['width'];
+    let d = size['depth'];
+    if(face_id < 2){
+
+      SetColorImage_Box(face_id, l, d, path);
+      SetColorImage_Box(face_id, l, d, path);
+    
+    } else if (face_id > 1 && face_id < 4){
+      
+      SetColorImage_Box(face_id, w, l, path);
+      SetColorImage_Box(face_id, w, l, path);
+    
+    } else if (face_id > 3 && face_id < 6){
+      
+      SetColorImage_Box(face_id, w, d, path);
+      SetColorImage_Box(face_id, w, d, path);
+    
+    }
+
+  }
+
+}
+
+//
+//  引数の値で画像をリサイズし、3Dプレビューに表示
+//
+function SetColorImage_Box(face_id, width, height, path){
 
   //canvasの設定
   const place = document.createElement('canvas');
@@ -22,65 +80,22 @@ function GetColor( face_id ){
   //画像の作成
   const img = new Image();
 
-  const loadPic = new THREE.TextureLoader();
-
-  //プレビューの設定
-  const preview = document.getElementById('preview' + face_id);
-  if (  preview.firstChild  ) {
-
-    preview.removeChild(preview.firstChild);
-  
-  }
-  preview.appendChild(place);
-  AppendPreview(face_id, place);
-
-  //選択された色を取得
-  let selectvalue = document.getElementById('face' + face_id).value;
-
-  //画像パスの設定
-  let path = "";
-  if ( selectvalue == 'none' ){
-
-    //パスのクリア
-    path = '';
-      
-    //canvas要素削除
-    let parent = document.getElementById('preview' + face_id);
-    parent.removeChild(parent.firstChild);
-
-    //ボックスのテクスチャを初期化
-    textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../img/' + (face_id + 1) + '.jpg' )});
-
-  } else if ( selectvalue == 'blue' ){
-
-    path = '../img/Blue.jpg';
-
-  } else if ( selectvalue == 'yellow' ){
-
-    path = '../img/Yellow.jpg';
-
-  } else if ( selectvalue == 'red'  ){
-
-    path = '../img/Red.jpg';
-
-  }
-
   img.src = path;
   img.onload = function () {
 
     //canvasの初期化
-    place.width = l;
-    place.height = w;
-    ctx.clearRect(0, 0, l, w);
+    place.width = width;
+    place.height = height;
+    ctx.clearRect(0, 0, width, height);
     
     //新しいサイズで画像を描画
-    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, l, w);
-
+    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, width, height);
+    
     //ボックスのテクスチャに設定
+    const loadPic = new THREE.TextureLoader();
     textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( path )});
 
   }
-
 }
 
 ///////////////////////////////////////////////////
@@ -91,12 +106,18 @@ function GetColor( face_id ){
 ///////////////////////////////////////////////////
 
 //
-//  300 * 330で画像を表示
+//  150 * 150で画像を表示
 //
 function ShowPreview( face_id ){
 
-  const new_length = 300;
-  const new_width = 330;
+  const new_length = 150;
+  const new_width = 150;
+
+  let droname = "DropColor" + face_id;
+  let prename = 'preview' + face_id;
+
+  //色選択用のドロップリストを初期化
+  DropListClear(droname);
 
   //画像の取得
   const file = document.querySelectorAll('#face')[face_id].files[0];
@@ -126,7 +147,7 @@ function ShowPreview( face_id ){
         //新しいサイズで画像を描画
         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, new_length, new_width);
 
-        document.getElementById('preview' + face_id).src = canvas.toDataURL();
+        document.getElementById(prename).src = canvas.toDataURL();
 
       }
 
@@ -144,9 +165,9 @@ function ShowPreview( face_id ){
 }
 
 //
-//  指定された幅、高さで画像を整形し、アップロード
+//  指定された幅、高さで画像を整形し、3Dプレビューに表示
 //
-function DrawImage( width, height, face_id ){
+function SetImage_Box( width, height, face_id ){
 
   //アップロードファイル取得
   const file = GetImage(face_id);
@@ -190,6 +211,7 @@ function DrawImage( width, height, face_id ){
     textures[face_id] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (face_id + 1) + '.jpg' )});
   
   }
+
 }
 
 ///////////////////////////////////////////////////
@@ -292,6 +314,8 @@ function init() {
 //
 function RePreview( face_id ){
 
+  let droname = 'DropColor' + face_id;
+
   //ボックスを初期化
   scene.clear();
   
@@ -300,25 +324,46 @@ function RePreview( face_id ){
   const length = currentSize['length'];
   const width = currentSize['width'];
   const depth = currentSize['depth'];
-
+  
   //ボックスを再生成
   const geometry = new THREE.BoxGeometry(width, depth, length);
-  
-  //サイズに応じてテクスチャをリサイズ
+
+  if( !DropListIsNone(droname) ){
+
+    let path = GetColorImagePath(droname);
+
+    if(face_id < 2){
+
+      SetColorImage_Box(face_id, length, depth, path);
+      SetColorImage_Box(face_id, length, depth, path);
+    
+    } else if (face_id > 1 && face_id < 4){
+      
+      SetColorImage_Box(face_id, width, length, path);
+      SetColorImage_Box(face_id, width, length, path);
+    
+    } else if (face_id > 3 && face_id < 6){
+      
+      SetColorImage_Box(face_id, width, depth, path);
+      SetColorImage_Box(face_id, width, depth, path);
+    
+    }
+  }
+
   if(face_id < 2){
 
-    DrawImage(length, depth, face_id);
-    DrawImage(length, depth, face_id);
+    SetImage_Box(length, depth, face_id);
+    SetImage_Box(length, depth, face_id);
   
   }else if(face_id > 1 && face_id < 4){
     
-    DrawImage(width, length, face_id);
-    DrawImage(width, length, face_id);
+    SetImage_Box(width, length, face_id);
+    SetImage_Box(width, length, face_id);
   
   }else if(face_id > 3 && face_id < 6){
     
-    DrawImage(width, depth, face_id);
-    DrawImage(width, depth, face_id);
+    SetImage_Box(width, depth, face_id);
+    SetImage_Box(width, depth, face_id);
   
   }
 
@@ -379,8 +424,10 @@ function ResetImage(){
     }
 
     //色選択のドロップリストを初期化
-    document.getElementById('face' + index).options[0].selected = true;
-    GetColor(index);
+    DropListClear('DropColor' + index);
+
+    //プレビュー画像を初期化
+    ImagePreviewClear('preview' + index);
 		
 		//初期画像を設定
 		textures[index] = new THREE.MeshBasicMaterial({map: loadPic.load( '../images/PreviewInitImages/' + (index + 1) + '.jpg' )});
