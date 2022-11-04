@@ -9,8 +9,8 @@
 </head>
 
 <body>
-	
-	<!-- TN31--ソースパス追加 -->
+
+	<!-- TN31---ソースパス追加 -->
 	<script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="./js/Preview.js"></script>
@@ -19,28 +19,9 @@
 	<script src="./js/dom/TemplateSelectColor.js"></script>
 
 <header id="header">
-  <h1><a href="#" class="crunchify-top"><img src="images/Logo.png" alt="ブロック・デコ" height="60px"></a></h1><span>最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
-  <a href="" class="Login_buttun">ログイン</a>
+  <h1><img src="images/Logo.png" alt="ブロック・デコ" height="60px"></h1><span>最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
+  <a href="login.html" class="Login_buttun">ログイン</a>
 </header>
-<script>            
-jQuery(document).ready(function() {
-var offset = 220;
-var duration = 500;
-jQuery(window).scroll(function() {
-if (jQuery(this).scrollTop() > offset) {
-jQuery('.crunchify-top').fadeIn(duration);
-} else {
-jQuery('.crunchify-top').fadeIn(duration);
-}
-});
- 
-jQuery('.crunchify-top').click(function(event) {
-event.preventDefault();
-jQuery('html, body').animate({scrollTop: 0}, duration);
-return false;
-})
-});
-</script>
 <div class="MainVis">
   <img src="images/MainVisual.png" alt="メインビジュアル" class="MainVis_img">
 </div>
@@ -64,9 +45,10 @@ return false;
   <div class="Preview_inner">
 	<p class="Preview_txt">プレビュー</p>
 	<div class="Preview_box">
+	  <!-- <img src="images/Preview.png" alt="プレビュー画面"> -->
 
-		<!-- TN31-- プレビュー画面・デザイン追加 -->
-		<div id="wrapper">
+	  <!-- TN31-- プレビュー画面・デザイン追加 -->
+	  	<div id="wrapper">
 			<style>
 				* {
 					padding: 0;
@@ -96,96 +78,108 @@ return false;
 		  <div class="Image_selection_box">
 
 			<!-- TN31--id追加 -->
-		    <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview0">
-		    
-			<!--TN31--画像アップロードボタンタグ編集・formタグ削除  -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(0)" id="face">
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview0">
 
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor0" onchange="GetColor(0)">
+              <!--TN31--画像アップロードボタンタグ編集・formタグ削除  -->
+			  <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(0)" id="face">
+
+			  	<!-- TN31--色選択用ドロップリスト追加 -->
+			  	<select class="Input_file" id="DropColor0" onchange="GetColor(0)">
+					<option value="none">選択なし</option>
+					<option value="blue">青色</option>
+					<option value="yellow">黄色</option>
+					<option value="red">赤色</option>
+					<option value="green">緑色</option>
+				</select>
+		  
+			</div>
+		  <div class="Image_selection_box">
+
+			<!-- TN31--id追加-->
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview1">
+
+			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(1)" id="face">
+
+				<!-- TN31--色選択用ドロップリスト追加 -->
+				<select class="Input_file" id="DropColor1" onchange="GetColor(1)">
+					<option value="none">選択なし</option>
+					<option value="blue">青色</option>
+					<option value="yellow">黄色</option>
+					<option value="red">赤色</option>
+					<option value="green">緑色</option>
+				</select>
+		  			
+			</div>
+		  <div class="Image_selection_box">
+
+			<!-- TN31--id追加 -->
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview2">
+
+			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(2)" id="face">
+
+			  <!-- TN31--色選択用ドロップリスト追加 -->
+			  <select class="Input_file" id="DropColor2" onchange="GetColor(2)">
+					<option value="none">選択なし</option>
+					<option value="blue">青色</option>
+					<option value="yellow">黄色</option>
+					<option value="red">赤色</option>
+					<option value="green">緑色</option>
+				</select>
+
+		  </div>
+		  <div class="Image_selection_box">
+
+			<!-- TN31--id追加 -->
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview3">
+
+			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(3)" id="face">
+
+			  <!-- TN31--色選択用ドロップリスト追加 -->
+			  <select class="Input_file" id="DropColor3" onchange="GetColor(3)">
 				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
+				<option value="blue">青色</option>
+				<option value="yellow">黄色</option>
+				<option value="red">赤色</option>
+				<option value="green">緑色</option>
+			</select>
+
+		  </div>
+		  <div class="Image_selection_box">
+
+			<!-- TN31--id追加 -->
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview4">
+
+			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(4)" id="face">
+
+			  <!-- TN31--色選択用ドロップリスト追加 -->
+			  <select class="Input_file" id="DropColor4" onchange="GetColor(4)">
+				<option value="none">選択なし</option>
+				<option value="blue">青色</option>
+				<option value="yellow">黄色</option>
+				<option value="red">赤色</option>
+				<option value="green">緑色</option>
 			</select>
 
 		  </div>
 		  <div class="Image_selection_box">
 
 			<!-- TN31--id追加-->
-			<img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview1">
-		    
-		    <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(1)" id="face">
+			  <img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview5">
 
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor1" onchange="GetColor(1)">
+			  <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
+              <input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(5)" id="face">
+
+			  <!-- TN31--色選択用ドロップリスト追加 -->
+			  <select class="Input_file" id="DropColor5" onchange="GetColor(5)">
 				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
-			</select>
-
-		  </div>
-		  <div class="Image_selection_box">
-
-			<!-- TN31--id追加 -->
-			<img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview2">
-		    
-		    <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(2)" id="face">
-
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor2" onchange="GetColor(2)">
-				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
-			</select>
-
-		  </div>
-		  <div class="Image_selection_box">
-		    
-			<!-- TN31--id追加 -->
-			<img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview3">
-		    
-		    <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(3)" id="face">
-
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor2" onchange="GetColor(3)">
-				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
-			</select>
-
-		  </div>
-		  <div class="Image_selection_box">
-		    
-			<!-- TN31--id追加 -->
-			<img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview4">
-		    
-		    <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(4)" id="face">
-
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor2" onchange="GetColor(4)">
-				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
-			</select>
-
-		  </div>
-		  <div class="Image_selection_box">
-		    
-			<!-- TN31--id追加 -->
-			<img src="images/None.jpg" alt="どこに画像がプリントされるかを示した画像" width="150px"  id="preview5">
-		    
-		    <!-- TN31--画像アップロードボタンタグ編集・formタグ削除 -->
-			<input type="file" accept=".png, .jpg, .jpeg" class="Input_file" onchange="ShowPreview(5)" id="face">
-
-			<!-- TN31--色選択用ドロップリスト追加 -->
-			<select class="Input_file" id="DropColor2" onchange="GetColor(5)">
-				<option value="none">選択なし</option>
-				<option value="blue">灰色</option>
-				<option value="yellow">白色</option>
+				<option value="blue">青色</option>
+				<option value="yellow">黄色</option>
+				<option value="red">赤色</option>
+				<option value="green">緑色</option>
 			</select>
 
 		  </div>
@@ -210,29 +204,28 @@ return false;
 			<a href="#tabpage4">タブ4</a>
           </p>
 		  <div id="tabbody">
-            
+
 			<!-- TN31--タグ情報追加 -->
             <div id="tabpage1" class="Shape_selection_tab">
-				<input type="radio" name="TemplateSelect" value="shape01" id="TemplateSelect01" checked><label for="TemplateSelect01" onclick="ChangeShowColor( 1 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape02" id="TemplateSelect02"><label for="TemplateSelect02" onclick="ChangeShowColor( 2 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape03" id="TemplateSelect03"><label for="TemplateSelect03" onclick="ChangeShowColor( 3 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape01" id="TemplateSelect01" checked><label for="TemplateSelect01" onclick="ChangeShowColor( 1 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape02" id="TemplateSelect02"><label for="TemplateSelect02" onclick="ChangeShowColor( 2 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape03" id="TemplateSelect03"><label for="TemplateSelect03" onclick="ChangeShowColor( 3 )"></label>
 			</div>
-			<div id="tabpage2" class="Shape_selection_tab">
-				<input type="radio" name="TemplateSelect" value="shape04" id="TemplateSelect04"><label for="TemplateSelect04" onclick="ChangeShowColor( 4 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape05" id="TemplateSelect05"><label for="TemplateSelect05" onclick="ChangeShowColor( 5 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape06" id="TemplateSelect06"><label for="TemplateSelect06" onclick="ChangeShowColor( 6 )"></label>
+            <div id="tabpage2" class="Shape_selection_tab">
+              <input type="radio" name="TemplateSelect" value="shape04" id="TemplateSelect04"><label for="TemplateSelect04" onclick="ChangeShowColor( 4 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape05" id="TemplateSelect05"><label for="TemplateSelect05" onclick="ChangeShowColor( 5 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape06" id="TemplateSelect06"><label for="TemplateSelect06" onclick="ChangeShowColor( 6 )"></label>
 			</div>
-			<div id="tabpage3" class="Shape_selection_tab">
-				<input type="radio" name="TemplateSelect" value="shape07" id="TemplateSelect07"><label for="TemplateSelect07" onclick="ChangeShowColor( 7 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape08" id="TemplateSelect08"><label for="TemplateSelect08" onclick="ChangeShowColor( 8 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape09" id="TemplateSelect09"><label for="TemplateSelect09" onclick="ChangeShowColor( 9 )"></label>
+            <div id="tabpage3" class="Shape_selection_tab">
+              <input type="radio" name="TemplateSelect" value="shape07" id="TemplateSelect07"><label for="TemplateSelect07" onclick="ChangeShowColor( 7 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape08" id="TemplateSelect08"><label for="TemplateSelect08" onclick="ChangeShowColor( 8 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape09" id="TemplateSelect09"><label for="TemplateSelect09" onclick="ChangeShowColor( 9 )"></label>
 			</div>
 			<div id="tabpage4" class="Shape_selection_tab">
-				<input type="radio" name="TemplateSelect" value="shape10" id="TemplateSelect10"><label for="TemplateSelect10"	onclick="ChangeShowColor( 10 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape11" id="TemplateSelect11"><label for="TemplateSelect11"	onclick="ChangeShowColor( 11 )"></label>
-				<input type="radio" name="TemplateSelect" value="shape12" id="TemplateSelect12"><label for="TemplateSelect12"	onclick="ChangeShowColor( 12 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape10" id="TemplateSelect10"><label for="TemplateSelect10"	onclick="ChangeShowColor( 10 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape11" id="TemplateSelect11"><label for="TemplateSelect11"	onclick="ChangeShowColor( 11 )"></label>
+              <input type="radio" name="TemplateSelect" value="shape12" id="TemplateSelect12"><label for="TemplateSelect12"	onclick="ChangeShowColor( 12 )"></label>
 			</div>
-
           </div>
 	    </div>
       </div>
@@ -242,19 +235,19 @@ return false;
 	      <p class="Color_selection_txt">配色</p>
         </div>
 	    <div class="Color_selection_inner">
-
 	      <input type="radio" name="ColorSelect" value="color01" id="ColorSelect01" checked><label for="ColorSelect01" class="Color_label"></label>
+		  
 		  <input type="radio" name="ColorSelect" value="color03" id="ColorSelect03"><label for="ColorSelect03" class="Color_label"></label>
           <input type="radio" name="ColorSelect" value="color04" id="ColorSelect04"><label for="ColorSelect04" class="Color_label"></label>
-
+         
 		  <!-- TN31--コメントアウト -->
-          <!-- <input type="radio" name="ColorSelect" value="color02" id="ColorSelect02"><label for="ColorSelect02" class="Color_label"></label>
+		  <!-- <input type="radio" name="ColorSelect" value="color02" id="ColorSelect02"><label for="ColorSelect02" class="Color_label"></label>
           <input type="radio" name="ColorSelect" value="color03" id="ColorSelect03"><label for="ColorSelect03" class="Color_label"></label>
           <input type="radio" name="ColorSelect" value="color04" id="ColorSelect04"><label for="ColorSelect04" class="Color_label"></label>
           <input type="radio" name="ColorSelect" value="color05" id="ColorSelect05"><label for="ColorSelect05" class="Color_label"></label>
           <input type="radio" name="ColorSelect" value="color06" id="ColorSelect06"><label for="ColorSelect06" class="Color_label"></label> -->
-
-	    </div>
+	    
+		</div>
       </div>
 	<hr width="100%">
     </div>
@@ -264,41 +257,36 @@ return false;
       </div>
       <div class="Size_inner">
 	    <div class="Size_selection_inner">
-			<div class="Size_input">
+	      <div class="Size_input">
+			<label for="number">長さ</label><br>
 
-				<label for="number">長さ</label><br>
-	
-				<!-- TN31--タグ情報追加・formタグ削除 -->
-				<input type="number" name="length" placeholder="300" required class="Size_number" id="length" value="300" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
-			  
-			</div>
-			<div class="Size_input">
+			<!-- TN31--タグ情報追加・formタグ削除 -->
+			<input type="number" name="length" placeholder="300" required class="Size_number" id="length" value="300" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
+		  
+		</div>
+	      <div class="Size_input">
+			<label for="number">幅</label><br>
 
-				<label for="number">幅</label><br>
-	
-				<!-- TN31--タグ情報追加・formタグ削除 -->
-				<input type="number" name="width" placeholder="330" required class="Size_number" id="width" value="330" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
-				
-			</div>
-			<div class="Size_input">
+			<!-- TN31--タグ情報追加・formタグ削除 -->
+			<input type="number" name="width" placeholder="330" required class="Size_number" id="width" value="330" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
+		  
+		</div>
+		  <div class="Size_input">
+			<label for="number">深さ</label><br>
 
-				<label for="number">深さ</label><br>
-	
-				<!-- TN31--タグ情報追加・formタグ削除 -->
-				<input type="number" name="depth" placeholder="220" required class="Size_number" id="depth" value="220" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
-			  
-			</div>
+			<!-- TN31--タグ情報追加・formタグ削除 -->
+			<input type="number" name="depth" placeholder="220" required class="Size_number" id="depth" value="220" onchange="RePreviewAll()"/><!-- <span>cm</span> --><span class="Size_number_span">mm</span>
+		  
+		</div>
 	    </div>
 	    <div class="Size_cm_mm_inner">
-	      <form method="post">
-	        <div>
-		      <label for="prefecture"></label><br>
-		      <select name="prefecture">
-		      <option value="外寸">外寸</option>
-			  <option value="内寸">内寸</option>
-		      </select>
-	        </div>
-		  </form>
+	    <div>
+		  <label for="prefecture"></label><br>
+		  <select name="prefecture">
+		  <option value="外寸">外寸</option>
+		  <option value="内寸">内寸</option>
+		  </select>
+	    </div>
 <!-- ↓cm,mmボックス cm,mmの切り替えで上記にあるspanのcm,mmが切り替わる挙動を導入 -->
 		  <!-- <div class="Cm_mm_inner">
             <ul class="Cm_mm_ul">
@@ -330,13 +318,10 @@ return false;
 	    </div>
       </div>
 	  <div class="Number_selection_inner">
-        <form method="post" class="Number_input">
-	      <div>
-		    <label for="number">枚数</label><br>
-		    <input type="number" name="number" placeholder="1" required class="Number_sheets" min="0"/><span class="Number_sheets_span">枚</span>
-	      </div>
-        </form>
-	    <form method="post" class="Number_input">
+	    <div>
+		  <label for="number">枚数</label><br>
+		  <input type="number" name="number" placeholder="1" required class="Number_sheets"/><span class="Number_sheets_span">枚</span>
+	    </div>
 	      <div>
 		    <label for="number">都道府県</label><br>
 		    <select name="pref_name">
@@ -390,20 +375,21 @@ return false;
 			  <option value="沖縄県">沖縄県</option>
 			</select>
 	      </div>
-        </form>
 	  </div>
 	</div>
   </div>
 </div>
 <div class="Price_inner">
-  <form action="" method="">
-    <input type="submit" class="Price_box" value="価格の確認をする">
-  </form>
+
+ <form action="" method="">
+   <input type="submit" class="Price_box" value="価格の確認をする">
+ </form>
+ 
 </div>
 <footer id="Footer">
   <div class="Footer_inner">
 	<ul class="Footer_ul">
-	  <li class="Footer_li"><a href="#" class="Footer_a crunchify-top">HOME</a></li>
+	  <li class="Footer_li"><a href="" class="Footer_a">HOME</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">FAQ・お問い合わせ</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
