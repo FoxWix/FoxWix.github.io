@@ -42,6 +42,11 @@ h1 {
 	margin-left: 20px;
 }
 
+/*Go to top*/
+a:hover {
+background-color: #ed702b;
+}
+
 /*--------------------------------
 メインビジュアル
 ---------------------------------*/
@@ -115,7 +120,7 @@ h1 {
 }
 
 .active {
-    background-color: #ff5555;
+    background-color: #ed702b;
 }
 
 .btn {
@@ -253,7 +258,8 @@ select {
 	display: flex;
 	flex-wrap: wrap;
 	flex: 1;
-	justify-content: center;
+	padding: 0 1em 0 1em;
+	/* justify-content: center; */
 	/* border-bottom: 1px solid gray; */
 }
 
@@ -752,26 +758,23 @@ input[type=radio][value="Thickness03"]+label:before{
 /*--------------------------------
 フッター
 ---------------------------------*/
-#Footer {
-	height: 240px;
-	background: #FF942A;
-}
-
 .Footer_ul {
 	display: flex;
 	text-align: center;
 	justify-content: center;
 	padding: 0;
+	margin: 0 auto;
 }
 
 .Footer_li {
 	margin-top: 40px;
 	width: 20%;
+	list-style: none;
 }
 
 .Footer_inner {
-	max-width: 1400px;
-	margin: 0 auto;
+	height: 240px;
+	background: #FF942A;
 }
 
 .Footer_a {
@@ -789,12 +792,10 @@ input[type=radio][value="Thickness03"]+label:before{
 	height: 30px;
 	background: #f56500;
 	text-align: center;
-	margin-top: 40px;
 }
 
 .Footer_copy_txt {
 	color: white;
 	line-height: 30px;
 }
-
 
