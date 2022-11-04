@@ -1,18 +1,43 @@
+/*-------------------------------------------------------------------------
+    形状テンプレートの各テンプレートごとに色を用意。
+    形状に応じて選択できる色を動的に変更する
 
+    1 - 選択なし
+    2 - オレンジ色
+    3 - 緑色
+    4 - 赤色
+    5 - 青色
+    6 - 黄色
+-------------------------------------------------------------------------*/
+
+//
+//  タブ1
+//
 const tmpColor1 = [3, 4];
 const tmpColor2 = [2, 3, 4];
 const tmpColor3 = [2, 3, 4, 5];
+//
+//  タブ2
+//
 const tmpColor4 = [2, 3, 4, 6];
 const tmpColor5 = [2, 3, 4, 5, 6];
 const tmpColor6 = [2, 3, 4];
+//
+//  タブ3
+//
 const tmpColor7 = [2, 3, 4];
 const tmpColor8 = [2, 3, 4];
 const tmpColor9 = [2, 3, 4];
+//
+//  タブ4
+//
 const tmpColor10 = [2, 3, 4];
 const tmpColor11 = [2, 3, 4];
 const tmpColor12 = [2, 3, 4];
 
-
+//-------------------------------------------------------------------------
+//テンプレートに応じて選択できる色を変更
+//-------------------------------------------------------------------------
 function ChangeShowColor( tmpNo ){
     
     //親要素取得
@@ -88,9 +113,12 @@ function ChangeShowColor( tmpNo ){
 
 }
 
+//-------------------------------------------------------------------------
+//  引数で指定された親タグに色選択ボタンを追加
+//-------------------------------------------------------------------------
 function CreateTag( color, parent ){
 
-    for(let index=0; index<color.length; ++index){
+    for(let index = 0; index < color.length; ++index){
 
         let radio = document.createElement('input');
         let label = document.createElement('label');
