@@ -56,4 +56,22 @@ function check_half_numeric($str){
   else
     return false;
 }
+
+
+/////////////////////
+//  error_list()
+//  機能:エラー一覧の表示
+/////////////////////
+function error_list($errors, $error){
+  if (isset($errors[$error])){
+    echo "<ul class='php_error'>";
+    foreach ($errors[$error] as $value) {
+      echo "<li>*", $value, "</li>";
+    }
+    echo "</ul>";
+  }
+  return;
+}
+
+
 ?>

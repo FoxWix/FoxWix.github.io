@@ -1,20 +1,13 @@
 <?php
 session_start();
 
-require_once("util.php");
+require_once("../php/util.php");
 
 if(isset($_SESSION["data"]))
     $data = $_SESSION["data"];
 
 unset($_SESSION["data"]);
 
-//セッション
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-    unset($_SESSION["errors"]);
-}
-else
-$errors = "";
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +33,8 @@ $errors = "";
         echo "<li>メールアドレス:{$data[0]}</li>";
         echo "<li>パスワード:{$data[6]}</li>";
         echo "</form>";
-        echo "<br><a href='register.html'>会員登録ページへ</a>" ;
-        echo "<br><a href='login.html'>ログインページへ</a>" ;
+        echo "<br><a href='../register.html'>会員登録ページへ</a>" ;
+        echo "<br><a href='../login.php'>ログインページへ</a>" ;
     ?>
 </body>
 </html>
