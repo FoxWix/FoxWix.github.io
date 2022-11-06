@@ -305,15 +305,15 @@
 						</div>
 					</div>
 					<div class="Size_cm_mm_inner">
-						<form method="post">
-							<div>
-								<label for="prefecture"></label><br>
-								<select name="prefecture">
-									<option value="外寸">外寸</option>
-									<option value="内寸">内寸</option>
-								</select>
-							</div>
-						</form>
+
+						<!-- TN31--formタグ削除 -->
+						<div>
+							<label for="prefecture"></label><br>
+							<select name="prefecture">
+								<option value="外寸">外寸</option>
+								<option value="内寸">内寸</option>
+							</select>
+						</div>
 						<!-- ↓cm,mmボックス cm,mmの切り替えで上記にあるspanのcm,mmが切り替わる挙動を導入 -->
 						<!-- <div class="Cm_mm_inner">
             <ul class="Cm_mm_ul">
@@ -348,68 +348,14 @@
 					</div>
 				</div>
 				<div class="Number_selection_inner">
-					<form method="post" class="Number_input">
-						<div>
-							<label for="number">枚数</label><br>
-							<input type="number" id="quantity" name="number" placeholder="1" required class="Number_sheets" /><span
-								class="Number_sheets_span">枚</span>
-						</div>
-					</form>
-					<form method="post" class="Number_input">
-						<div>
-							<label for="number">都道府県</label><br>
-							<select name="pref_name">
-								<option value="" selected>お選び下さい</option>
-								<option value="北海道">北海道</option>
-								<option value="青森県">青森県</option>
-								<option value="岩手県">岩手県</option>
-								<option value="宮城県">宮城県</option>
-								<option value="秋田県">秋田県</option>
-								<option value="山形県">山形県</option>
-								<option value="福島県">福島県</option>
-								<option value="宮城県">宮城県</option>
-								<option value="栃木県">栃木県</option>
-								<option value="群馬県">群馬県</option>
-								<option value="埼玉県">埼玉県</option>
-								<option value="千葉県">千葉県</option>
-								<option value="東京都">東京都</option>
-								<option value="神奈川県">神奈川県</option>
-								<option value="新潟県">新潟県</option>
-								<option value="富山県">富山県</option>
-								<option value="石川県">石川県</option>
-								<option value="福井県">福井県</option>
-								<option value="山梨県">山梨県</option>
-								<option value="長野県">長野県</option>
-								<option value="岐阜県">岐阜県</option>
-								<option value="静岡県">静岡県</option>
-								<option value="愛知県">愛知県</option>
-								<option value="三重県">三重県</option>
-								<option value="滋賀県">滋賀県</option>
-								<option value="京都府">京都府</option>
-								<option value="大阪府">大阪府</option>
-								<option value="兵庫県">兵庫県</option>
-								<option value="奈良県">奈良県</option>
-								<option value="和歌山県">和歌山県</option>
-								<option value="鳥取県">鳥取県</option>
-								<option value="島根県">島根県</option>
-								<option value="岡山県">岡山県</option>
-								<option value="広島県">広島県</option>
-								<option value="山口県">山口県</option>
-								<option value="徳島県">徳島県</option>
-								<option value="香川県">香川県</option>
-								<option value="愛媛県">愛媛県</option>
-								<option value="高知県">高知県</option>
-								<option value="福岡県">福岡県</option>
-								<option value="佐賀県">佐賀県</option>
-								<option value="長崎県">長崎県</option>
-								<option value="熊本県">熊本県</option>
-								<option value="大分県">大分県</option>
-								<option value="宮崎県">宮崎県</option>
-								<option value="鹿児島県">鹿児島県</option>
-								<option value="沖縄県">沖縄県</option>
-							</select>
-						</div>
-					</form>
+
+					<!-- TN31--formタグ削除 -->
+					<div class="Number_input">
+						<label for="number">枚数</label><br>
+						<!-- TN31--入力範囲追加 -->
+						<input type="number" id="quantity" name="number" min="1" max="10" value="1" required class="Number_sheets" /><span
+							class="Number_sheets_span">枚</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -423,7 +369,6 @@
 
 		<!-- TN31--追加 -->
 		<button class="Price_box" id="submit">価格の確認</button>
-		<img id="pd" src="" alt="">
 		
 	</div>
 	<footer id="Footer">
