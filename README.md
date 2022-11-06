@@ -16,3 +16,17 @@
 
 [workDB_MF.ini]
 自分の環境に合わせていじりました
+
+パスの修正
+
+
+22/11/06
+[style-php_error.css]
+エラーメッセージ関係で追加
+[style-register.css]
+144 /* エラーメッセージ挿入で * の位置がずれるためコメントアウト
+
+ファイル名変更
+[php/login.php] > [php/user_login.php]
+[login.html] > [login.php]
+[register.html] > [register.php]
