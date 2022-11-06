@@ -141,8 +141,11 @@ dt::after {
    content: " *";
    color: red;
    position: absolute;
+   /* エラーメッセージの挿入で * の位置がずれるためコメントアウト
    top: 50%;
-   transform: translate(-50%,-50%);
+   transform: translate(-50%,-50%); */
+   top: 20px;
+   
    margin-left: 10px;
 }
 
