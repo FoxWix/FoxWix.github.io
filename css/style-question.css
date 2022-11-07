@@ -1,0 +1,340 @@
+@charset "UTF-8";
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+p,
+h1,
+h2,
+span {
+	color: #333333;
+}
+
+
+/*--------------------------------
+ヘッダー
+---------------------------------*/
+#header {
+	height: 60px;
+	background: #fff;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Cart_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: white;
+	border: 3px solid #f56500;
+    padding: 10px 20px;
+    color: #f56500;
+	line-height: 40px;
+	height: 40px;
+	margin-right: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.Login_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: #f56500;
+    padding: 10px 20px;
+    color: white;
+	line-height: 40px;
+	height: 40px;
+	border: 3px solid #f56500;
+	font-weight: bold;
+}
+
+#header-btns {
+	margin-left: auto;
+	margin-right: 40px;
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	margin-left: 20px;
+}
+
+/*Go to top*/
+a:hover {
+    background-color: #ed702b;
+}
+
+.Cart_buttun:hover {
+	background-color: white;
+	opacity: 0.7;
+}
+
+.Cart_buttun::before {
+	content: "";
+    display: inline-block;
+    background-image: url("../images/cart-icon.svg");
+    height: 28px;
+    width: 28px;
+	position: relative;
+	top: 8px;
+}
+
+.User-inner {
+	margin-right: 10px;
+}
+
+#User-name {
+	font-weight: bold;
+}
+
+/*--------------------------------
+よくある質問
+---------------------------------*/
+h2 {
+	margin-top: 100px;
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+
+#register {
+	width: 700px;
+	margin: 20px auto;
+	border-bottom: 5px solid #f56500;
+}
+
+h3 {
+	width: 60%;
+	margin: 3rem auto 0.5rem auto;
+}
+
+dl {
+    width:60%;
+    margin:0 auto 2rem;
+}
+
+dt,
+dd {
+    padding:.5rem 1rem;
+}
+
+dt {
+    color:#fff;
+    background:#FF942A;
+    position:relative;
+}
+
+dt:hover {
+    background:#7bf;
+}
+
+dd {
+    display:none;
+    border-right: 3px solid #FF942A;
+    border-left: 3px solid #FF942A;
+    border-bottom: 3px solid #FF942A;
+}
+
+dt::after {
+    content:"\e5cf";
+    display:block;
+    font-family:'Material Icons';
+    font-weight:400;
+    position: absolute;
+    font-size:2em;
+    top: 50%;
+    right: 20px;
+    transform:translateY(-50%);
+}
+
+dt.active::after {
+    content:"\e5ce";
+}
+
+/* .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+} */
+
+.Answer {
+	color: #E7402D;
+}
+
+/*--------------------------------
+フッター
+---------------------------------*/
+.Footer_ul {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.Footer_li {
+	margin-top: 40px;
+	width: 20%;
+	list-style: none;
+}
+
+.Footer_inner {
+	height: 240px;
+	background: #FF942A;
+	margin-top: 200px;
+}
+
+.Footer_a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+.Footer_img {
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.Footer_copy {
+	height: 30px;
+	background: #f56500;
+	text-align: center;
+}
+
+.Footer_copy_txt {
+	color: white;
+	line-height: 30px;
+}
+
+/*--------------------------------
+ここからタブレット・sp
+---------------------------------*/
+@media screen and (max-width: 1050px) {
+	/* 1050px以下に適用されるCSS（タブレット用） */
+
+/*--------------------------------
+ヘッダータブレット
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		height: 60px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin-right: 1rem;
+    }
+
+/*--------------------------------
+よくある質問タブレット
+---------------------------------*/
+    #register {
+	    width: 500px;
+	    margin: 20px auto;
+	    border-bottom: 5px solid #f56500;
+    }
+
+}
+
+@media screen and (max-width: 640px) {
+	/* 640px以下に適用されるCSS（スマホ用） */
+
+/*--------------------------------
+ヘッダーsp
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		flex-direction: column;
+		height: 120px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin: 0 auto;
+		display: flex;
+		flex-direction: column-reverse;
+    }
+
+	.User-inner {
+		margin-top: 0.3rem;
+	}
+
+/*--------------------------------
+会員登録sp
+---------------------------------*/
+    h2 {
+	    margin-top: 160px;
+	    display: block;
+	    text-align: center;
+	    font-weight: bold;
+    }
+
+    #register {
+	    width: 300px;
+	    margin: 20px auto;
+	    border-bottom: 5px solid #f56500;
+    }
+
+/*--------------------------------
+フッターsp
+---------------------------------*/
+    .Footer_a {
+	    font-size: 0.75rem;
+    }
+
+}
+
+

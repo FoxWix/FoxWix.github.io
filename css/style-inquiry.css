@@ -1,0 +1,503 @@
+@charset "UTF-8";
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+p,
+h1,
+h2,
+span {
+	color: #333333;
+}
+
+/*--------------------------------
+ヘッダー
+---------------------------------*/
+#header {
+	height: 60px;
+	background: #fff;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Cart_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: white;
+	border: 3px solid #f56500;
+    padding: 10px 20px;
+    color: #f56500;
+	line-height: 40px;
+	height: 40px;
+	margin-right: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.Login_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: #f56500;
+    padding: 10px 20px;
+    color: white;
+	line-height: 40px;
+	height: 40px;
+	border: 3px solid #f56500;
+	font-weight: bold;
+}
+
+#header-btns {
+	margin-left: auto;
+	margin-right: 40px;
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	margin-left: 20px;
+}
+
+/*Go to top*/
+a:hover {
+    background-color: #ed702b;
+}
+
+.Cart_buttun:hover {
+	background-color: white;
+	opacity: 0.7;
+}
+
+.Cart_buttun::before {
+	content: "";
+    /* background-image: url("../images/cart-icon.svg"); */
+    display: inline-block;
+    background-image: url("../images/cart-icon.svg");
+    height: 28px;
+    width: 28px;
+	position: relative;
+	top: 8px;
+}
+
+.User-inner {
+	margin-right: 10px;
+}
+
+#User-name {
+	font-weight: bold;
+}
+
+/*--------------------------------
+お問い合わせ
+---------------------------------*/
+h2 {
+	margin-top: 100px;
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+
+#register {
+	width: 700px;
+	margin: 20px auto;
+	border-bottom: 5px solid #f56500;
+}
+
+/*--------------------------------
+お問い合わせ
+---------------------------------*/
+.Form {
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 720px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form {
+        margin-top: 40px;
+    }
+}
+
+.Form-Item {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item {
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        flex-wrap: wrap;
+    }
+}
+
+.Form-Item:nth-child(5) {
+
+}
+
+.Form-Item-Label {
+    width: 100%;
+    max-width: 248px;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item-Label {
+        max-width: inherit;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+    }
+}
+
+.Form-Item-Label.isMsg {
+    margin-top: 8px;
+    margin-bottom: auto;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item-Label.isMsg {
+        margin-top: 0;
+    }
+}
+
+.Form-Item-Label-Required {
+    border-radius: 6px;
+    margin-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 48px;
+    display: inline-block;
+    text-align: center;
+    background: #f56500;
+    color: #fff;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item-Label-Required {
+        border-radius: 4px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        width: 32px;
+        font-size: 10px;
+    }
+}
+
+.Form-Item-Input {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-left: 40px;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 48px;
+    flex: 1;
+    width: 100%;
+    max-width: 410px;
+    background: #eaedf2;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item-Input {
+        margin-left: 0;
+        margin-top: 18px;
+        height: 40px;
+        flex: inherit;
+        font-size: 15px;
+    }
+}
+
+.Form-Item-Textarea {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-left: 40px;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 216px;
+    flex: 1;
+    width: 100%;
+    max-width: 410px;
+    background: #eaedf2;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Item-Textarea {
+        margin-top: 18px;
+        margin-left: 0;
+        height: 200px;
+        flex: inherit;
+        font-size: 15px;
+    }
+}
+
+.Form-Btn {
+    border-radius: 6px;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 280px;
+    display: block;
+    letter-spacing: 0.05em;
+    background: #545454;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    .Form-Btn {
+        margin-top: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        width: 160px;
+        font-size: 16px;
+    }
+}
+
+/*--------------------------------
+送信ボタン
+---------------------------------*/
+.Price_box {
+	background: #f56500;
+	padding: 10px 100px;
+	margin: 0 auto;
+	display: block;
+	font-size: 20px;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	border: none;
+}
+
+.Price_box:hover {
+	opacity: 0.8;
+}
+
+.Price_inner {
+	/* border: 1px solid black; */
+	margin-top: 40px;
+	margin-bottom: 200px;
+}
+
+input {
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+
+select {
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+
+/*--------------------------------
+フッター
+---------------------------------*/
+.Footer_ul {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.Footer_li {
+	margin-top: 40px;
+	width: 20%;
+	list-style: none;
+}
+
+.Footer_inner {
+	height: 240px;
+	background: #FF942A;
+	margin-top: 200px;
+}
+
+.Footer_a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+.Footer_img {
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.Footer_copy {
+	height: 30px;
+	background: #f56500;
+	text-align: center;
+}
+
+.Footer_copy_txt {
+	color: white;
+	line-height: 30px;
+}
+
+/*--------------------------------
+ここからタブレット・sp
+---------------------------------*/
+@media screen and (max-width: 1050px) {
+	/* 1050px以下に適用されるCSS（タブレット用） */
+
+/*--------------------------------
+ヘッダータブレット
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		height: 60px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin-right: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 640px) {
+	/* 640px以下に適用されるCSS（スマホ用） */
+
+/*--------------------------------
+ヘッダーsp
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		flex-direction: column;
+		height: 120px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin: 0 auto;
+		display: flex;
+		flex-direction: column-reverse;
+    }
+
+	.User-inner {
+		margin-top: 0.3rem;
+	}
+
+/*--------------------------------
+会員登録sp
+---------------------------------*/
+    h2 {
+	    margin-top: 160px;
+	    display: block;
+	    text-align: center;
+	    font-weight: bold;
+    }
+
+    #register {
+	    width: 300px;
+	    margin: 20px auto;
+	    border-bottom: 5px solid #f56500;
+    }
+
+/*--------------------------------
+送信ボタンsp
+---------------------------------*/
+    .Price_box {
+	    background: #f56500;
+	    padding: 0.5rem 2rem;
+	    margin: 0 auto;
+	    display: block;
+	    font-size: 20px;
+	    border-radius: 10px;
+	    color: white;
+	    font-weight: bold;
+	    border: none;
+    }
+
+    .Price_box:hover {
+	    opacity: 0.8;
+    }
+
+    .Price_inner {
+	    margin-top: 40px;
+	    margin-bottom: 200px;
+    }
+
+    input {
+	    border-radius: 5px;
+	    border: 1px solid gray;
+    }
+
+    select {
+	    border-radius: 5px;
+	    border: 1px solid gray;
+    }
+
+/*--------------------------------
+フッターsp
+---------------------------------*/
+    .Footer_a {
+	    font-size: 0.75rem;
+    }
+
+}
+
+
