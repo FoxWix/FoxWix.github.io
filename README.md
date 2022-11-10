@@ -30,3 +30,15 @@
 [php/login.php] > [php/user_login.php]
 [login.html] > [login.php]
 [register.html] > [register.php]
+
+22/11/10
+[js/event/designOrder.js]
+色々変更
+[order.html]
+152~ id追加
+[cart.html] > [cart.php]
+76 //カートデータをリスト表示
+237 //カート内データ削除処理追加
+[php/cart_add.php]
+[php/cart_remove.php]
+追加
