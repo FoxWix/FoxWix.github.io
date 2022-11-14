@@ -42,3 +42,7 @@
 [php/cart_add.php]
 [php/cart_remove.php]
 追加
+
+22/11/14
+[cart.html]
+削除
