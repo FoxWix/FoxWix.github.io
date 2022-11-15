@@ -1,39 +1,13 @@
-<?php
-session_start();
-require_once("./php/util.php");
-
-//ログイン情報
-if(isset($_SESSION["user_data"])){
-  $user_data = $_SESSION["user_data"];
-  $user_name = $user_data["Name"];
-  $Login_flg = true;
-}
-else{
-  $user_name = "";
-  $Login_flg = false;
-}
-
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-    unset($_SESSION["errors"]);
-}
-else
-    $errors = "";
-?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>お問い合わせ -</title>
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/style-login.css">
-<link rel="stylesheet" href="css/style-php_error.css">
-<!-- <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
-<script src="//jpostal-1006.appspot.com/jquery.jpostal.js" type="text/javascript"></script> -->
+<link rel="stylesheet" href="css/style-inquiry.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>ログイン -</title>
 </head>
-
 <body>
 <header id="header">
     <h1><a href="./index.php" class=""><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
@@ -73,27 +47,34 @@ return false;
 })
 });
 </script>
-<div id="login-box">
-  <div id="register">
-    <h2>ログイン</h2>
-  </div>
-  <form  action="./php/user_login.php" method="post">
-    <div class="label-box">
-      <label for="email">email</label>
-    </div>
-      <input type="email" name="email" class="email">
-      <?php error_list($errors,"email"); ?>
-	<div class="label-box">
-      <label for="password">password</label>
-    </div>
-      <input type="password" name="password" class="password">
-      <?php error_list($errors,"password"); ?>
-    <div class="btn-box">
-      <button type="submit" class="Login_buttun2">ログイン</button>
-	  <a href="register.php" class="no-register">新規会員登録はこちら</a>
-    </div>
-  </form>
+<div id="register">
+  <h2>お問い合わせ</h2>
 </div>
+<main>
+<div class="Form">
+  <div class="Form-Item">
+    <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>お名前</p>
+    <input type="text" class="Form-Item-Input" placeholder="例）山田太郎">
+  </div>
+  <div class="Form-Item">
+    <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>電話番号</p>
+    <input type="text" class="Form-Item-Input" placeholder="例）000-0000-0000">
+  </div>
+  <div class="Form-Item">
+    <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
+    <input type="email" class="Form-Item-Input" placeholder="例）example@gmail.com">
+  </div>
+  <div class="Form-Item">
+    <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
+    <textarea class="Form-Item-Textarea"></textarea>
+  </div>
+  <div class="Price_inner">
+    <form action="" method="">
+      <input type="submit" class="Price_box" value="入力内容を送信する">
+    </form>
+  </div>
+</div>
+</main>
 <footer id="Footer">
   <div class="Footer_inner">
 	<ul class="Footer_ul">
@@ -110,5 +91,20 @@ return false;
 	<p class="Footer_copy_txt">©️ Bloc Deco. All rights reserved.</p>
   </div>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+//質問をクリックで答えが展開//
+  $(function() {
+    $('.trigger').on('click',function() {
+      $(this).next().slideToggle();
+    });
+  });
+//答えが展開している状態にするためdtにclassを付与する//
+  $(function() {
+    $('.trigger').on('click',function() {
+      $(this).toggleClass('active');//もしクラスが付いていると外します、付いていないなら付けます//
+    });
+  });
+</script>
 </body>
 </html>

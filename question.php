@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("./php/util.php");
+require_once("./php/workDB_MF.php");
 
 //ログイン情報
 if(isset($_SESSION["user_data"])){
@@ -12,26 +13,17 @@ else{
   $user_name = "";
   $Login_flg = false;
 }
-
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-    unset($_SESSION["errors"]);
-}
-else
-    $errors = "";
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>よくある質問 -</title>
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/style-login.css">
-<link rel="stylesheet" href="css/style-php_error.css">
-<!-- <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
-<script src="//jpostal-1006.appspot.com/jquery.jpostal.js" type="text/javascript"></script> -->
+<link rel="stylesheet" href="css/style-question.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>ログイン -</title>
 </head>
 
 <body>
@@ -73,27 +65,50 @@ return false;
 })
 });
 </script>
-<div id="login-box">
-  <div id="register">
-    <h2>ログイン</h2>
-  </div>
-  <form  action="./php/user_login.php" method="post">
-    <div class="label-box">
-      <label for="email">email</label>
-    </div>
-      <input type="email" name="email" class="email">
-      <?php error_list($errors,"email"); ?>
-	<div class="label-box">
-      <label for="password">password</label>
-    </div>
-      <input type="password" name="password" class="password">
-      <?php error_list($errors,"password"); ?>
-    <div class="btn-box">
-      <button type="submit" class="Login_buttun2">ログイン</button>
-	  <a href="register.php" class="no-register">新規会員登録はこちら</a>
-    </div>
-  </form>
+<div id="register">
+  <h2>よくある質問</h2>
 </div>
+<main>
+
+  <h3>「お客様プリント」に関して</h3>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その1</dt>
+    <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その2</dt>
+	  <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+
+  <h3>「デザインテンプレート」に関して</h3>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その1</dt>
+    <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その2</dt>
+	  <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+  <dl>
+      <dt class="trigger">Q.&nbsp;その3</dt>
+	  <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+
+  <h3>「配送」に関して</h3>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その1</dt>
+    <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その2</dt>
+    <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+  <dl>
+    <dt class="trigger">Q.&nbsp;その3</dt>
+    <dd><span class="Answer">A.&nbsp;回答</span><br>　 ここに詳細を記載する</dd>
+  </dl>
+
+</main>
 <footer id="Footer">
   <div class="Footer_inner">
 	<ul class="Footer_ul">
@@ -110,5 +125,20 @@ return false;
 	<p class="Footer_copy_txt">©️ Bloc Deco. All rights reserved.</p>
   </div>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+//質問をクリックで答えが展開//
+  $(function() {
+    $('.trigger').on('click',function() {
+      $(this).next().slideToggle();
+    });
+  });
+//答えが展開している状態にするためdtにclassを付与する//
+  $(function() {
+    $('.trigger').on('click',function() {
+      $(this).toggleClass('active');//もしクラスが付いていると外します、付いていないなら付けます//
+    });
+  });
+</script>
 </body>
 </html>

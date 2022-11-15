@@ -3,8 +3,24 @@ session_start();
 require_once("./php/util.php");
 require_once("./php/workDB_MF.php");
 
-$_SESSION["cart"] = array_values($_SESSION["cart"]);
-$cart = $_SESSION["cart"];
+//ログイン情報
+if(isset($_SESSION["user_data"])){
+  $user_data = $_SESSION["user_data"];
+  $user_name = $user_data["Name"];
+  $Login_flg = true;
+}
+else{
+  $user_name = "";
+  $Login_flg = false;
+}
+
+if(isset($_SESSION["cart"])){
+  $_SESSION["cart"] = array_values($_SESSION["cart"]);
+  $cart = $_SESSION["cart"];
+}
+else{
+  $cart = [];
+}
 ?>
 <!doctype html>
 <html>
@@ -22,14 +38,22 @@ $cart = $_SESSION["cart"];
 </head>
 
 <body>
-  <header id="header">
-    <h1><a href="#" class="crunchify-top"><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
+<header id="header">
+    <h1><a href="./index.php" class=""><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
     <span class="head-pr">最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
     <div id="header-btns">
-      <span class="User-inner">ユーザー：<span id="User-name">大阪太郎</span></span>
+      <!-- ログイン処理 -->
+      <?php if($Login_flg): ?>
+      <span class="User-inner">ユーザー：<span id="User-name"><?php echo $user_name ?></span></span>
+      <?php endif; ?>
       <div id="flex-btns">
-        <a href="" class="Cart_buttun">カート</a>
-        <a href="" class="Login_buttun">ログイン</a>
+        <a href="./cart.php" class="Cart_buttun">カート</a>
+        <?php if($Login_flg): ?>
+          <a href="./php/user_logout.php" class="Login_buttun">ログアウト</a>
+        <?php endif; ?>
+        <?php if(!$Login_flg): ?>
+          <a href="./login.php" class="Login_buttun">ログイン</a>
+        <?php endif; ?>
       </div>
     </div>
   </header>
@@ -75,6 +99,7 @@ $cart = $_SESSION["cart"];
       <?php
       //カートデータをリスト表示
       $count = 0;
+      $total = 0;
       foreach($cart as $data){
         $length    = $data["length"];
         $width     = $data["width"];
@@ -83,6 +108,8 @@ $cart = $_SESSION["cart"];
         $quantity  = $data["quantity"];
         $color     = $data["color"];
         $imgpath   = $data["imgpath"];
+        $price = 2600;
+        $total = $total + $price * $quantity;
 
         echo '<div class="basket-product">';
           echo '<div class="item">';
@@ -100,7 +127,7 @@ $cart = $_SESSION["cart"];
           echo '<div class="quantity">';
             echo '<input type="number" value="'.$quantity.'" min="1" class="quantity-field">';
           echo '</div>';
-          echo '<div class="subtotal">2600</div>';
+          echo '<div class="subtotal">'.$price.'</div>';
           echo '<div class="remove">';
             echo '<button id="'.$count.'" >削除</button>';
           echo '</div>';
@@ -108,11 +135,11 @@ $cart = $_SESSION["cart"];
 
         $count++;
       }
-      
-
+    
       ?>
 
-      <div class="basket-product">
+      <!-- カートデータサンプル
+        <div class="basket-product">
         <div class="item">
           <div class="product-image">
             <img src="images/damball_03.png" alt="Placholder Image 2" class="product-frame">
@@ -120,7 +147,7 @@ $cart = $_SESSION["cart"];
 
           <div class="product-details">
             <h1><strong><span class="item-quantity">1</span> x お客様プリント</strong></h1>
-            <!-- <p><strong>Navy</strong></p> -->
+            <p><strong>Navy</strong></p>
             <p>寸法<br>300<span>mm</span> 300<span>mm</span> 300<span>mm</span></p>
             <p>厚み<br>3<span>mm</span></p>
           </div>
@@ -134,30 +161,7 @@ $cart = $_SESSION["cart"];
         <div class="remove">
           <button>削除</button>
         </div>
-      </div>
-
-      <div class="basket-product">
-        <div class="item">
-          <div class="product-image">
-            <img src="images/damball_03.png" alt="Placholder Image 2" class="product-frame">
-          </div>
-          <div class="product-details">
-            <h1><strong><span class="item-quantity">1</span> x Whistles</strong><!-- Amella Lace Midi Dress -->
-            </h1>
-            <p><strong>Pink</strong></p>
-            <p>寸法<br>300<span>mm</span> 300<span>mm</span> 300<span>mm</span></p>
-            <p>厚み<br>3<span>mm</span></p>
-          </div>
-        </div>
-        <div class="price">2600</div>
-        <div class="quantity">
-          <input type="number" value="1" min="1" class="quantity-field">
-        </div>
-        <div class="subtotal">2600</div>
-        <div class="remove">
-          <button>削除</button>
-        </div>
-      </div>
+      </div> -->
 
     </div>
     <aside>
@@ -165,7 +169,8 @@ $cart = $_SESSION["cart"];
         <div class="summary-total-items"><span class="total-items"></span> つの商品が入っています</div>
         <div class="summary-subtotal">
           <div class="subtotal-title">小合計</div>
-          <div class="subtotal-value final-value" id="basket-subtotal">7800</div>
+          <!-- 商品合計 -->
+          <div class="subtotal-value final-value" id="basket-subtotal"><?php echo $total ?></div>
           <div class="summary-promo hide">
             <div class="promo-title">Promotion</div>
             <div class="promo-value final-value" id="basket-promo"></div>
@@ -174,6 +179,7 @@ $cart = $_SESSION["cart"];
 
         <div class="summary-subtotal">
           <div class="subtotal-title">送料</div>
+          <!-- 送料 -->
           <div class="subtotal-value">790</div>
           <div class="summary-promo hide">
             <div class="promo-title">Promotion</div>
@@ -194,7 +200,8 @@ $cart = $_SESSION["cart"];
 
         <div class="summary-total">
           <div class="total-title">合計</div>
-          <div class="total-value final-value total-color" id="basket-total">7800</div>
+          <!-- 送料込み合計 -->
+          <div class="total-value final-value total-color" id="basket-total"><?php echo $total+790 ?></div>
         </div>
         <div class="summary-checkout">
           <button class="checkout-cta">注文を確定する</button>
@@ -209,7 +216,7 @@ $cart = $_SESSION["cart"];
   <footer id="Footer">
     <div class="Footer_inner">
       <ul class="Footer_ul">
-        <li class="Footer_li"><a href="index.html" class="Footer_a">HOME</a></li>
+        <li class="Footer_li"><a href="index.php" class="Footer_a">HOME</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">お問い合わせ</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
@@ -310,7 +317,7 @@ $cart = $_SESSION["cart"];
         /* Update summary display. */
         $('.final-value').fadeOut(fadeTime, function () {
           $('#basket-subtotal').html(subtotal.toFixed());
-          $('#basket-total').html(total.toFixed());
+          $('#basket-total').html((total+790).toFixed());
           if (total == 0) {
             $('.checkout-cta').fadeOut(fadeTime);
           } else {
@@ -360,6 +367,11 @@ $cart = $_SESSION["cart"];
         updateSumItems();
       });
     }
+
+    $('.checkout-cta').click(function () {
+      location.href = "./php/order_registration.php";
+    });
+
   </script>
 </body>
 

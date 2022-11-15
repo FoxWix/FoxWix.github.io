@@ -2,6 +2,18 @@
 session_start();
 require_once("./php/util.php");
 
+//ログイン情報
+if(isset($_SESSION["user_data"])){
+	$user_data = $_SESSION["user_data"];
+  
+	$user_name = $user_data["Name"];
+	$Login_flg = true;
+  }
+  else{
+	$user_name = "";
+	$Login_flg = false;
+  }
+
 if(isset($_SESSION["errors"])){
     $errors = $_SESSION["errors"];
     unset($_SESSION["errors"]);
@@ -20,14 +32,29 @@ else
 <!-- <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
 <script src="//jpostal-1006.appspot.com/jquery.jpostal.js" type="text/javascript"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>test-register</title>
+<title>新規会員登録 -</title>
 </head>
 
 <body>
 <header id="header">
-  <h1><a href="./index.html" class="crunchify-top"><img src="images/Logo.png" alt="ブロック・デコ" height="60px"></a></h1><span>最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
-  <a href="./login.php" class="Login_buttun">ログイン</a>
-</header>
+    <h1><a href="./index.php" class=""><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
+    <span class="head-pr">最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
+    <div id="header-btns">
+      <!-- ログイン処理 -->
+      <?php if($Login_flg): ?>
+      <span class="User-inner">ユーザー：<span id="User-name"><?php echo $user_name ?></span></span>
+      <?php endif; ?>
+      <div id="flex-btns">
+        <a href="./cart.php" class="Cart_buttun">カート</a>
+        <?php if($Login_flg): ?>
+          <a href="./php/user_logout.php" class="Login_buttun">ログアウト</a>
+        <?php endif; ?>
+        <?php if(!$Login_flg): ?>
+          <a href="./login.php" class="Login_buttun">ログイン</a>
+        <?php endif; ?>
+      </div>
+    </div>
+  </header>
 <script>            
 jQuery(document).ready(function() {
 var offset = 220;
@@ -49,20 +76,22 @@ return false;
 </script>
 <div id="register">
   <h2>新規会員登録</h2>
+  <?php error_list($errors,"database"); ?>
 </div>
 <!-- <form action="user_register.php" method="POST"> 処理追加 -->
 <form action="./php/user_register.php" method="POST">
 	<div id="Form-area">
+	<?php error_list($errors,"database"); ?>
 	<dl class="Form-dl">
 		<dt>メールアドレス</dt>
-		<dd><input name="e-mail-address" type="text" class="Form-txt" required placeholder="info@bloc.com">
+		<dd><input name="e-mail-address" type="text" class="Form-txt" required placeholder="例）info@bloc.com">
 		<?php error_list($errors,"email"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>メールアドレス(確認)</dt>
-		<dd><input name="e-mail-address-confirmation" type="text" class="Form-txt" required placeholder="info@bloc.com">
-		<?php error_list($errors,"email-conf"); ?>	
+		<dd><input name="e-mail-address-confirmation" type="text" class="Form-txt" required placeholder="例）info@bloc.com">
+		<?php error_list($errors,"email-conf"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
@@ -79,109 +108,108 @@ return false;
 	</dl>
 	<dl class="Form-dl">
 		<dt>お名前</dt>
-		<dd><input name="name-1" type="text" class="Form-name-txt" required placeholder="大阪"><input name="name-2" type="text" class="Form-name-txt" required placeholder="太郎">
+		<dd><input name="name-1" type="text" class="Form-name-txt" required placeholder="例）大阪"><input name="name-2" type="text" class="Form-name-txt" required placeholder="例）太郎">
 		<?php error_list($errors,"name"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>お名前(フリガナ)</dt>
-		<dd><input name="name-3" type="text" class="Form-name-txt" required placeholder="オオサカ"><input name="name-4" type="text" class="Form-name-txt" required placeholder="タロウ">
+		<dd><input name="name-3" type="text" class="Form-name-txt" required placeholder="例）オオサカ"><input name="name-4" type="text" class="Form-name-txt" required placeholder="例）タロウ">
 		<?php error_list($errors,"name-kana"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>電話番号</dt>
-		<dd><input name="phone-number" type="text" class="Form-code-txt" required placeholder="06-6772-2233">
+		<dd><input name="phone-number" type="text" class="Form-code-txt" required placeholder="例）06-6772-2233">
 		<?php error_list($errors,"phone-number"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>郵便番号</dt>
-		<dd>〒 <input name="postcode1" type="text" class="Form-name-txt" required placeholder="543" id="postcode1"> - <input name="postcode2" type="text" class="Form-name-txt" required placeholder="0001" id="postcode2">
+		<dd>〒 <input name="postcode1" type="text" class="Form-name-txt" required placeholder="例）543" id="postcode1"> - <input name="postcode2" type="text" class="Form-name-txt" required placeholder="例）0001" id="postcode2">
 		<?php error_list($errors,"postcode"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>都道府県(お届け先)</dt>
 		<dd>
-			<div name="post" class="Number_input" required placeholder="012-3456">
-				<!-- <form> を <div> に変更 -->
-				<div>
-					<select name="prefecture" id="address1">
-					<option value="" selected>お選び下さい</option>
-					<option value="北海道">北海道</option>
-					<option value="青森県">青森県</option>
-					<option value="岩手県">岩手県</option>
-					<option value="宮城県">宮城県</option>
-					<option value="秋田県">秋田県</option>
-					<option value="山形県">山形県</option>
-					<option value="福島県">福島県</option>
-					<option value="宮城県">宮城県</option>
-					<option value="栃木県">栃木県</option>
-					<option value="群馬県">群馬県</option>
-					<option value="埼玉県">埼玉県</option>
-					<option value="千葉県">千葉県</option>
-					<option value="東京都">東京都</option>
-					<option value="神奈川県">神奈川県</option>
-					<option value="新潟県">新潟県</option>
-					<option value="富山県">富山県</option>
-					<option value="石川県">石川県</option>
-					<option value="福井県">福井県</option>
-					<option value="山梨県">山梨県</option>
-					<option value="長野県">長野県</option>
-					<option value="岐阜県">岐阜県</option>
-					<option value="静岡県">静岡県</option>
-					<option value="愛知県">愛知県</option>
-					<option value="三重県">三重県</option>
-					<option value="滋賀県">滋賀県</option>
-					<option value="京都府">京都府</option>
-					<option value="大阪府">大阪府</option>
-					<option value="兵庫県">兵庫県</option>
-					<option value="奈良県">奈良県</option>
-					<option value="和歌山県">和歌山県</option>
-					<option value="鳥取県">鳥取県</option>
-					<option value="島根県">島根県</option>
-					<option value="岡山県">岡山県</option>
-					<option value="広島県">広島県</option>
-					<option value="山口県">山口県</option>
-					<option value="徳島県">徳島県</option>
-					<option value="香川県">香川県</option>
-					<option value="愛媛県">愛媛県</option>
-					<option value="高知県">高知県</option>
-					<option value="福岡県">福岡県</option>
-					<option value="佐賀県">佐賀県</option>
-					<option value="長崎県">長崎県</option>
-					<option value="熊本県">熊本県</option>
-					<option value="大分県">大分県</option>
-					<option value="宮崎県">宮崎県</option>
-					<option value="鹿児島県">鹿児島県</option>
-					<option value="沖縄県">沖縄県</option>
+			<!-- <form> を <div> に変更 -->
+			<div name="post" class="Number_input" required placeholder="">
+			<div>
+				<select name="prefecture" id="address1">
+				<option value="" selected>お選び下さい</option>
+				<option value="北海道">北海道</option>
+				<option value="青森県">青森県</option>
+				<option value="岩手県">岩手県</option>
+				<option value="宮城県">宮城県</option>
+				<option value="秋田県">秋田県</option>
+				<option value="山形県">山形県</option>
+				<option value="福島県">福島県</option>
+				<option value="宮城県">宮城県</option>
+				<option value="栃木県">栃木県</option>
+				<option value="群馬県">群馬県</option>
+				<option value="埼玉県">埼玉県</option>
+				<option value="千葉県">千葉県</option>
+				<option value="東京都">東京都</option>
+				<option value="神奈川県">神奈川県</option>
+				<option value="新潟県">新潟県</option>
+				<option value="富山県">富山県</option>
+				<option value="石川県">石川県</option>
+				<option value="福井県">福井県</option>
+				<option value="山梨県">山梨県</option>
+				<option value="長野県">長野県</option>
+				<option value="岐阜県">岐阜県</option>
+				<option value="静岡県">静岡県</option>
+				<option value="愛知県">愛知県</option>
+				<option value="三重県">三重県</option>
+				<option value="滋賀県">滋賀県</option>
+				<option value="京都府">京都府</option>
+				<option value="大阪府">大阪府</option>
+				<option value="兵庫県">兵庫県</option>
+				<option value="奈良県">奈良県</option>
+				<option value="和歌山県">和歌山県</option>
+				<option value="鳥取県">鳥取県</option>
+				<option value="島根県">島根県</option>
+				<option value="岡山県">岡山県</option>
+				<option value="広島県">広島県</option>
+				<option value="山口県">山口県</option>
+				<option value="徳島県">徳島県</option>
+				<option value="香川県">香川県</option>
+				<option value="愛媛県">愛媛県</option>
+				<option value="高知県">高知県</option>
+				<option value="福岡県">福岡県</option>
+				<option value="佐賀県">佐賀県</option>
+				<option value="長崎県">長崎県</option>
+				<option value="熊本県">熊本県</option>
+				<option value="大分県">大分県</option>
+				<option value="宮崎県">宮崎県</option>
+				<option value="鹿児島県">鹿児島県</option>
+				<option value="沖縄県">沖縄県</option>
 				</select>
-				</div>
 			</div>
 			<!-- </form> を </div> に変更 -->
-			<?php error_list($errors,"prefecture"); ?>
+		</div>
+		<?php error_list($errors,"prefecture"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt>市区町村(お届け先)</dt>
-		<dd><input name="citytown" type="text" class="Form-txt" required placeholder="大阪市天王寺区上本町" id="address2">
+		<dd><input name="citytown" type="text" class="Form-txt" required placeholder="例）大阪市天王寺区上本町" id="address2">
 		<?php error_list($errors,"citytown"); ?>
 		</dd>
 	</dl>
 	<dl class="Form-dl">
 		<dt id="address-dt">番地・建物名(お届け先)</dt>
-		<dd><input name="addnumber" type="text" class="Form-txt" required placeholder="6-8-4" id="address3">
+		<dd><input name="addnumber" type="text" class="Form-txt" required placeholder="例）6-8-4" id="address3">
 		<?php error_list($errors,"addnumber"); ?>
 		</dd>
 	</dl>
 	</div>
-
 	<div id="terms">
 	<h3>ご利用規約</h3>
 	</div>
 	<div class="box">
-	<p>この利用規約（以下，「本規約」といいます。）は，＿＿＿＿＿（以下，「当社」といいます。）がこのウェブサイト上で提供するオンラインショップ（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。</p><br>
+	<p>この利用規約（以下，「本規約」といいます。）は，株式会社ブロック・デコ（以下，「当社」といいます。）がこのウェブサイト上で提供するオンラインショップ（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。</p><br>
 
 	<h4>第1条（適用）</h4>
 	<ol>
@@ -297,7 +325,6 @@ return false;
 	<li>本サービスに関して紛争が生じた場合には，当社の本店所在地を管轄する裁判所を専属的合意管轄裁判所とします。</li>
 	</ol>
 	</div>
-
 	<div class="checkbox">
 	<p class="checkbox-p"><input required type="checkbox" name="os" value="win7" class="checkbox-input">利用規約に同意する</p>
 	</div>
@@ -313,9 +340,9 @@ return false;
 <footer id="Footer">
   <div class="Footer_inner">
 	<ul class="Footer_ul">
-	  <li class="Footer_li"><a href="./index.html" class="Footer_a crunchify-top">HOME</a></li>
+	  <li class="Footer_li"><a href="index.php" class="Footer_a">HOME</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">FAQ・お問い合わせ</a></li>
+	  <li class="Footer_li"><a href="" class="Footer_a">お問い合わせ</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
     </ul>
 	<div class="Footer_logo">

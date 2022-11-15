@@ -43,6 +43,9 @@
 [php/cart_remove.php]
 追加
 
-22/11/14
-[cart.html]
-削除
+22/11/14 [cart.html] 削除
+
+22/11/15
+注文処理追加
+html を php に変更
+ユーザーセッション情報を追加
