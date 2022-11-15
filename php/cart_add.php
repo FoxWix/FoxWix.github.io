@@ -68,6 +68,8 @@ $imgpath = $_POST["imgpath" ];
 else
 $imgpath = "";
 
+//仮データ
+$price = 2600;
 
 if($type=="C_order"){
     //オリジナル
@@ -80,6 +82,7 @@ if($type=="C_order"){
         "color"       => $color    ,
         "imgpath"     => $imgpath  ,
         "quantity"    => $quantity ,
+        "price"       => $price
     ];
 
 }else{
@@ -88,11 +91,13 @@ if($type=="C_order"){
         "cardboardID" => "T",
         "color"       => $color,
         "tmpId"       => $tmpId,
-        "quantity"    => $quantity
+        "quantity"    => $quantity,
+        "price"       => $price
     ];
 }
 
 $_SESSION["cart"][] = $cardboard_data;
+unset($_SESSION["cardboard_flg"]);
 
 header("Location:../cart.php");
 exit();

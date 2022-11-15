@@ -51,8 +51,8 @@ if(isset($_POST["name-2"]))
     $name_2 = str_replace(" ","",$_POST["name-2"]);
 
 //名前（姓名）
-$name = $name_1.$name_2;
-if($name_kana = "")
+$name = $name_1." ".$name_2;
+if($name == "")
     $errors["name"][] = "名前が入力されていません";
 if(mb_strlen($name) > 20)
     $errors["name"][] = "名前は20文字以下です";
@@ -65,8 +65,8 @@ if(isset($_POST["name-4"]))
     $name_4 = str_replace(" ","",$_POST["name-4"]);
 
 //名前カナ
-$name_kana = $name_3.$name_4;
-if($name_kana = "")
+$name_kana = $name_3." ".$name_4;
+if($name_kana == "")
     $errors["name-kana"][] = "フリガナが入力されていません";
 if(mb_strlen($name_kana) > 20)
     $errors["name-kana"][] = "フリガナは30文字以下です";
@@ -109,16 +109,20 @@ if(isset($_POST["citytown"])){
     $citytown = str_replace(" ","",$_POST["citytown"]);
     if($citytown == "")
         $errors["citytown"][] = "市区町村が入力されていません";
+    if(strpos($citytown,"$"))
+        $errors["citytown"][] = "使用できない文字が入力されています";
 }
 //番地建物
 if(isset($_POST["addnumber"])){
     $addnumber = str_replace(" ","",$_POST["addnumber"]);
     if($addnumber == "")
         $errors["addnumber"][] = "番地・建物名が入力されていません";
+    if(strpos($addnumber,"$"))
+        $errors["addnumber"][] = "使用できない文字が入力されています";
 }
 
 //住所
-$address = $prefecture.$citytown.$addnumber;
+$address = $prefecture."$".$citytown."$".$addnumber;
 if(mb_strlen($address) > 50)
     $errors["address"][] = "住所は50文字以下です";
 
@@ -140,7 +144,7 @@ $data = [
     $password
 ];
 
-$e = Add("customer",$data);
+$e = Add("t_customer",$data);
 if(isset($e)){
     $errors["database"][] = $e;
     $_SESSION["errors"] = $errors;
@@ -148,8 +152,23 @@ if(isset($e)){
     exit();
 }
 
-//仮ページに遷移
-$_SESSION["data"] = $data;
-header("Location:../phptest/Test_register.php");
-exit();
+
+$result = GetData_LOGIN("t_customer",["mail","password"],[$email],[$password]);
+
+if(isset($result)){
+    //会員データ
+    if(count($result) > 0){
+    foreach($result as $row){
+        $_SESSION["user_data"] = $row;
+    }
+
+    if(isset($_SESSION["cardboard_flg"])){
+        header("Location:../order.php");
+        exit();
+    }
+
+    header("Location:../index.php");
+    exit();
+    }
+}
 ?>

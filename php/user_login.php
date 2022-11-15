@@ -24,16 +24,20 @@ if(count($errors) > 0){
     exit();
 }
 
-$result = GetData_LOGIN("customer",["mail","password"],[$email],[$password]);
+$result = GetData_LOGIN("t_customer",["mail","password"],[$email],[$password]);
 
 if(isset($result)){
-    //会員データ（仮）
+    //会員データ
     if(count($result) > 0){
     foreach($result as $row){
-        $_SESSION["data"] = $row;
+        $_SESSION["user_data"] = $row;
     }
 
-    header("Location:../phptest/Test_login.php");
+    if(isset($_SESSION["cardboard_flg"])){
+        header("Location:../order.php");
+        exit();
+    }
+    header("Location:../index.php");
     exit();
     }
 }
