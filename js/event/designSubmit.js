@@ -77,15 +77,23 @@ document.getElementById('submit').addEventListener('click', () => {
             }
         }
 
+        //セッションストレージに注文内容を保存
         sessionStorage.clear();
         sessionStorage.setItem('type', 'T_order');
         sessionStorage.setItem('tmpId', selectvalue);
         sessionStorage.setItem('color', color);
         sessionStorage.setItem('quantity', quan);
+        const texture = getTextures();
+        for (let i = 0; i < 6; ++i) {
+
+            let idname = 'texture' + i;
+            sessionStorage.setItem(idname, texture[i]);
+
+        }
 
     }
 
     //確認ページへ移動
-    location.href = '../order.html';
+    location.href = '../../php/order_load.php';
 
 }, false);
