@@ -8,7 +8,8 @@ if(isset($_SESSION["user_data"])){
   $user_data = $_SESSION["user_data"];
 
   $user_name = $user_data["Name"];
-  $user_address = $user_data["Address"];
+  $address = $user_data["Address"];
+  $user_address =  mb_split('\$',$address);
   $user_post = $user_data["Post"];
   $Login_flg = true;
 }
@@ -153,19 +154,19 @@ else{
               <table border="1" style="border-collapse: collapse" class="table-size" bordercolor="#cccccc">
                 <tr>
                   <th width="40%" class="size-th-03">郵便番号</th>
-                  <td><span>〒 </span>543<span> - </span>0001</td>
+                  <td><span>〒 </span><?php echo mb_substr($user_post,0,3)?><span> - </span><?php echo mb_substr($user_post,3,4)?></td>
                 </tr>
                 <tr>
                   <th width="40%" class="size-th-03">都道府県</th>
-                  <td>大阪府</td>
+                  <td><?php echo $user_address[0] ?></td>
                 </tr>
                 <tr>
                   <th width="40%" class="size-th-03">市区町村</th>
-                  <td>大阪市天王寺区上本町</td>
+                  <td><?php echo $user_address[1] ?></td>
                 </tr>
                 <tr>
                   <th width="40%" class="size-th-03">番地・建物名</th>
-                  <td>6-8-4</td>
+                  <td><?php echo $user_address[2] ?></td>
                 </tr>
               </table>
             </td>
