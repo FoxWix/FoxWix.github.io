@@ -6,8 +6,8 @@ require_once("workDB_MF.php");
 /*  4.1 注文登録  */
 
 //　仮データ
-$price = 2000;
 $payment = "銀行振込";
+$souryo = 790;
 
 /* 
     4.1.2 注文情報登録
@@ -33,10 +33,13 @@ for($count=0;count($cardboard_list) > $count; $count++){
     $order = [
         "orderID"     => $order_id             ,
         "cardboardID" => ""                    ,
-        "price"       => $price                ,
+        "price"       => $cardboard["price"]   ,
         "quantity"    => $cardboard["quantity"],
     ];
     unset($cardboard["quantity"]);
+    unset($cardboard["price"]);
+    //注文合計金額
+    $Total_amount += $order["price"] * $order["quantity"];
 
     //段ボールID取得
     if($cardboard["cardboardID"] == "P"){
@@ -64,6 +67,8 @@ for($count=0;count($cardboard_list) > $count; $count++){
     
     //段ボール登録
     Add($tablename,$cardboard_data);
+    //登録済みデータ削除
+    unset($cardboard_data);
     
     //段ボールID更新
     $order["cardboardID"] = $cardboard_id;
@@ -79,12 +84,10 @@ for($count=0;count($cardboard_list) > $count; $count++){
 
     //登録済みデータ削除
     unset($order_data);
-    
-    //注文合計金額
-    $Total_amount += $order["price"] * $order["quantity"];
 }
 
 //  注文詳細登録
+$Total_amount += $souryo;
 
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];
@@ -112,7 +115,7 @@ var_export($cardboard_list);
 var_export($order_detail);
 
 //カートデータ削除
-unset($_SESSION["cart"]);
+//unset($_SESSION["cart"]);
 
 header("Location:../phptest/Test_order.php");
 exit();
