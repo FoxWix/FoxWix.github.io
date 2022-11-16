@@ -29,8 +29,8 @@ else{
 </head>
 
 <body>
-<header id="header">
-    <h1><a href="./index.php" class=""><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
+  <header id="header">
+    <h1><a href="./index.php" class="crunchify-top"><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1>
     <span class="head-pr">最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
     <div id="header-btns">
       <!-- ログイン処理 -->
@@ -199,35 +199,35 @@ else{
             <div id="tabbody">
               <div id="tabpage1" class="Shape_selection_tab">
                 <input type="radio" name="TemplateSelect" value="shape01" id="TemplateSelect01" checked><label
-                  for="TemplateSelect01" class="show_pop" onclick="ChangeShowColor( 1 )"></label>
+                  for="TemplateSelect01" class="show_pop"></label>
                 <input type="radio" name="TemplateSelect" value="shape02" id="TemplateSelect02"><label
-                  for="TemplateSelect02" class="show_pop02" onclick="ChangeShowColor( 2 )"></label>
+                  for="TemplateSelect02" class="show_pop02"></label>
                 <input type="radio" name="TemplateSelect" value="shape03" id="TemplateSelect03"><label
-                  for="TemplateSelect03" onclick="ChangeShowColor( 3 )"></label>
+                  for="TemplateSelect03"></label>
               </div>
               <div id="tabpage2" class="Shape_selection_tab">
                 <input type="radio" name="TemplateSelect" value="shape04" id="TemplateSelect04"><label
-                  for="TemplateSelect04" onclick="ChangeShowColor( 4 )"></label>
+                  for="TemplateSelect04"></label>
                 <input type="radio" name="TemplateSelect" value="shape05" id="TemplateSelect05"><label
-                  for="TemplateSelect05" onclick="ChangeShowColor( 5 )"></label>
+                  for="TemplateSelect05"></label>
                 <input type="radio" name="TemplateSelect" value="shape06" id="TemplateSelect06"><label
-                  for="TemplateSelect06" onclick="ChangeShowColor( 6 )"></label>
+                  for="TemplateSelect06"></label>
               </div>
               <div id="tabpage3" class="Shape_selection_tab">
                 <input type="radio" name="TemplateSelect" value="shape07" id="TemplateSelect07"><label
-                  for="TemplateSelect07" onclick="ChangeShowColor( 7 )"></label>
+                  for="TemplateSelect07"></label>
                 <input type="radio" name="TemplateSelect" value="shape08" id="TemplateSelect08"><label
-                  for="TemplateSelect08" onclick="ChangeShowColor( 8 )"></label>
+                  for="TemplateSelect08"></label>
                 <input type="radio" name="TemplateSelect" value="shape09" id="TemplateSelect09"><label
-                  for="TemplateSelect09" onclick="ChangeShowColor( 9 )"></label>
+                  for="TemplateSelect09"></label>
               </div>
               <div id="tabpage4" class="Shape_selection_tab">
                 <input type="radio" name="TemplateSelect" value="shape10" id="TemplateSelect10"><label
-                  for="TemplateSelect10" onclick="ChangeShowColor( 10 )"></label>
+                  for="TemplateSelect10"></label>
                 <input type="radio" name="TemplateSelect" value="shape11" id="TemplateSelect11"><label
-                  for="TemplateSelect11" onclick="ChangeShowColor( 11 )"></label>
+                  for="TemplateSelect11"></label>
                 <input type="radio" name="TemplateSelect" value="shape12" id="TemplateSelect12"><label
-                  for="TemplateSelect12" onclick="ChangeShowColor( 12 )"></label>
+                  for="TemplateSelect12"></label>
               </div>
             </div>
           </div>
@@ -261,13 +261,13 @@ else{
 		  <p class="Size_selection_txt">(外寸)</p>
         </div>
 	  </div> -->
-        <div class="Size_txt_box">
+        <div class="Size_txt_box" id="SW3">
           <div class="Size_txt_inner">
             <p class="Size_txt">寸法</p>
             <p class="Size_txt02">(外寸)</p>
           </div>
         </div>
-        <div class="Size_inner">
+        <div class="Size_inner" id="SW4">
           <div class="Size_selection_inner">
             <div class="Size_input">
               <label for="number">長さ</label><br>
@@ -358,7 +358,7 @@ else{
   <footer id="Footer">
     <div class="Footer_inner">
       <ul class="Footer_ul">
-        <li class="Footer_li"><a href="#" class="Footer_a">HOME</a></li>
+        <li class="Footer_li"><a href="#" class="Footer_a crunchify-top">HOME</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">お問い合わせ</a></li>
         <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
@@ -371,111 +371,6 @@ else{
       <p class="Footer_copy_txt">©️ Bloc Deco. All rights reserved.</p>
     </div>
   </footer>
-  <script>
-    // jQueryクリックイベント
-    $('.Selection_btn').on('click', function () {
-      $('.Selection_btn').removeClass('active');
-      $(this).addClass('active');
-    });
-
-    function Display(no) {
-
-      if (no == "no1") {
-
-        document.getElementById("SW1").style.display = "block";
-        document.getElementById("SW2").style.display = "none";
-
-      } else if (no == "no2") {
-
-        document.getElementById("SW1").style.display = "none";
-        document.getElementById("SW2").style.display = "block";
-
-      }
-
-    }
-
-    // jQuery cm-mm切り替え01 getElementByClassNameで組まないといけないので注意
-    $('.Cm_mm_li').on('click', function () {
-      $('.Cm_mm_li').removeClass('active02');
-      $(this).addClass('active02');
-    });
-
-    // ---------------------------
-    // ▼A：対象要素を得る
-    // ---------------------------
-    var tabs = document.getElementById('tabcontrol').getElementsByTagName('a');
-    var pages = document.getElementById('tabbody').getElementsByTagName('div');
-
-    // ---------------------------
-    // ▼B：タブの切り替え処理
-    // ---------------------------
-    function changeTab() {
-      // ▼B-1. href属性値から対象のid名を抜き出す
-      var targetid = this.href.substring(this.href.indexOf('#') + 1, this.href.length);
-
-      // ▼B-2. 指定のタブページだけを表示する
-      for (var i = 0; i < pages.length; i++) {
-        if (pages[i].id != targetid) {
-          pages[i].style.display = "none";
-        }
-        else {
-          pages[i].style.display = "block";
-        }
-      }
-
-      // ▼B-3. クリックされたタブを前面に表示する
-      for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.zIndex = "0";
-      }
-      this.style.zIndex = "10";
-
-      // ▼B-4. ページ遷移しないようにfalseを返す
-      return false;
-    }
-
-    // ---------------------------
-    // ▼C：すべてのタブに対して、クリック時にchangeTab関数が実行されるよう指定する
-    // ---------------------------
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].onclick = changeTab;
-    }
-
-    // ---------------------------
-    // ▼D：最初は先頭のタブを選択しておく
-    // ---------------------------
-    tabs[0].onclick();
-
-    //ここから選んだテンプレートの展開図がポップアップ
-
-    //1行目でロード時はポップアップを隠し、
-    //2～4行目でボタンクリック時にポップアップを表示し
-    //6～7行目で画面の背景をクリック時にポップアップを非表示にしています。
-    //css追加するのを忘れるな！
-
-    //参考サイト
-    //https://mgmgblog.com/?p=641
-    //https://zero-plus.io/media/jquery-dblclick/
-
-    //01
-    $('.modal_pop').hide();
-    $('.show_pop').on('dblclick', function () {
-      $('.modal_pop').fadeIn();
-    })
-    $('.js-modal-close').on('click', function () {
-      $('.modal_pop').fadeOut();
-    })
-
-    //02
-    $('.modal_pop02').hide();
-    $('.show_pop02').on('dblclick', function () {
-      $('.modal_pop02').fadeIn();
-    })
-    $('.js-modal-close02').on('click', function () {
-      $('.modal_pop02').fadeOut();
-    })
-
-  </script>
-
 
   <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
