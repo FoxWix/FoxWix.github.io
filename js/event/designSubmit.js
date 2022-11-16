@@ -14,25 +14,21 @@ document.getElementById('submit').addEventListener('click', async () => {
 
                 thic = 3;
 
-                return;
-
             }
             else if (i == 1) {
 
                 thic = 6;
-
-                return;
 
             }
             else if (i == 2) {
 
                 thic = 8;
 
-                return;
-
             }
 
         }
+
+        if (thic > -1) break;
 
     }
 
