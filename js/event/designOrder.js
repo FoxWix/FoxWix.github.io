@@ -22,14 +22,36 @@ window.addEventListener('load', () => {
 
         //テクスチャを一枚の画像に連結
         let form = document.getElementById('base64');
-        texturesConnection(form);
+        let errorflg = texturesConnection(form);
+        if (!errorflg) {
 
+            alert('エラーが発生しました');
+
+            location.href = '../../index.php';
+
+        }
 
     } else if ('T_order') {
 
         document.getElementById('ordertype').innerHTML = "形状テンプレート " + color + " " + tmpId;
         document.getElementById('sth').innerHTML = thickness + "<span> mm</span>";
         document.getElementById('sq').innerHTML = quantity + "<span> 枚</span>";
+        
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const offset = GetOffsetSize('wrapper');
+        canvas.width = offset['width'];
+        canvas.height = offset['height']
+
+        const preview = new Image();
+        preview.src = '../../images/Box-1.jpg';
+
+        preview.onload = () => {
+
+            ctx.drawImage(preview, 0, 0);
+
+        };
 
     }
 
