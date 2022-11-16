@@ -38,6 +38,10 @@ const reader = new FileReader();
 //*********************************************************************** 
 document.addEventListener('DOMContentLoaded', function () {
 
+    //セッションストレージにテンプレート注文情報がある場合は実行狩猟
+    if (sessionStorage.getItem('type') == 'T_order')
+        return;
+    
     //シーンの準備
     prepareScene();
 
