@@ -45,6 +45,8 @@ window.addEventListener('load', () => {
         canvas.height = offset['height']
 
         const preview = new Image();
+        
+        //*** テンプレート画像ができ次第、その画像パスに変更  ***
         preview.src = '../../images/Box-1.jpg';
 
         preview.onload = () => {
