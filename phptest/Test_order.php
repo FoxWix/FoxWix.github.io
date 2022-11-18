@@ -1,19 +1,10 @@
 <?php
 session_start();
 require_once("../php/util.php");
+require_once("../php/workDB_MF.php");
+$TOD = $_SESSION["T_O_D"];
+$TOC = $_SESSION["T_O"];
 
-if(isset($_SESSION["test_c"]))
-    $board = $_SESSION["test_c"];
-
-if(isset($_SESSION["test_o"]))
-    $data_o = $_SESSION["test_o"];
-
-if(isset($_SESSION["test_o_d"]))
-    $data_d = $_SESSION["test_o_d"];
-
-unset($_SESSION["test_c"]);
-unset($_SESSION["test_o"]);
-unset($_SESSION["test_o_d"]);
 ?>
 
 <!DOCTYPE html>
@@ -27,46 +18,19 @@ unset($_SESSION["test_o_d"]);
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <h3>注文データ確認（テスト用）</h3>
+    <h1>注文データ確認（テスト用）</h1>
     <h2>注文登録成功</h2>
-    <?php 
-    
-    echo "<h2>段ボールデータ</h2>";
-    for($count=0;count($board) > $count; $count++){
-        echo "<h3>".($count+1)."個目</h3>";
-        foreach($board[$count] as $key => $board_d)
-            echo "<li>".$key.":".$board_d."</li>";
-        echo "<br>";
-    }
-
+    <?php
     echo "<h2>注文データ</h2>";
-    for($count=0;count($data_o) > $count; $count++){
-        echo "<h3>".($count+1)."個目</h3>";
-        foreach($data_o[$count] as $key => $data_od){
-            switch($key){
-                case 0:
-                    $key = "注文ID";
-                    break;
-                case 1:
-                    $key = "段ボールID";
-                    break;
-                case 2:
-                    $key = "値段";
-                    break;
-                case 3:
-                    $key = "個数";
-                    break;
-                default:
-                    $key = "error";
-                    break;
-            }
-            echo "<li>".$key.":".$data_od."</li>";
-        }
-        echo "<br>";
+    foreach($TOD as $key => $data){
+        echo "{$key}:{$data}<br>";
     }
-    echo "<h2>詳細データ</h2>";
-    foreach($data_d as $key => $od){
-        echo "<li>".$key.":".$od."</li>";
+    echo "<h2>カートデータ</h2>";
+    for($count=0; count($TOC) > $count;$count++){
+        echo "<h3>{$count}</h3>";
+        foreach($TOC[$count] as $key => $data){
+            echo "{$key}:{$data}<br>";
+        }
     }
     ?>
     <br><a href='../register.html'>会員登録ページへ</a>
