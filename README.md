@@ -57,7 +57,12 @@ html を php に変更
 [js/event/designSubmit.js]
 画面遷移処理追加
 
-22/11/16
-[index.html]削除
-[index.php]タグ情報編集
-[js/event/*]画像結合処理追加
+
+22/11/18
+注文処理
+セッションからデータベースへ修正
+[workDB_MF.php]
+[order_registration.php]
+[cart_remove.php]
+[cart_add.php]
+[cart.php]

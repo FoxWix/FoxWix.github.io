@@ -7,6 +7,7 @@ require_once("./php/workDB_MF.php");
 if(isset($_SESSION["user_data"])){
   $user_data = $_SESSION["user_data"];
   $user_name = $user_data["Name"];
+  $user_mail = $user_data["Mail"];
   $Login_flg = true;
 }
 else{
@@ -14,13 +15,11 @@ else{
   $Login_flg = false;
 }
 
-if(isset($_SESSION["cart"])){
-  $_SESSION["cart"] = array_values($_SESSION["cart"]);
-  $cart = $_SESSION["cart"];
-}
-else{
+if(GetData_Cart("'{$user_mail}'") !== null)
+  $cart =  GetData_Cart("'{$user_mail}'");
+else
   $cart = [];
-}
+
 ?>
 <!doctype html>
 <html>
@@ -101,6 +100,7 @@ else{
       $count = 0;
       $total = 0;
       foreach($cart as $data){
+        $ID        = $data["cardboardID"];
         $length    = $data["length"];
         $width     = $data["width"];
         $depth     = $data["depth"];
@@ -127,9 +127,9 @@ else{
           echo '<div class="quantity">';
             echo '<input type="number" value="'.$quantity.'" min="1" class="quantity-field">';
           echo '</div>';
-          echo '<div class="subtotal">'.$price.'</div>';
+          echo '<div class="subtotal">'.($price*$quantity).'</div>';
           echo '<div class="remove">';
-            echo '<button id="'.$count.'" >削除</button>';
+            echo '<button id="'.$ID.'" >削除</button>';
           echo '</div>';
         echo '</div>';
 
@@ -278,7 +278,7 @@ else{
       //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
       if (promoPrice) {
         $('.summary-promo').removeClass('hide');
-        $('.promo-value').text(promoPrice.toFixed(2));
+        $('.promo-value').text(promoPrice.toFixed());
         recalculateCart(true);
       }
     });
