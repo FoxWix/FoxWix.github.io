@@ -318,6 +318,65 @@
 
     //  ↓↓↓↓↓↓↓　新しく作った処理　↓↓↓↓↓↓↓
 
+
+    //
+    //  DBへ接続(カート)
+    //
+    function connectDB_C(){
+
+        //設定ファイルの読み込み
+        $file = fopen("./php/workDB_MF.ini", "r");
+        if($file){
+            $row = 1;
+            while($line = fgets($file)){
+                switch($row){
+                    case 5:
+                        //ユーザ名の取得
+                        $user = trim(substr($line,  7));
+                        break;
+                    case 7:
+                        //パスワードの取得
+                        $password = trim(substr($line,  11));
+                        break;
+                    case 9:
+                        //データーベース名の取得
+                        $dbname = trim(substr($line,  9));
+                        break;
+                    case 11:
+                        //ホストの取得
+                        $host = trim(substr($line,  7));
+                        break;
+                    case 13:
+                        //文字コードを取得
+                        $charset = trim(substr($line,  10));
+                        break;
+                }
+                $row++;
+            }
+        }
+        fclose($file);
+
+        //接続文字列を作成
+        $dsn = "mysql:host={$host};dbname={$dbname};charset={$charset}";
+        
+        try{
+
+            $pdo = new PDO($dsn, $user, $password);
+            $pdo -> setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $pdo -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+            return $pdo;
+
+        }catch(Exception $e){
+
+            echo $e -> getMessage();
+            
+            $pdo = NULL;
+
+        }
+    }
+
+
     //
     //  データの存在確認
     //
@@ -372,7 +431,6 @@
 
         }catch(Exception $e){
 
-            echo $e;
             return $e;
             echo $e -> getMessage();
 
@@ -432,15 +490,53 @@
     //
     // テーブル内で最大のID + 1 のID取得
     //
-    function GetData_Increment_MaxID($tablename,$tableid){
+    function GetData_Increment_MaxID($tablename,$tableid,$where){
         try{
 
             $pdo = connectDB();
 
-            $sql = "SELECT LPAD((MAX(CAST(SUBSTRING($tableid ,2 ,4) as SIGNED)) + 1) ,4 ,0) as $tableid FROM {$tablename};";
+            $sql = "SELECT LPAD((MAX(CAST(SUBSTRING({$tableid} ,2 ,4) as SIGNED)) + 1) ,4 ,0) as {$tableid} FROM {$tablename} {$where};";
             $stm = $pdo -> prepare($sql);
             $stm -> execute();
 
+            $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
+
+            return $value;
+
+        }catch(Exception $e){
+
+            echo $e -> getMessage();
+
+        }finally{
+
+            $pdo = NULL;
+
+        }
+    }
+
+    //
+    // テーブル名と項目で指定されたデータを取得
+    //
+    function GetData_SELECT_Match($tablename,$selectcolmun,$colmunname,$colmundata){
+        try{
+
+            $pdo = connectDB();
+
+            $select = "SELECT {$selectcolmun} FROM {$tablename}";
+
+            $where = " WHERE ";
+            $count = 0;
+            do{
+                if($count > 0){
+                    $where .= "AND ";
+                }
+                $where .= "{$colmunname[$count]} = {$colmundata[$count]} ";
+                $count++;
+            }while(count($colmunname) > $count);
+            
+            $sql = $select.$where.";";
+            $stm = $pdo -> prepare($sql);
+            $stm -> execute();
             $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
             return $value;
 
@@ -455,7 +551,65 @@
         }
     }
 
-        //
+    //
+    // カートページ表示用データ取得（ユーザー毎）
+    //
+    function GetData_Cart($Mail){
+        try{
+
+            $pdo = connectDB_C();
+
+            $sql = "SELECT  o.CardboardID as cardboardID, c.Length as length, c.Width as width, 
+                            c.Depth as depth, c.Thickness as thickness, c.Color as color, 
+                            c.Image as imgpath, o.Price as price, o.Quantity as quantity 
+                            FROM t_order as o INNER JOIN t_cardboard as c ON o.CardboardID = c.CardboardID 
+                            WHERE o.Mail = {$Mail} AND o.OrderFlag = 0;";
+            $stm = $pdo -> prepare($sql);
+            $stm -> execute();
+
+            $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
+
+            return $value;
+
+        }catch(Exception $e){
+
+            echo $e -> getMessage();
+
+        }finally{
+
+            $pdo = NULL;
+
+        }
+    }
+
+    //
+    // カートページ表示用データ　フラグ変更
+    //
+    function GetData_Cart_UpdateFlag($Mail,$ID,$Flag){
+        try{
+
+            $pdo = connectDB();
+
+            $sql = "UPDATE t_order SET OrderFlag = {$Flag} WHERE Mail = {$Mail} AND CardboardID LIKE {$ID} AND OrderFlag = 0;";
+            $stm = $pdo -> prepare($sql);
+            $stm -> execute();
+
+            $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
+
+            return $value;
+
+        }catch(Exception $e){
+
+            echo $e -> getMessage();
+
+        }finally{
+
+            $pdo = NULL;
+
+        }
+    }
+
+    //
     // テーブル名、項目名とID、PWで指定されたデータを取得(ログイン処理)
     //
     function GetData_LOGIN($tablename, $colmunname, $id, $pw){

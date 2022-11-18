@@ -3,95 +3,28 @@ session_start();
 require_once("util.php");
 require_once("workDB_MF.php");
 
-/*  4.1 注文登録  */
+/*  注文詳細登録  */
 
 //　仮データ
 $payment = "銀行振込";
 $souryo = 790;
 
-/* 
-    4.1.2 注文情報登録
-        .1 DB接続
-*/
-
-//カートデータ取得
-$cardboard_list = $_SESSION["cart"];
-if(GetData_Increment_MaxID("t_order","OrderID")[0]["OrderID"] !== null)
-    $order_id = GetData_Increment_MaxID("t_order","OrderID")[0]["OrderID"];
-else
-    $order_id = 1;
-
-$Total_amount = 0;
-
-//カート内商品を登録
-for($count=0;count($cardboard_list) > $count; $count++){
-
-    //段ボールデータ
-    $cardboard = $cardboard_list[$count];
-
-    //注文データ
-    $order = [
-        "orderID"     => $order_id             ,
-        "cardboardID" => ""                    ,
-        "price"       => $cardboard["price"]   ,
-        "quantity"    => $cardboard["quantity"],
-    ];
-    unset($cardboard["quantity"]);
-    unset($cardboard["price"]);
-    //注文合計金額
-    $Total_amount += $order["price"] * $order["quantity"];
-
-    //段ボールID取得
-    if($cardboard["cardboardID"] == "P"){
-        $tablename = "t_cardboard";
-        if(GetData_Increment_MaxID($tablename,"CardboardID")[0]["CardboardID"] !== null)
-            $cardboard_id = "P".GetData_Increment_MaxID($tablename,"CardboardID")[0]["CardboardID"];
-        else
-            $cardboard_id = "P0001";
-    }
-    else{
-        $tablename = "T_form";
-        if(GetData_Increment_MaxID($tablename,"CardboardID")[0]["CardboardID"] !== null)
-            $cardboard_id = "T".GetData_Increment_MaxID($tablename,"CardboardID")[0]["CardboardID"];
-        else
-            $cardboard_id = "T0001";
-    }
-
-    $cardboard["cardboardID"] = $cardboard_id;
-    foreach($cardboard as $name => $data){
-        $cardboard_data[] = $data;
-    }
-
-    //テスト用
-    $_SESSION["test_c"][] = $cardboard;
-    
-    //段ボール登録
-    Add($tablename,$cardboard_data);
-    //登録済みデータ削除
-    unset($cardboard_data);
-    
-    //段ボールID更新
-    $order["cardboardID"] = $cardboard_id;
-    foreach($order as $name => $data){
-        $order_data[] = $data;
-    }
-    
-    //注文登録
-    Add("t_order",$order_data);
-
-    //テスト用
-    $_SESSION["test_o"][] = $order_data;
-
-    //登録済みデータ削除
-    unset($order_data);
-}
-
-//  注文詳細登録
-$Total_amount += $souryo;
-
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];
+//　日付
 $date = date("Y-m-d H:i:s");
+
+//　注文ID取得
+if(GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"] !== null)
+    //フラグ＝0　の　最大ID
+    $order_id = GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"];
+
+//　合計計算
+$Total_amount = 0;
+$data = GetData_SELECT_Match("t_order","Price,Quantity",["OrderFlag","OrderID","Mail"],[0,$order_id,"'{$user_data["Mail"]}'"]);
+for($count = 0; count($data) > $count; $count++){
+    $Total_amount += $data[$count]["Price"] * $data[$count]["Quantity"];
+}
 
 //  注文詳細データ
 $order_detail = [
@@ -103,19 +36,23 @@ $order_detail = [
     "flag"    => 0
 ];
 
-//　テスト
-$_SESSION["test_o_d"] = $order_detail;
-
+//　登録
 Add_AUTO_INCREMENT("T_order_detail",$order_detail);
+
+//　注文データ確定
+GetData_Cart_UpdateFlag("'{$user_data["Mail"]}'","'%%'",1);
 
 /*
     4.1.3 完了画面遷移
 */
-var_export($cardboard_list);
-var_export($order_detail);
 
-//カートデータ削除
-//unset($_SESSION["cart"]);
+//テスト用データ
+$from = "t_order as o INNER JOIN t_cardboard as c ON o.CardboardID = c.CardboardID";
+$select = "o.CardboardID as cardboardID, c.Length as length, c.Width as width,
+            c.Depth as depth, c.Thickness as thickness, c.Color as color,
+            o.Price as price, o.Quantity as quantity";
+$_SESSION["T_O_D"] = $order_detail;
+$_SESSION["T_O"] = GetData_SELECT_Match($from,$select,["OrderID","Mail","OrderFlag"],["'{$order_id}'","'{$user_data["Mail"]}'",1]);
 
 header("Location:../phptest/Test_order.php");
 exit();

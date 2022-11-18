@@ -71,6 +71,9 @@ $imgpath = "";
 //仮データ
 $price = 2600;
 
+//　ユーザーデータ取得
+$user_data = $_SESSION["user_data"];
+
 if($type=="C_order"){
     //オリジナル
     $cardboard_data = [
@@ -81,9 +84,48 @@ if($type=="C_order"){
         "thickness"   => $thickness,
         "color"       => $color    ,
         "imgpath"     => $imgpath  ,
-        "quantity"    => $quantity ,
-        "price"       => $price
     ];
+
+    $order_data = [
+        "orderID"     => ""                ,
+        "cardboardID" => ""                ,
+        "mail"        => $user_data["Mail"],
+        "price"       => $price            ,
+        "quantity"    => $quantity         ,
+        "orderFlag"   => 0                 ,
+    ];
+
+    //段ボール登録
+    //段ボールID取得
+    if(GetData_Increment_MaxID("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"] !== null)
+        //最大ID + 1
+        $cardboard_id = "P".GetData_Increment_MaxID("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"];
+    else
+        $cardboard_id = "P0001";
+    
+    $cardboard_data["cardboardID"] = $cardboard_id;
+    
+    //段ボール登録
+    Add("t_cardboard",$cardboard_data);
+
+
+    //注文登録（カート）
+    //注文ID取得
+    if(GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"] !== null)
+        //フラグ＝0　の　最大ID
+        $order_id = GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"];
+    else{
+        if(GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"] !== null)
+            $order_id = GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"];
+        else
+            $order_id = 1;
+    }
+    
+    $order_data["orderID"] = $order_id;
+    $order_data["cardboardID"] = $cardboard_id;
+
+    //注文（カート）登録
+    Add("t_order",$order_data);
 
 }else{
     //テンプレート
@@ -94,9 +136,18 @@ if($type=="C_order"){
         "quantity"    => $quantity,
         "price"       => $price
     ];
+
+    $order_data = [
+        "orderID"     => ""                ,
+        "cardboardID" => ""                ,
+        "mail"        => $user_data["Mail"],
+        "price"       => $price            ,
+        "quantity"    => $quantity         ,
+        "orderFlag"   => 0                 ,
+    ];
 }
 
-$_SESSION["cart"][] = $cardboard_data;
+
 unset($_SESSION["cardboard_flg"]);
 
 header("Location:../cart.php");
