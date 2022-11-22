@@ -5,6 +5,11 @@ require_once("../php/workDB_MF.php");
 $TOD = $_SESSION["T_O_D"];
 $TOC = $_SESSION["T_O"];
 
+unset($_SESSION["T_O_D"]);
+unset($_SESSION["T_O"]);
+
+if(!isset($_SESSION["T_O_D"]))
+    header("Location:../index.php");
 ?>
 
 <!DOCTYPE html>
