@@ -66,3 +66,10 @@ html を php に変更
 [cart_remove.php]
 [cart_add.php]
 [cart.php]
+
+22/11/22
+注文処理
+[workDB_MF.php]
+[cart.php]
+[cart_add.php]
+[order_registration.php]

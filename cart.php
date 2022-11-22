@@ -13,12 +13,17 @@ if(isset($_SESSION["user_data"])){
 else{
   $user_name = "";
   $Login_flg = false;
+  header("Location:./login.php");
 }
 
-if(GetData_Cart("'{$user_mail}'") !== null)
-  $cart =  GetData_Cart("'{$user_mail}'");
-else
-  $cart = [];
+$cart = [];
+
+if(GetData_Cart_CB("'{$user_mail}'") !== null)
+  $cart = GetData_Cart_CB("'{$user_mail}'");
+
+if(GetData_Cart_F("'{$user_mail}'") !== null)
+  $cart = array_merge($cart,GetData_Cart_F("'{$user_mail}'"));
+
 
 ?>
 <!doctype html>
@@ -100,38 +105,56 @@ else
       $count = 0;
       $total = 0;
       foreach($cart as $data){
-        $ID        = $data["cardboardID"];
-        $length    = $data["length"];
-        $width     = $data["width"];
-        $depth     = $data["depth"];
-        $thickness = $data["thickness"];
-        $quantity  = $data["quantity"];
-        $color     = $data["color"];
-        $imgpath   = $data["imgpath"];
-        $price = 2600;
-        $total = $total + $price * $quantity;
+        if(mb_substr($data["cardboardID"],0,1) == "P"){
+          $name      = "お客様プリント";
+          $ID        = $data["cardboardID"];
+          $tmpid     = "";
+          $length    = $data["length"];
+          $width     = $data["width"];
+          $depth     = $data["depth"];
+          $thickness = $data["thickness"];
+          $quantity  = $data["quantity"];
+          $color     = $data["color"];
+          $imgpath   = $data["imgpath"];
+          $price = 2600;
+          $total = $total + $price * $quantity;
+        }
+        else{
+          $name      = "段ボールテンプレート";
+          $ID        = $data["cardboardID"];
+          $tmpid     = $data["tmpid"];
+          $length    = "- ";
+          $width     = "- ";
+          $depth     = "- ";
+          $thickness = "- ";
+          $quantity  = $data["quantity"];
+          $color     = $data["color"];
+          $imgpath   = "";
+          $price = 2600;
+          $total = $total + $price * $quantity;
+        }
 
         echo '<div class="basket-product">';
-          echo '<div class="item">';
-            echo '<div class="product-image">';
-              echo '<img src="'.$imgpath.'" alt="" class="product-frame">';
+            echo '<div class="item">';
+              echo '<div class="product-image">';
+                echo '<img src="'.$imgpath.'" alt="" class="product-frame">';
+              echo '</div>';
+              echo '<div class="product-details">';
+                echo '<h1><strong><span class="item-quantity">'.$quantity.'</span> x '.$name.'</strong></h1>';
+                echo '<p><strong>'.$color.'</strong></p>';
+                echo '<p>寸法<br> '.$length.'<span>mm</span> '.$width.'<span>mm</span> '.$depth.'<span>mm</span></p>';
+                echo '<p>厚み<br>'.$thickness.'<span>mm</span></p>';
+              echo '</div>'; 
             echo '</div>';
-            echo '<div class="product-details">';
-              echo '<h1><strong><span class="item-quantity">'.$quantity.'</span> x '."お客様プリント".'</strong></h1>';
-              echo '<p><strong>'.$color.'</strong></p>';
-              echo '<p>寸法<br> '.$length.'<span>mm</span> '.$width.'<span>mm</span> '.$depth.'<span>mm</span></p>';
-              echo '<p>厚み<br>'.$thickness.'<span>mm</span></p>';
-            echo '</div>'; 
+            echo '<div class="price">2600</div>';
+            echo '<div class="quantity">';
+              echo '<input type="number" value="'.$quantity.'" min="1" class="quantity-field">';
+            echo '</div>';
+            echo '<div class="subtotal">'.($price*$quantity).'</div>';
+            echo '<div class="remove">';
+              echo '<button id="'.$ID.'" >削除</button>';
+            echo '</div>';
           echo '</div>';
-          echo '<div class="price">2600</div>';
-          echo '<div class="quantity">';
-            echo '<input type="number" value="'.$quantity.'" min="1" class="quantity-field">';
-          echo '</div>';
-          echo '<div class="subtotal">'.($price*$quantity).'</div>';
-          echo '<div class="remove">';
-            echo '<button id="'.$ID.'" >削除</button>';
-          echo '</div>';
-        echo '</div>';
 
         $count++;
       }
@@ -204,7 +227,12 @@ else
           <div class="total-value final-value total-color" id="basket-total"><?php echo $total+790 ?></div>
         </div>
         <div class="summary-checkout">
-          <button class="checkout-cta">注文を確定する</button>
+          <?php if(count($cart) > 0): ?>
+            <button class="checkout-cta">注文を確定する</button>
+          <?php endif; ?>
+          <?php if(count($cart) == 0): ?>
+            <button class="checkout-cta" disabled>注文を確定する</button>
+          <?php endif; ?>
         </div>
       </div>
     </aside>
