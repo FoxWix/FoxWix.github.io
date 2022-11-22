@@ -23,6 +23,25 @@ require_once("../php/workDB_MF.php");
 
 */
 
+if(isset ( $_POST["imgpath" ]))
+    $imgpath = $_POST["imgpath" ];
+else
+    $imgpath = "";
+    
+//画像が添付されている場合はpostimgフォルダへアップロード
+$file_path = '../postimg/';
+// POST データ設定
+$img_name = $_POST['img_name'] ?? '';
+$img_type = $_POST['img_type'] ?? '';
+$img_src  = preg_replace('/data:(.*);base64,/', '', $_POST['img_src'])  ?? '';
+if($img_name != ''){
+  // 保存イメージ名
+  $img_name = uniqid(dechex(random_int(0, 255))) . $img_name;
+  // base64デコード
+  $data = base64_decode($img_src);
+  file_put_contents($file_path . $img_name, $data);
+}
+
 if(isset ( $_POST["type" ]))
 $type = $_POST["type" ];
 else
@@ -63,10 +82,6 @@ $quantity = $_POST["quantity" ];
 else
 $quantity = "";
 
-if(isset ( $_POST["imgpath" ]))
-$imgpath = $_POST["imgpath" ];
-else
-$imgpath = "";
 
 //仮データ
 $price = 2600;
@@ -97,9 +112,9 @@ if($type=="C_order"){
 
     //段ボール登録
     //段ボールID取得
-    if(GetData_Increment_MaxID("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"] !== null)
+    if(GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","")[0]["CardboardID"] !== null)
         //最大ID + 1
-        $cardboard_id = "P".GetData_Increment_MaxID("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"];
+        $cardboard_id = "P".GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","")[0]["CardboardID"];
     else
         $cardboard_id = "P0001";
     
@@ -108,33 +123,12 @@ if($type=="C_order"){
     //段ボール登録
     Add("t_cardboard",$cardboard_data);
 
-
-    //注文登録（カート）
-    //注文ID取得
-    if(GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"] !== null)
-        //フラグ＝0　の　最大ID
-        $order_id = GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"];
-    else{
-        if(GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"] !== null)
-            $order_id = GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"];
-        else
-            $order_id = 1;
-    }
-    
-    $order_data["orderID"] = $order_id;
-    $order_data["cardboardID"] = $cardboard_id;
-
-    //注文（カート）登録
-    Add("t_order",$order_data);
-
 }else{
     //テンプレート
-    $cardboard_data = [
+    $form_data = [
         "cardboardID" => "T",
-        "color"       => $color,
         "tmpId"       => $tmpId,
-        "quantity"    => $quantity,
-        "price"       => $price
+        "color"       => $color,
     ];
 
     $order_data = [
@@ -145,11 +139,43 @@ if($type=="C_order"){
         "quantity"    => $quantity         ,
         "orderFlag"   => 0                 ,
     ];
+
+    //段ボール登録
+    //段ボールID取得
+    if(GetData_Increment_MaxID_LPAD("t_form","CardboardID","")[0]["CardboardID"] !== null)
+        //最大ID + 1
+        $cardboard_id = "T".GetData_Increment_MaxID_LPAD("t_form","CardboardID","")[0]["CardboardID"];
+    else
+        $cardboard_id = "T0001";
+    
+    $form_data["cardboardID"] = $cardboard_id;
+    
+    //段ボール登録
+    Add("t_form",$form_data);
 }
 
+//注文登録（カート）
+//注文ID取得
+if(GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"] !== null)
+    //フラグ＝0　の　最大ID
+    $order_id = GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"];
+
+else{
+    if(GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"] !== null)
+        //最大注文ID + 1
+        $order_id = GetData_Increment_MaxID("t_order","OrderID","WHERE Mail = '{$user_data["Mail"]}'")[0]["OrderID"];
+    else
+        $order_id = 1;
+}
+
+$order_data["orderID"] = $order_id;
+$order_data["cardboardID"] = $cardboard_id;
+
+//注文（カート）登録
+Add("t_order",$order_data);
 
 unset($_SESSION["cardboard_flg"]);
-
 header("Location:../cart.php");
 exit();
+
 ?>
