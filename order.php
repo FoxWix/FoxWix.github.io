@@ -213,6 +213,9 @@ else{
           <input type="hidden" name="color"     id="color"    value="">
           <input type="hidden" name="thickness" id="thickness"  value="">
           <input type="hidden" name="quantity"  id="quantity"   value="">
+          <input type="hidden" id="img_src" value="">
+          <input type="hidden" id="img_type" value="">
+          <input type="hidden" id="img_name" value="">
           <input type="submit" class="Price_box" value="カートに入れる">
         </form>
       </div>
