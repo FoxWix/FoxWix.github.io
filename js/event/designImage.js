@@ -100,7 +100,7 @@ function drawTexture() {
 //--------------------------------------------------------------------------
 //  テクスチャの画像を一枚に結合
 //--------------------------------------------------------------------------
-function texturesConnection(form) {
+function texturesConnection(data, type, name) {
 
     try {
 
@@ -146,7 +146,9 @@ function texturesConnection(form) {
                 ctx.drawImage(chip[f], 0, 0, chip[f].width, chip[f].height, x, 0, ds['width'], ds['height']);
 
                 //formに設定
-                form.value = canvas.toDataURL('image/jpeg');
+                data.value = canvas.toDataURL('image/jpeg');
+                type.value = 'jpeg';
+                name.value = new Date().getTime().toString() + Math.floor(Math.random() * 10).toString();
 
             });
 
