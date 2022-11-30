@@ -76,6 +76,6 @@ html を php に変更
 
 22/11/30
 [order.php]フォームタグ編集
-[designSubmit.js]
-[designImage.js]
+[designSubmit.js]NaNチェック追加
+[designImage.js]画像データ（拡張子、画像名）をフォームに設定する処理を追加
 [designOrder.js]
