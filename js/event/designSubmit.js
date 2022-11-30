@@ -34,6 +34,13 @@ document.getElementById('submit').addEventListener('click', async () => {
 
     //数量を取得
     const quan = parseInt(document.getElementById('quantity').value);
+    if (Check_e(quan)) {
+
+        alert('数量は最大10個までです');
+
+        return;
+
+    }
     if (quan < 1 || quan == null) {
 
         alert('数量が選択されていません。');
@@ -78,6 +85,13 @@ document.getElementById('submit').addEventListener('click', async () => {
         const wid = GetWidth();
         const dep = GetDepth();
         let errroMessage = '長さは100mm～500mmの範囲で選択可能です';
+        if (Check_e(len) || Check_e(wid) || Check_e(dep)) {
+            
+            alert(errroMessage);
+
+            return;
+
+        }
         if (len < 100 || len > 500) {
 
             alert(errroMessage);
@@ -162,3 +176,9 @@ document.getElementById('submit').addEventListener('click', async () => {
     location.href = '../../php/order_load.php';
 
 }, false);
+
+function Check_e(target) {
+
+    return target.toString().indexOf('NaN') > -1 ? true : false;
+
+}
