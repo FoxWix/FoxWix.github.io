@@ -21,8 +21,10 @@ window.addEventListener('load', () => {
         document.getElementById('sq').innerHTML = quantity + "<span> 枚</span>";
 
         //テクスチャを一枚の画像に連結
-        let form = document.getElementById('base64');
-        let errorflg = texturesConnection(form);
+        let data = document.getElementById('img_src');
+        let type = document.getElementById('img_type');
+        let name = document.getElementById('img_name');
+        let errorflg = texturesConnection(data, type, name);
         if (!errorflg) {
 
             alert('エラーが発生しました');
