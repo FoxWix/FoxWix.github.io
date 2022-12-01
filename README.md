@@ -79,3 +79,8 @@ html を php に変更
 [designSubmit.js]NaNチェック追加
 [designImage.js]画像データ（拡張子、画像名）をフォームに設定する処理を追加
 [designOrder.js]
+
+22/12/01
+[cart.php] 画像処理追加
+[cart_add.php] 画像処理追加 画像のパスを images/designTextures/ に変更
+[order.php] form に id 追加

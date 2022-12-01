@@ -102,6 +102,7 @@ if(GetData_Cart_F("'{$user_mail}'") !== null)
 
       <?php
       //カートデータをリスト表示
+      $file_path = "../images/designTextures/";
       $count = 0;
       $total = 0;
       foreach($cart as $data){
@@ -115,7 +116,7 @@ if(GetData_Cart_F("'{$user_mail}'") !== null)
           $thickness = $data["thickness"];
           $quantity  = $data["quantity"];
           $color     = $data["color"];
-          $imgpath   = $data["imgpath"];
+          $imgpath   = $file_path . $data["imgpath"];
           $price = 2600;
           $total = $total + $price * $quantity;
         }
