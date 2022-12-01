@@ -16,27 +16,24 @@ require_once("../php/workDB_MF.php");
         <input type="number" id="tmpId"     value="">
         <input type="number" id="color"     value="">
         <input type="number" id="quantity"  value="">
-        <input type="text"   id="imgpath"   value="">
+        <input type="hidden" name="img_src"   id="img_src"  value="">
+        <input type="hidden" name="img_type"  id="img_type" value="">
+        <input type="hidden" name="img_name"  id="img_name" value="">
     </form>
 
     4.1.1 カートに追加
 
 */
 
-if(isset ( $_POST["imgpath" ]))
-    $imgpath = $_POST["imgpath" ];
-else
-    $imgpath = "";
-    
-//画像が添付されている場合はpostimgフォルダへアップロード
-$file_path = '../postimg/';
+//画像が添付されている場合はdesignTexturesフォルダへアップロード
+$file_path = '../images/designTextures/';
 // POST データ設定
 $img_name = $_POST['img_name'] ?? '';
 $img_type = $_POST['img_type'] ?? '';
 $img_src  = preg_replace('/data:(.*);base64,/', '', $_POST['img_src'])  ?? '';
 if($img_name != ''){
   // 保存イメージ名
-  $img_name = uniqid(dechex(random_int(0, 255))) . $img_name;
+  $img_name = uniqid(dechex(random_int(0, 255))) . $img_name . "." . $img_type;
   // base64デコード
   $data = base64_decode($img_src);
   file_put_contents($file_path . $img_name, $data);
@@ -98,7 +95,7 @@ if($type=="C_order"){
         "depth"       => $depth    ,
         "thickness"   => $thickness,
         "color"       => $color    ,
-        "imgpath"     => $imgpath  ,
+        "imgpath"     => $img_name  ,
     ];
 
     $order_data = [
@@ -173,7 +170,6 @@ $order_data["cardboardID"] = $cardboard_id;
 
 //注文（カート）登録
 Add("t_order",$order_data);
-
 unset($_SESSION["cardboard_flg"]);
 header("Location:../cart.php");
 exit();
