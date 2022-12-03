@@ -151,6 +151,13 @@ document.getElementById('submit').addEventListener('click', async () => {
             }
 
         }
+        if (selectvalue == '') {
+            
+            alert("商品が選択されていません");
+
+            return;
+            
+        }
 
         //選択色取得
         let c = document.getElementsByName('ColorSelect');
