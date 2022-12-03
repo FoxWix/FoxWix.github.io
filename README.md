@@ -84,3 +84,7 @@ html を php に変更
 [cart.php] 画像処理追加
 [cart_add.php] 画像処理追加 画像のパスを images/designTextures/ に変更
 [order.php] form に id 追加
+
+22/12/03
+[index.php]サイトの最新版に合わせ、更新
+[js/designEvent.js]テンプレートの配色選択処理の改修
