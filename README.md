@@ -88,3 +88,7 @@ html を php に変更
 22/12/03
 [index.php]サイトの最新版に合わせ、更新
 [js/designEvent.js]テンプレートの配色選択処理の改修
+
+22/12/04
+[js/render.js]プレビューにナビゲーション機能を追加
+[js/designEvent.js]リセットボタンを押すとnone画像の位置が適切に表示されない問題を修正
