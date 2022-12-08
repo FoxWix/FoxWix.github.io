@@ -60,10 +60,21 @@ window.addEventListener('load', () => {
 
     }
 
-    //価格を設定　＊価格要修正＊
-    document.getElementById('price').innerHTML = depth + "<span> 円</span>";
-    document.getElementById('total').innerHTML = depth + "<span> 円</span>";
-    document.getElementById('with-tax').innerHTML = depth + '<span class="total-last-span"> 円</span>';
+    //価格を設定
+    let total = length + width + depth;
+    let price = 0;
+    switch(total){
+        case total <= 600:
+        price = 2000;
+        break;
+        default:
+        price = 2000;
+        break;  
+    }
+
+    document.getElementById('price').innerHTML = price + "<span> 円</span>";
+    document.getElementById('total').innerHTML = (price*quantity) + "<span> 円</span>";
+    document.getElementById('with-tax').innerHTML = Math.floor(price*quantity*1.1) + '<span class="total-last-span"> 円</span>';
 
     //formに設定
     document.getElementById('type').value = type == '' ? '' : type;
@@ -74,6 +85,7 @@ window.addEventListener('load', () => {
     document.getElementById('color').value = color != null ? color : '';
     document.getElementById('thickness').value = thickness;
     document.getElementById('quantity').value = quantity;
+    document.getElementById('f_price').value = price;
 
     //セッションストレージをクリア
     sessionStorage.clear();
