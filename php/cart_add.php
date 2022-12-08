@@ -79,9 +79,10 @@ $quantity = $_POST["quantity" ];
 else
 $quantity = "";
 
-
-//仮データ
-$price = 2600;
+if(isset ( $_POST["f_price" ]))
+$price = $_POST["f_price" ];
+else
+$price = 0;
 
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];

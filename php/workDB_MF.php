@@ -670,6 +670,33 @@
     }
 
     //
+    // カートページ表示用データ　個数変更
+    //
+    function GetData_Cart_UpdateQuantity($Mail,$ID,$Quantity){
+        try{
+
+            $pdo = connectDB();
+
+            $sql = "UPDATE t_order SET Quantity = {$Quantity} WHERE Mail = {$Mail} AND CardboardID LIKE {$ID} AND OrderFlag = 0;";
+            $stm = $pdo -> prepare($sql);
+            $stm -> execute();
+
+            $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
+
+            return $value;
+
+        }catch(Exception $e){
+
+            echo $e -> getMessage();
+
+        }finally{
+
+            $pdo = NULL;
+
+        }
+    }
+
+    //
     // テーブル名、項目名とID、PWで指定されたデータを取得(ログイン処理)
     //
     function GetData_LOGIN($tablename, $colmunname, $id, $pw){

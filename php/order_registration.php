@@ -6,11 +6,11 @@ require_once("workDB_MF.php");
 /*  注文詳細登録  */
 
 //　仮データ
-$payment = "銀行振込";
-$souryo = 790;
+$payment = "現金";
 
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];
+$postage = $_SESSION["postage"];
 //　日付
 $date = date("Y-m-d H:i:s");
 
@@ -26,6 +26,8 @@ $data = GetData_SELECT_Match("t_order","Price,Quantity",["OrderFlag","OrderID","
 for($count = 0; count($data) > $count; $count++){
     $Total_amount += $data[$count]["Price"] * $data[$count]["Quantity"];
 }
+//  税 + 送料
+$Total_amount = floor($Total_amount*1.1) + $postage;
 
 //  注文詳細データ
 $order_detail = [
@@ -68,6 +70,6 @@ if(isset($T_O1))
     $_SESSION["T_O"] = array_merge($_SESSION["T_O"],$T_O1);
 if(isset($T_O2))
     $_SESSION["T_O"] = array_merge($_SESSION["T_O"],$T_O2);
-header("Location:../phptest/Test_order.php");
+header("Location:../confirm.php");
 exit();
 ?>
