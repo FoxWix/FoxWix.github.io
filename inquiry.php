@@ -1,3 +1,19 @@
+<?php
+session_start();
+require_once("./php/util.php");
+require_once("./php/workDB_MF.php");
+
+//ログイン情報
+if (isset($_SESSION["user_data"])) {
+  $user_data = $_SESSION["user_data"];
+  $user_name = $user_data["Name"];
+  $Login_flg = true;
+} else {
+  $user_name = "";
+  $Login_flg = false;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

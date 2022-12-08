@@ -75,22 +75,15 @@ html を php に変更
 [order_registration.php]
 
 22/11/30
-[order.php]
-・フォームタグ編集
-[designSubmit.js]
-・NaNチェック追加
-[designImage.js]
-・画像データ（拡張子、画像名）をフォームに設定する処理を追加
+[order.php]フォームタグ編集
+[designSubmit.js]NaNチェック追加
+[designImage.js]画像データ（拡張子、画像名）をフォームに設定する処理を追加
 [designOrder.js]
-・コードの改修
 
 22/12/01
-[cart.php]
-・画像処理追加
-[cart_add.php]
-・画像処理追加 画像のパスを images/designTextures/ に変更
-[order.php]
-・form に id 追加
+[cart.php] 画像処理追加
+[cart_add.php] 画像処理追加 画像のパスを images/designTextures/ に変更
+[order.php] form に id 追加
 
 22/12/03
 [index.php]
@@ -104,3 +97,13 @@ html を php に変更
 ・プレビューオブジェクトの初期テクスチャを変更
 [js/designEvent.js]
 ・リセットボタンを押すとnone画像の位置が適切に表示されない問題を修正
+
+
+22/12/08
+phpファイルにログイン処理を追加
+[register.php] テスト結果に合わせて修正
+[cart.php] テスト結果に合わせて修正、個数更新機能追加、送料処理追加
+[cart.update] 処理追加
+[workDB_MF.php] 処理追加
+[order.php]
+[designOrder.js] 価格処理
