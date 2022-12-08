@@ -25,8 +25,10 @@ else
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/style-login.css">
+<link rel="icon" href="ico/favicon.ico">
 <link rel="stylesheet" href="css/style-php_error.css">
 <!-- <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
 <script src="//jpostal-1006.appspot.com/jquery.jpostal.js" type="text/javascript"></script> -->
@@ -73,6 +75,16 @@ return false;
 })
 });
 </script>
+<nav class="Breadcrumb">
+    <ol class="Breadcrumb-ListGroup">
+        <li class="Breadcrumb-ListGroup-Item">
+            <a class="Breadcrumb-ListGroup-Item-Link" href="index.php"><span>トップ</span></a>
+        </li>
+        <li class="Breadcrumb-ListGroup-Item">
+            <a class="Breadcrumb-ListGroup-Item-Link"><span>ログイン</span></a>
+        </li>
+    </ol>
+</nav>
 <div id="login-box">
   <div id="register">
     <h2>ログイン</h2>
@@ -98,8 +110,8 @@ return false;
   <div class="Footer_inner">
 	<ul class="Footer_ul">
 	  <li class="Footer_li"><a href="index.php" class="Footer_a">HOME</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">お問い合わせ</a></li>
+	  <li class="Footer_li"><a href="question.php" class="Footer_a">よくある質問</a></li>
+	  <li class="Footer_li"><a href="inquiry.php" class="Footer_a">お問い合わせ</a></li>
 	  <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
     </ul>
 	<div class="Footer_logo">
