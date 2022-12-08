@@ -87,6 +87,8 @@ switch($prefecture){
     $postage = 1370;
     break;
 }
+$_SESSION["postage"] = $postage;
+
 ?>
 
 <!doctype html>
