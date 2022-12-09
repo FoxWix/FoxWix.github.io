@@ -107,3 +107,13 @@ phpファイルにログイン処理を追加
 [workDB_MF.php] 処理追加
 [order.php]
 [designOrder.js] 価格処理
+
+22/12/09
+[js/event/designSubmit.js]
+・セッションストレージの内容を変更
+  type -> お客様プリント/デザインテンプレート
+  tmpId -> ユーザが選択したテンプレートの名前
+  color -> ユーザが選択したテンプレートの配色(カラーコード)
+  quantity -> 数量
+[js/common/designCommon.js]
+・デザインテンプレートのテンプレート名を格納
