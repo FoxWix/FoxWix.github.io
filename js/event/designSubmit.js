@@ -139,38 +139,38 @@ document.getElementById('submit').addEventListener('click', async () => {
 
         //選択形状取得
         let rb = document.getElementsByName('TemplateSelect');
-        let selectvalue = '';
-        let selectSize = '';
+        let selecttemp;
         for (let f = 0; f < rb.length; ++f) {
 
             if (rb[f].checked) {
 
-                selectvalue = f;
+                selecttemp = f;
 
             }
 
         }
-        if (selectvalue == '') {
+        if (typeof selecttemp === 'undefined') {
             
             alert("商品が選択されていません");
 
             return;
             
         }
+        const tempName = Template[Math.floor(selecttemp / 3)][Math.floor(selecttemp % 3)].fullname;
 
         //選択色取得
         let c = document.getElementsByName('ColorSelect');
-        let color = '';
+        let selectcolor;
         for (let k = 0; k < c.length; ++k) {
 
             if (c[k].checked) {
 
-                color = Color.ColorCode[c[k].value];
+                selectcolor = Color.ColorCode[c[k].value];
 
             }
 
         }
-        if (color == '') {
+        if (typeof selectcolor ===  'undefined') {
              
             alert("色が選択されていません");
 
@@ -181,8 +181,8 @@ document.getElementById('submit').addEventListener('click', async () => {
         //セッションストレージに注文内容を保存
         sessionStorage.clear();
         sessionStorage.setItem('type', 'T_order');
-        sessionStorage.setItem('tmpId', selectvalue);   //修正
-        sessionStorage.setItem('color', Color.ColorCode[ParseInt(color)]);
+        sessionStorage.setItem('tmpId', tempName);
+        sessionStorage.setItem('color', selectcolor);
         sessionStorage.setItem('quantity', quan);
 
     }
