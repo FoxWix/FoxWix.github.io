@@ -140,6 +140,7 @@ document.getElementById('submit').addEventListener('click', async () => {
         //選択形状取得
         let rb = document.getElementsByName('TemplateSelect');
         let selectvalue = '';
+        let selectSize = '';
         for (let f = 0; f < rb.length; ++f) {
 
             if (rb[f].checked) {
@@ -180,8 +181,8 @@ document.getElementById('submit').addEventListener('click', async () => {
         //セッションストレージに注文内容を保存
         sessionStorage.clear();
         sessionStorage.setItem('type', 'T_order');
-        sessionStorage.setItem('tmpId', selectvalue);
-        sessionStorage.setItem('color', color);
+        sessionStorage.setItem('tmpId', selectvalue);   //修正
+        sessionStorage.setItem('color', Color.ColorCode[ParseInt(color)]);
         sessionStorage.setItem('quantity', quan);
 
     }
