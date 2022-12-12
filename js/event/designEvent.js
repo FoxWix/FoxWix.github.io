@@ -76,6 +76,46 @@ for (let index = 0; index < texture_color.length; ++index) {
 }
 
 //--------------------------------------------------------------------------
+//  すべて初期化
+//--------------------------------------------------------------------------
+document.getElementById('resetAllBtn').addEventListener('click', () => {
+    
+    const files = document.getElementsByClassName('Userimg');
+    for (let index = 0; index < 6; ++index) {
+
+        //選択ファイルをクリア
+        if (files[index].files != null) {
+
+            //アップロードされた画像をクリア
+            files[index].value = '';
+
+        }
+
+        //色選択のドロップリストを初期化
+        DropListClear('DropColor' + index);
+
+        //プレビュー画像を初期化
+        ImagePreviewClear(index);
+
+    }
+
+    //none画像を設定
+    document.getElementById('preview0').src = "../images/PreviewInitImages/none6.png"
+    document.getElementById('preview1').src = "../images/PreviewInitImages/none5.png"
+    document.getElementById('preview2').src = "../images/PreviewInitImages/none2.png"
+    document.getElementById('preview3').src = "../images/PreviewInitImages/none4.png"
+    document.getElementById('preview4').src = "../images/PreviewInitImages/none1.png"
+    document.getElementById('preview5').src = "../images/PreviewInitImages/none3.png"
+
+    //3Dオブジェクトの画像を初期化
+    textureReset();
+
+    //カメラの位置を初期化
+    resetCameraPos();
+
+}, false);
+
+//--------------------------------------------------------------------------
 //	画像を初期化
 //--------------------------------------------------------------------------
 document.getElementById('resetBtn').addEventListener('click', () => {
@@ -109,6 +149,16 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 
     //3Dオブジェクトの画像を初期化
     textureReset();
+
+}, false);
+
+//--------------------------------------------------------------------------
+//  ナビをの表示・非表示設定
+//--------------------------------------------------------------------------
+const NaviCheck = document.getElementById('hideNavi');
+NaviCheck.addEventListener('change', () => {
+    
+    hideNavi(NaviCheck.checked);
 
 }, false);
 
