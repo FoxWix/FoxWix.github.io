@@ -197,6 +197,30 @@ function createNavigation(length, width, depth) {
 }
 
 //--------------------------------------------------------------------------
+//  ナビゲーションの表示非表示設定
+//--------------------------------------------------------------------------
+function hideNavi(cheked) {
+    
+    for (let f = 0; f < 6; ++f){
+
+        const navi = scene.getObjectByName('navi' + f);
+
+        navi.visible = cheked;
+        
+    }
+
+}
+
+//--------------------------------------------------------------------------
+//  カメラの位置を初期化
+//--------------------------------------------------------------------------
+function resetCameraPos() {
+    
+    camera.position.set(x, y, currentCameraPos);
+
+}
+
+//--------------------------------------------------------------------------
 //  テクスチャのリセット
 //--------------------------------------------------------------------------
 function textureReset() {
@@ -218,7 +242,7 @@ function textureReset() {
     for (let index = 0; index < 6; ++index) {
 
         //初期画像を設定
-        textures[index] = new THREE.MeshBasicMaterial({ map: loadPic.load('../images/PreviewInitImages/' + (index + 1) + '.jpg') });
+        textures[index] = new THREE.MeshBasicMaterial({ map: loadPic.load('../images/PreviewInitImages/box.jpg') });
 
     }
 
@@ -236,7 +260,7 @@ function textureReset() {
 //--------------------------------------------------------------------------
 function ImageOneReset(textureId) {
 
-    textures[textureId] = new THREE.MeshBasicMaterial({ map: loadPic.load('../images/PreviewInitImages/' + (textureId + 1) + '.jpg') });
+    textures[textureId] = new THREE.MeshBasicMaterial({ map: loadPic.load('../images/PreviewInitImages/box.jpg') });
 
 }
 
