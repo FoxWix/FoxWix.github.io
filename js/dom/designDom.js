@@ -174,7 +174,30 @@ function DropListClear(tag) {
 //-------------------------------------------------------------------------
 function ImagePreviewClear(face_id) {
 
-    document.getElementById('preview' + face_id).src = '../../images/PreviewInitImages/none' + (face_id + 1) + '.png';
+ const comb = document.getElementById('preview' + face_id);
+
+    switch (face_id) {
+
+        case 0:
+            comb.src = '../../images/PreviewInitImages/none6.png';
+            break;
+        case 1:
+            comb.src = '../../images/PreviewInitImages/none5.png';
+            break;
+        case 2:
+            comb.src = '../../images/PreviewInitImages/none2.png';
+            break;
+        case 3:
+            comb.src = '../../images/PreviewInitImages/none4.png';
+            break;
+        case 4:
+            comb.src = '../../images/PreviewInitImages/none1.png';
+            break;
+        case 5:
+            comb.src = '../../images/PreviewInitImages/none3.png';
+            break;
+
+    }   
 
 }
 
