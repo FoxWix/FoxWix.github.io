@@ -117,3 +117,11 @@ phpファイルにログイン処理を追加
   quantity -> 数量
 [js/common/designCommon.js]
 ・デザインテンプレートのテンプレート名を格納
+
+22/12/12
+[js/object/render.js]
+[js/event/designEvent.js]
+[js/dom/designDom.js]
+・プレビューのリセット機能を追加
+・プレビューナビゲーションの表示／非表示機能を追加
+・お客様プリントで色未選択ボタンを押したとき正しい未選択画像が表示されない問題を修正
