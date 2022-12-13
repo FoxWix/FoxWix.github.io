@@ -11,6 +11,9 @@ window.addEventListener('load', () => {
 
     }
 
+    document.getElementById("SWP").style.display = "block";
+    document.getElementById("TMP").style.display = "none";
+
 }, false);
 
 //--------------------------------------------------------------------------
@@ -79,7 +82,7 @@ for (let index = 0; index < texture_color.length; ++index) {
 //  すべて初期化
 //--------------------------------------------------------------------------
 document.getElementById('resetAllBtn').addEventListener('click', () => {
-    
+
     const files = document.getElementsByClassName('Userimg');
     for (let index = 0; index < 6; ++index) {
 
@@ -157,7 +160,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 //--------------------------------------------------------------------------
 const NaviCheck = document.getElementById('hideNavi');
 NaviCheck.addEventListener('change', () => {
-    
+
     hideNavi(NaviCheck.checked);
 
 }, false);
@@ -220,6 +223,7 @@ for (let index = 0; index < usersize.length; ++index) {
         UpdateSize(length, width, depth);
 
     }, false);
+
 }
 
 //--------------------------------------------------------------------------
@@ -229,15 +233,24 @@ const objcolor = document.getElementsByName('TemplateSelect');
 for (let index = 0; index < objcolor.length; ++index) {
 
     objcolor[index].addEventListener('click', () => {
-        
+
         let c = parseInt(objcolor[index].value.substring(5, objcolor[index].value.length)) - 1;
-        
+
         CreateColorTag(Color.TemplateColor[c]);
 
     }, false);
 
-}
+    objcolor[index].addEventListener('change', () => {
 
+        const path = Template[Math.floor(index / 3)][Math.floor(index % 3)].path;
+
+        if (typeof path === 'undefined') return;
+
+        document.getElementById("tmpImage").src = path;
+
+    }, false);
+
+}
 
 
 //=========================================================
@@ -258,17 +271,25 @@ function Display(no) {
         document.getElementById('SW3').style.display = 'block';
         document.getElementById('SW4').style.display = 'block';
         document.getElementById("SW2").style.display = "none";
-        
-        document.getElementById('SWP').style.display = "block";
-        
+
+        document.getElementById("SWP").style.display = "block";
+        document.getElementById("TMP").style.display = "none";
+
+        //プレビューオブジェクトを表示
+        boxVisible(true);
+
     } else if (no == "no2") {
-        
+
         document.getElementById("SW1").style.display = "none";
         document.getElementById('SW3').style.display = 'none';
         document.getElementById('SW4').style.display = 'none';
         document.getElementById("SW2").style.display = "block";
-        
-        document.getElementById('SWP').style.display = 'none';
+
+        document.getElementById("SWP").style.display = "none";
+        document.getElementById("TMP").style.display = "block";
+
+        //プレビューオブジェクトを非表示
+        boxVisible(false);
 
     }
 
