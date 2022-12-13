@@ -8,6 +8,7 @@ let stats;
 let box;
 let scene;
 let textures = [];
+let ren;
 //オブジェクトとカメラの距離
 const currentCameraPos = 2000;
 //カメラの座標
@@ -28,15 +29,10 @@ const backgroundColor = 0xffffff;
 const loadPic = new THREE.TextureLoader();
 const reader = new FileReader();
 
+
 //*********************************************************************** 
 //  メイン関数
 //*********************************************************************** 
-document.addEventListener('DOMContentLoaded', function () {
-
-    main();
-
-}, false);
-
 function main() {
 
     //セッションストレージにテンプレート注文情報がある場合は実行終了
@@ -50,6 +46,15 @@ function main() {
     sceneRender();
 
 }
+
+//--------------------------------------------------------------------------
+//  HTMLのファイル解析後に実行
+//--------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+
+    main();
+
+}, false);
 
 //--------------------------------------------------------------------------
 //  シーンの準備
@@ -82,7 +87,6 @@ function prepareScene() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     //オブジェクトの生成と初期テクスチャを設定
-    const loadPic = new THREE.TextureLoader();
     const session = sessionStorage.getItem('type');
     let bw, bd, bl;
     if (session) {
@@ -98,9 +102,9 @@ function prepareScene() {
             let itemname = 'texture' + f;
 
             textures[f] = new THREE.MeshBasicMaterial({
-                
+
                 map: new THREE.TextureLoader().load(sessionStorage.getItem(itemname))
-            
+
             });
 
         }
@@ -116,9 +120,9 @@ function prepareScene() {
         for (let f = 0; f < 6; ++f) {
 
             textures[f] = new THREE.MeshBasicMaterial({
-                
+
                 map: new THREE.TextureLoader().load('./images/PreviewInitImages/box.jpg')
-            
+
             });
 
         }
@@ -131,6 +135,7 @@ function prepareScene() {
     //オブジェクトをシーンに追加
     box = new THREE.Mesh(geometry, textures);
     box.scale.set(initscaleX, initscaleY, initscaleZ);
+    box.name = "previewBox";
     scene.add(box);
 
     //ナビゲーション用の平面を生成
@@ -156,12 +161,30 @@ function sceneRender() {
 }
 
 //-------------------------------------------------------------------------
+//  プレビューのボックスを非表示
+//-------------------------------------------------------------------------
+function boxVisible(visible) {
+
+    scene.getObjectByName('previewBox').visible = visible;
+
+    scene.getObjectByName('axes').visible = visible;
+
+    for (let f = 0; f < 6; ++f) {
+
+        scene.getObjectByName('navi' + f).visible = visible;
+
+    }
+
+}
+
+//-------------------------------------------------------------------------
 //  ナビゲーションを追加
 //-------------------------------------------------------------------------
 function createNavigation(length, width, depth) {
 
     //XYZ軸の追加
-    let axes = new THREE.AxesHelper(initaxesLength);
+    const axes = new THREE.AxesHelper(initaxesLength);
+    axes.name = "axes";
     scene.add(axes);
 
     //ナビゲーション用の画像を表示
@@ -189,6 +212,7 @@ function createNavigation(length, width, depth) {
         const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.TextureLoader().load(PosPath.path[f]) }));
         sprite.position.set(PosPath.pos[f].x, PosPath.pos[f].y, PosPath.pos[f].z);
         sprite.scale.set(scaleNavi, scaleNavi, scaleNavi);
+        sprite.name = "navi" + f;
 
         scene.add(sprite);
 
@@ -200,13 +224,13 @@ function createNavigation(length, width, depth) {
 //  ナビゲーションの表示非表示設定
 //--------------------------------------------------------------------------
 function hideNavi(cheked) {
-    
-    for (let f = 0; f < 6; ++f){
+
+    for (let f = 0; f < 6; ++f) {
 
         const navi = scene.getObjectByName('navi' + f);
 
         navi.visible = cheked;
-        
+
     }
 
 }
@@ -215,7 +239,7 @@ function hideNavi(cheked) {
 //  カメラの位置を初期化
 //--------------------------------------------------------------------------
 function resetCameraPos() {
-    
+
     camera.position.set(x, y, currentCameraPos);
 
 }
