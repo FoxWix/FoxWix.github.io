@@ -109,6 +109,11 @@ if (isset($_SESSION["user_data"])) {
         </div>
       </div>
     </div>
+	<div id="TMP" class="Preview_inner">
+      		<div class="Preview_box">
+        		<img src="" id="tmpImage" width="400" height="400">
+      		</div>
+    	</div>
     <div class="Custom_inner">
       <div id="SW1">
         <!-- <p>これはSW1のエリアです。上記SW2をクリックすると消えます。</p> -->
