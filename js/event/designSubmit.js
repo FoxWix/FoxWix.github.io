@@ -183,6 +183,7 @@ document.getElementById('submit').addEventListener('click', async () => {
         sessionStorage.setItem('type', 'T_order');
         sessionStorage.setItem('tmpId', tempName);
         sessionStorage.setItem('color', selectcolor);
+        sessionStorage.setItem('thickness', thic);
         sessionStorage.setItem('quantity', quan);
 
     }
