@@ -131,3 +131,7 @@ phpファイルにログイン処理を追加
 [js/event/designEvent.js]
 [js/common/designCommon.js]
 ・テンプレート注文の際のプレビュー機能を追加
+
+22/12/16
+[js/event/designSubmit.js]
+デザインテンプレート注文で注文した際に厚みがセッションストレージに格納されていない問題を修正
