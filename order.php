@@ -96,7 +96,7 @@ else{
   </div>
 
   <div class="Body_inner">
-    <div class="Preview_inner">
+    <div class="Preview_inner" id="cp">
       <p class="Preview_txt">プレビュー</p>
       <div class="Preview_box">
         <div id="wrapper">
@@ -119,6 +119,11 @@ else{
           </style>
           <canvas id="canvas" width="" height=""></canvas>
         </div>
+      </div>
+    </div>
+	  <div id="tp" class="Preview_inner" style="display:none;">
+      <div class="Preview_box">
+        <img src="" id="tmpImage" width="400" height="400">
       </div>
     </div>
     <div id="table-btn-box">
