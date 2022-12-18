@@ -138,3 +138,8 @@ phpファイルにログイン処理を追加
 [js/event/designOrder.js]
 [order.php]
 ・価格確認ページでのプレビュー機能を追加
+
+22/12/18
+index.php
+style.css
+・最新版に更新
