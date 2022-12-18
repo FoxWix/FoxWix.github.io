@@ -1,8 +1,5 @@
 @charset "UTF-8";
 /* CSS Document */
-/* text-color #777777
-   background-color #777777*/
-/* レスポンシブ 対応予定 */
 
 body {
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
@@ -13,6 +10,10 @@ h1,
 h2,
 span {
 	color: #333333;
+}
+
+a {
+    transition : all 0.5s ease 0s;
 }
 
 /*--------------------------------
@@ -69,7 +70,7 @@ h1 {
 
 /*Go to top*/
 a:hover {
-background-color: #ed702b;
+    background-color: #ed702b;
 }
 
 .Cart_buttun:hover {
@@ -96,38 +97,42 @@ background-color: #ed702b;
 	font-weight: bold;
 }
 
+.head-pr {
+	font-size: 0.8rem;
+}
+
 /*--------------------------------
 メインビジュアル
 ---------------------------------*/
 .MainVis {
-	margin-bottom: 60px;
+	margin-bottom: 120px;
 	margin-top: 60px;
 }
 
 .MainVis_img {
 	margin: 0 auto;
 	display: block;
-	max-width: 100%;
+	max-width: 95%;/*変更*/
 }
 
 .MainVis_inner {
-	max-width: 1000px;
+	max-width: 1100px;
 	margin: 0 auto;
 	/* border: 1px solid black; */
-	margin-bottom: 160px;
+	margin-bottom: 120px;/*変更*/
 }
 
 .MainVis_headline {
 	text-align: center;
 	font-size: 24px;
-	margin-bottom: 60px;
+	/* margin-bottom: 60px; */
 }
 
 .MainVis_headline_flex {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 60px;
+	margin-bottom: 20px;
 }
 
 .MainVis_headline_txt {
@@ -136,12 +141,140 @@ background-color: #ed702b;
 	font-weight: bold;
 }
 
+.MainVis_headline_txt span {
+	color: #FF942A;
+	font-size: 1.2rem;
+}
+/* ここからpcのスライダー */
+.loop_wrap_pc {
+    display: flex;
+    /* width: 100vw; */
+    height: 100px;
+    overflow: hidden;
+}
+
+.loop_wrap_pc img {
+    width: auto;
+    height: 100%;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+.loop_wrap_pc img:first-child {
+    animation: loop 50s -25s linear infinite;
+}
+
+.loop_wrap_pc img:last-child {
+    animation: loop2 50s linear infinite;
+}
+
+/* pcのスライダーここまで */
+
+/* ここからspのスライダー */
+.loop_wrap_sp1 {
+    display: flex;
+    /* width: 100vw; */
+    height: 120px;
+    overflow: hidden;
+}
+
+.loop_wrap_sp1 img {
+    width: auto;
+    height: 100%;
+}
+
+@keyframes loop3 {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loop4 {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+.loop_wrap_sp1 img:first-child {
+    animation: loop3 100s -50s linear infinite;
+}
+
+.loop_wrap_sp1 img:last-child {
+    animation: loop4 100s linear infinite;
+}
+
+.loop_wrap_sp2 {
+    display: flex;
+    /* width: 100vw; */
+    height: 120px;
+    overflow: hidden;
+}
+
+.loop_wrap_sp2 img {
+    width: auto;
+    height: 100%;
+}
+
+@keyframes loop5{
+  0% {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes loop6 {
+  0% {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.loop_wrap_sp2 img:first-child {
+    animation: loop5 100s -50s linear infinite;
+}
+
+.loop_wrap_sp2 img:last-child {
+    animation: loop6 100s linear infinite;
+}
+
+/* spのスライダーここまで */
+
 .MainVis_sp {
 	display: none;
 }
 
+.MainVis_sp_s {
+	display: none;
+}
+
 /*--------------------------------
-会員登録
+会員登録ボタン
 ---------------------------------*/
 /* .Member_registration_button {
 	max-width: 200px;
@@ -151,14 +284,14 @@ background-color: #ed702b;
 	border-radius: 10px;
 } */
 
-.Member_registration_button {
+/* .Member_registration_button {
 	text-align: center;
 	display: block;
-}
+} */
 
 .Member_registration_txt {
 	line-height: 35px;
-	font-size: 20px;
+	font-size: 24px;/*変更*/
 	text-decoration: none;
 	padding: 15px 40px;
 	font-weight: bold;
@@ -172,6 +305,7 @@ background-color: #ed702b;
     font-size: 20px;
     font-weight: bold;
     margin: 0 15px 0 15px;
+    /* padding: 5px 10px; */
 }
 
 .active {
@@ -182,6 +316,7 @@ background-color: #ed702b;
 	padding: 10px 20px;
 	text-decoration: none;
 	color: white;
+	display: block;
 }
 
 .btn--orange,
@@ -198,6 +333,44 @@ a.btn--orange:hover {
 
 a.btn--radius {
     border-radius: 100vh;
+}
+
+/*--------------------------------
+サイト導線
+---------------------------------*/
+#Lead-Wire {
+	margin: 0 auto 120px;
+	overflow: scroll;
+	/* padding: 25px; */
+	max-width: 1140px;
+	height: 500px;
+	border: 2px solid #ccc;
+}
+
+#Image-Element {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+h2 {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+
+.register {
+	width: 700px;
+	margin: 20px auto;
+	border-bottom: 5px solid #f56500;
+}
+
+.Conductor-Element {
+	position: relative;
+}
+
+.Member_registration_button {
+	position: absolute;
+    transform: translate(692px,-1611px);
 }
 
 /*--------------------------------
@@ -223,9 +396,9 @@ a.btn--radius {
 セレクト全体
 ---------------------------------*/
 .Body_inner {
-	max-width: 1700px;
+	max-width: 1500px;/*変更*/
 	margin: 0 auto;
-	padding: 0 100px;
+	padding: 0 1vw;
 	/* border:1px solid black; */
 	display: flex;
 }
@@ -410,26 +583,34 @@ select {
 /* ▼タブ */
 #tabcontrol a {
     display: inline-block;                  /* インラインブロック化 */
-    /* border-width: 1px 1px 0px 1px; */    /* 下以外の枠線を引く */
-    /* border-style: solid; */              /* 枠線の種類：実線 */
-    /* border-color: black; */              /* 枠線の色：黒色 */
-    border-radius: 0.75em 0.75em 0 0;       /* 枠線の左上角と右上角だけを丸く */
+    border-width: 3px 3px 0px 3px;          /* 下以外の枠線を引く */
+    border-style: solid;                    /* 枠線の種類：実線 */
+    border-color: #DBDBDB;                  /* 枠線の色：黒色 */
+    /* border-radius: 0.75em 0.75em 0 0; */ /* 枠線の左上角と右上角だけを丸く */
     padding: 0.75em 1em;                    /* 内側の余白 */
     text-decoration: none;                  /* リンクの下線を消す */
     color: #333333;                           /* 文字色：黒色 */
-    background-color: white;                /* 背景色：白色 */
+    background-color: #f56500;                /* 背景色：白色 */
     font-weight: bold;                      /* 太字 */
     position: relative;                     /* JavaScriptでz-indexを調整するために必要 */
 }
+
+#tabcontrol a:first-child {
+	border-width: 3px 3px 0px 0px;
+}
+
 /* ▼タブにマウスポインタが載った際(任意) */
 #tabcontrol a:hover {
-    text-decoration: underline;       /* 文字に下線を引く */
+    /* text-decoration: underline; */       /* 文字に下線を引く */
+	color: #f56500;
 }
 
 /* ▼タブの中身 */
 #tabbody div {
-    /* border: 1px solid black; */ /* 枠線：黒色の実線を1pxの太さで引く */
-    margin-top: -1px;        /* 上側にあるタブと1pxだけ重ねるために「-1px」を指定 */
+	border-width: 3px 3px 3px 0px;
+    border-style: solid;     /* 枠線：黒色の実線を1pxの太さで引く */
+    border-color: #DBDBDB;
+	margin-top: -3px;        /* 上側にあるタブと1pxだけ重ねるために「-1px」を指定 */
     padding: 1em;            /* 内側の余白量 */
     background-color: white; /* 背景色：白色 */
     position: relative;      /* z-indexを調整するために必要 */
@@ -437,17 +618,17 @@ select {
 }
 
 /* ▼タブの配色 */
-#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #ffffdd; }/* 1つ目のタブとその中身用の配色 */
-#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: #ddffdd; }/* 2つ目のタブとその中身用の配色 */
-#tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #ddddff; }/* 3つ目のタブとその中身用の配色 */
-#tabcontrol a:nth-child(4), #tabbody div:nth-child(4) { background-color: #FFCCCD; }/* 4つ目のタブとその中身用の配色 */
+#tabcontrol a:nth-child(1), #tabbody div:nth-child(1) { background-color: #fff; }/* 1つ目のタブとその中身用の配色 */
+#tabcontrol a:nth-child(2), #tabbody div:nth-child(2) { background-color: #fff; }/* 2つ目のタブとその中身用の配色 */
+/* #tabcontrol a:nth-child(3), #tabbody div:nth-child(3) { background-color: #fff; }*/ /* 3つ目のタブとその中身用の配色 */
+/* #tabcontrol a:nth-child(4), #tabbody div:nth-child(4) { background-color: #fff; }*/ /* 4つ目のタブとその中身用の配色 */
 
 .Shape_selection_inner {
 	width: 100%;
 	max-width: 1270px;
 	min-width: 290px;
 	/* border-bottom: 1px solid gray; */
-}
+}	
 
 input[type=radio]+label:before{
     content: "";
@@ -456,59 +637,182 @@ input[type=radio]+label:before{
     width: 250px;
     height: 250px;
 	margin: 10px;
-	border-radius: 10px;
+	/* border-radius: 10px; */
 }
 
+/* ここからテンプレート（デザイン） */
 input[type=radio][value="shape01"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design01-A.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape02"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design01-B.png");
+	background-repeat: no-repeat;
 }
     
 input[type=radio][value="shape03"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design01-C.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape04"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design02-A.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape05"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design02-B.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape06"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design02-C.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape07"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design03-A.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape08"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design03-B.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape09"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design03-C.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape10"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design04-A.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape11"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design04-B.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="shape12"]+label:before{
-    background-image: url("../images/damball_03.png");
+    background-image: url("../images/Design04-C.png");
+	background-repeat: no-repeat;
 }
 
+input[type=radio][value="shape13"]+label:before{
+    background-image: url("../images/Design05-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape14"]+label:before{
+    background-image: url("../images/Design05-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape15"]+label:before{
+    background-image: url("../images/Design05-C.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape16"]+label:before{
+    background-image: url("../images/Design06-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape17"]+label:before{
+    background-image: url("../images/Design06-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape18"]+label:before{
+    background-image: url("../images/Design06-C.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape19"]+label:before{
+    background-image: url("../images/Design07-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape20"]+label:before{
+    background-image: url("../images/Design07-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape21"]+label:before{
+    background-image: url("../images/Design07-C.png");
+	background-repeat: no-repeat;
+}
+
+/* ここまでテンプレート（デザイン） */
+
+/* ここからテンプレート（形状） */
+input[type=radio][value="shape22"]+label:before{
+    background-image: url("../images/Shape01-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape23"]+label:before{
+    background-image: url("../images/Shape01-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape24"]+label:before{
+    background-image: url("../images/Shape01-C.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape25"]+label:before{
+    background-image: url("../images/Shape02-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape26"]+label:before{
+    background-image: url("../images/Shape02-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape27"]+label:before{
+    background-image: url("../images/Shape02-C.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape28"]+label:before{
+    background-image: url("../images/Shape03-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape29"]+label:before{
+    background-image: url("../images/Shape03-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape30"]+label:before{
+    background-image: url("../images/Shape03-C.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape31"]+label:before{
+    background-image: url("../images/Shape04-A.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape32"]+label:before{
+    background-image: url("../images/Shape04-B.png");
+	background-repeat: no-repeat;
+}
+
+input[type=radio][value="shape33"]+label:before{
+    background-image: url("../images/Shape04-C.png");
+	background-repeat: no-repeat;
+}
+
+/* ここまでテンプレート（形状） */
+
 input[type=radio]:checked+label::before{
-    border: 3px solid #333333;
+    border: 4px solid #FF942A;
     box-sizing: border-box;
 }
 
@@ -574,7 +878,55 @@ input[type=radio]{
     z-index:9999!important;
 }
 
+/* 03 */
+.modal_pop03{
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    top: 0;
+    left:0;
+    z-index:9997!important;
+}
+.bg{
+    background-color: #1119;
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    z-index:9998!important;
+}
+.modal_pop03 img{
+    height:80vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index:9999!important;
+}
 
+/* 04 */
+.modal_pop04{
+    width: 100vw;
+    height: 100vh;
+    position:fixed;
+    top: 0;
+    left:0;
+    z-index:9997!important;
+}
+.bg{
+    background-color: #1119;
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    z-index:9998!important;
+}
+.modal_pop04 img{
+    height:80vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index:9999!important;
+}
 
 /*--------------------------------
 配色
@@ -621,27 +973,33 @@ input[type=radio]+.Color_label:before{
 }
 
 input[type=radio][value="color01"]+label:before{
-    background: #e0e0e0;
+    /* background: #e0e0e0; */
+	background-image: url("../images/Color_1.png");
 }
 
 input[type=radio][value="color02"]+label:before{
-    background: #ff7f7f;
+    /* background: #ffd1d1; */
+	background-image: url("../images/Color_2.png");
 }
 
 input[type=radio][value="color03"]+label:before{
-    background: #ff7fff;
+    /* background: #e8d1ff; */
+	background-image: url("../images/Color_3.png");
 }
 
 input[type=radio][value="color04"]+label:before{
-    background: #7f7fff;
+    /* background: #d1e8ff; */
+	background-image: url("../images/Color_4.png");
 }
 
 input[type=radio][value="color05"]+label:before{
-    background: #7fffbf;
+    /* background: #d1ffd1; */
+	background-image: url("../images/Color_5.png");
 }
 
 input[type=radio][value="color06"]+label:before{
-    background: #ffbf7f;
+    /* background: #ffe8d1; */
+	background-image: url("../images/Color_6.png");
 }
 
 .Color_selection_inner {
@@ -803,21 +1161,25 @@ input[type=radio]+.Thickness_label:before{
     content: "";
     display: inline-block;
     background-size: contain;
-    width: 140px;
-    height: 180px;
+    width: 160px;
+    height: 206px;
 	margin: 10px;
 }
 
 input[type=radio][value="Thickness01"]+label:before{
-    background-image: url("../images/Thickness.png");
+    background-image: url("../images/Thickness-01.png");
+	background-repeat: no-repeat;
 }
 
 input[type=radio][value="Thickness02"]+label:before{
-    background-image: url("../images/Thickness.png");
+    background-image: url("../images/Thickness-02.png");
+	background-repeat: no-repeat;
+
 }
 
 input[type=radio][value="Thickness03"]+label:before{
-    background-image: url("../images/Thickness.png");
+    background-image: url("../images/Thickness-03.png");
+	background-repeat: no-repeat;
 }
 
 .Thickness_selection_inner {
@@ -1064,6 +1426,32 @@ input[type=radio][value="Thickness03"]+label:before{
     }
 
 /*--------------------------------
+形状タブレット
+---------------------------------*/
+/* ここからテンプレート画像ポップアップ */
+
+/* 01 */
+    .modal_pop img{
+        height:60vh;
+    }
+
+/* 02 */
+    .modal_pop02 img{
+        height:60vh;
+    }
+
+/* 03 */
+    .modal_pop03 img{
+        height:60vh;
+    }
+
+/* 04
+	*/
+    .modal_pop04 img{
+        height:60vh;
+    }
+
+/*--------------------------------
 セレクト全体タブレット
 ---------------------------------*/
     .Body_inner {
@@ -1079,8 +1467,7 @@ input[type=radio][value="Thickness03"]+label:before{
     .Preview_box {
 	    width: 400px;
 	    height: 400px;
-	    border: 2px solid #333333;
-	    border-radius: 10px;
+	   	border: 3px solid #333333;
 	    margin-top: 10px;
     }
 
@@ -1156,15 +1543,23 @@ input[type=radio][value="Thickness03"]+label:before{
 	    display: none;
     }
 
+	.MainVis_pc {
+		display: none;
+	}
+
+	.MainVis_sp_s {
+		display: flex;
+	}
+
     .MainVis_sp {
 	    margin: 0 auto;
 	    display: block;
 	    max-width: 100%;
     }
 
-    .MainVis_headline {
+ /*   .MainVis_headline {
 	    margin-bottom: 1.5rem;
-    }
+    } */
 
     .MainVis_headline_flex {
 	    flex-direction: column-reverse;
@@ -1188,12 +1583,36 @@ input[type=radio][value="Thickness03"]+label:before{
 /*--------------------------------
 会員登録sp
 ---------------------------------*/
-    .Member_registration_txt {
+/*     .Member_registration_txt {
 	    line-height: 35px;
 	    font-size: 1rem;
 	    text-decoration: none;
 	    padding: 15px 40px;
+    } */
+
+ /*更新*/   h2 {
+	    margin-top: 0;
+	    display: block;
+	    text-align: center;
+	    font-weight: bold;
     }
+
+    .register {
+	    width: 300px;
+	    margin: 20px auto;
+	    border-bottom: 5px solid #f56500;
+    }
+
+/*--------------------------------
+サイト導線
+---------------------------------*/	
+    #Image-Element {
+	    width: 800px;
+	}
+
+    .Member_registration_button {
+        transform: translate(464px,-1176px);
+}
 
 /*--------------------------------
 ダンボールセレクトsp
@@ -1231,7 +1650,8 @@ input[type=radio][value="Thickness03"]+label:before{
     }
 
     hr {
-	    margin: 10px 0;
+	    /* margin: 10px 0; */
+		display: none;
     }
 
     input {
@@ -1246,10 +1666,10 @@ input[type=radio][value="Thickness03"]+label:before{
 プレビューsp
 ---------------------------------*/
     .Preview_box {
-	    width:  375px;
-	    height: 375px;
-	    border: 2px solid #333333;
-	    border-radius: 10px;
+	    width: 70vw;
+		/* min-width: 300px; */
+	    height: 70vw;
+		/* min-height: 300px; */
 	    margin-top: 10px;
     }
 
@@ -1272,18 +1692,18 @@ input[type=radio][value="Thickness03"]+label:before{
         width: 100%;
 	    max-width: 1270px;
 	    min-width: 0;
+		flex-direction: column;
     }
 
     .Image_selection_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    height: 60px;
 	    position: relative;
     }
 
     .Image_selection_box {
-	    width: 110px;
+	    width: 130px;
 	    height: 170px;
-	    margin: 25px;
     }
 
     .Input_file {
@@ -1296,6 +1716,7 @@ input[type=radio][value="Thickness03"]+label:before{
 	    display: flex;
 	    flex-wrap: wrap;
 	    flex: 1;
+		justify-content: center;
     }
 
     .Reset_buttun {
@@ -1305,18 +1726,24 @@ input[type=radio][value="Thickness03"]+label:before{
     }
 
     #Reset-inner {
-	    margin-top: 20px;
-	    text-align: left;
+	    margin-top: 0;
+	    text-align: center;
 	    padding: 0 1em 0 1em;
-	    margin-left: 10px;
+	    /* margin-left: 10px; */
+		margin-bottom: 0.5rem;
     }
 
+     .Image_selection_box img {
+		 width: 130px;
+		 height: 130px
+	}
 /*--------------------------------
 形状sp
 ---------------------------------*/
     .Shape_selection_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    height: 60px;
+		max-width: 700px;
     }
 
     .Shape_txt_inner {
@@ -1334,27 +1761,45 @@ input[type=radio][value="Thickness03"]+label:before{
         width: 100%;
 	    max-width: 1270px;
 	    min-width: 0;
+		flex-direction: column;
     }
 
     .Shape_selection_inner {
 	    width: 100%;
 	    max-width: 1270px;
 	    min-width: 0;
+		margin-top: 0.5rem;
     }
 
     input[type=radio]+label:before{
         content: "";
         display: inline-block;
         background-size: contain;
-        width: 150px;
-        height: 150px;
-	    margin: 0.5rem;
-	    border-radius: 10px;
+        width: 160px;
+        height: 160px;
+	    margin: 0.2rem;
     }
 
     #tabbody div {
         padding: 0;
     }
+
+/* ここからテンプレート画像ポップアップ */
+
+/* 01 */
+    .modal_pop img{
+        height:50vh;
+		left: 48%;
+    }
+
+/* 02 */
+    .modal_pop02 img{
+        height:50vh;
+		left: 48%;
+    }
+
+
+
 
 /*--------------------------------
 配色sp
@@ -1363,35 +1808,50 @@ input[type=radio][value="Thickness03"]+label:before{
         width: 100%;
 	    max-width: 1270px;
 	    min-width: 0;
+		flex-direction: column;
     }
 
     .Color_selection_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    height: 60px;
+		max-width: 700px;
+		min-height: 0;
     }
 
     .Color_selection_inner {
 	    max-width: 1270px;
 	    min-width: 0;
+		text-align: center;
     }
+
+input[type=radio]+.Color_label:before {
+    width: 35px;
+    height: 35px;
+    margin: 25px 5px 20px 5px;
+}
 
 /*--------------------------------
 寸法sp
 ---------------------------------*/
     .Custom_size_box {
 	    min-width: 0;
+		flex-direction: column;
     }
 
     .Size_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    min-width: 0;
+		max-width: 700px;
+		height: 60px;
+		min-height: 0;
     }
 
     .Size_selection_inner {
 	    display: flex;
 	    flex-direction: row;
 	    flex-wrap: wrap;
-	
+		justify-content: space-between;
+	    margin-bottom: 0.5rem;
     }
 
     .Size_inner {
@@ -1401,6 +1861,7 @@ input[type=radio][value="Thickness03"]+label:before{
 	.Size_txt02 {
 		display: none;
 	}
+
 /*--------------------------------
 厚みsp
 ---------------------------------*/
@@ -1409,11 +1870,15 @@ input[type=radio][value="Thickness03"]+label:before{
 	    max-width: 1270px;
 	    min-width: 0;
 	    display: flex;
+		flex-direction: column;
     }
 
     .Thickness_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    min-width: 0;
+		max-width: 700px;
+		height: 60px;
+		min-height: 0;
     }
 
     .Thickness_selection_inner {
@@ -1421,12 +1886,13 @@ input[type=radio][value="Thickness03"]+label:before{
 	    min-width: 0;
 	    flex-direction: row;
 	    flex-wrap: wrap;
+		justify-content: space-between;
+		margin-top: 0.5rem
     }
 
     input[type=radio]+.Thickness_label:before{
         width: 140px;
         height: 180px;
-	    margin: 10px 0 0 10px;
     }
 
 /*--------------------------------
@@ -1436,11 +1902,15 @@ input[type=radio][value="Thickness03"]+label:before{
         width: 100%;
 	    max-width: 1270px;
 	    min-width: 0;
+		flex-direction: column;
     }
 
     .Number_txt_box {
-	    width: 10vw;
-	    min-width: 10vw;
+	    width: 100%;
+	    min-width: 0;
+		max-width: 700px;
+		height: 60px;
+		min-height: 0;
     }
 
 /*--------------------------------
@@ -1461,8 +1931,25 @@ input[type=radio][value="Thickness03"]+label:before{
 フッターsp
 ---------------------------------*/
     .Footer_a {
-	    font-size: 0.75rem;
+	    /* font-size: 0.75rem; */
+		/* width: 50%; */
+		display: block;
+		padding: 1rem 1rem;
+
     }
 
+	.Footer_ul {
+		flex-wrap: wrap;
+		/* justify-content: space-around; */
+	}
+	
+	.Footer_li {
+		width: 50%;
+		margin-top: 0;
+		/* padding: 0.5rem 1rem; */
+	}
+	
+	.Footer_img {
+		margin-top: 1rem;
+	}
 }
-
