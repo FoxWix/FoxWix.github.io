@@ -72,15 +72,26 @@ if (isset($_SESSION["user_data"])) {
       </p>
       <img src="images/damball_01.png" alt="ダンボールイメージ" width="250" height="278">
     </div>
-    <div class="Member_registration_button">
-      <a href="register.php" class="Member_registration_txt btn--orange btn--radius">まずは無料会員登録！</a>
+  </div>
+  <div id="Guide">
+  <div class="register">
+    <h2>サイトの使い方</h2>
+  </div>
+  <div id="Lead-Wire">
+	<div class="Conductor-Element">
+      <img src="images/Lead-Wire.png" alt="サイトの導線" id="Image-Element" width="1100px">
+	  <div class="Member_registration_button">
+        <a href="register.php" class="Member_registration_txt btn--orange btn--radius">会員登録はこちら</a>
+      </div>
     </div>
   </div>
+</div>
   <div class="Selection_inner">
     <ul class="btns">
       <li class="Selection_btn active "><a href="javascript:;" onclick="Display('no1')" class="btn" id="designCus"
           id="btn1">お客様プリント</a></li>
-      <li class="Selection_btn "><a href="javascript:;" onclick="Display('no2')" class="btn" id="designTemp">デザインテンプレート</a></li>
+      <li class="Selection_btn "><a href="javascript:;" onclick="Display('no2')" class="btn"
+          id="designTemp">デザインテンプレート</a></li>
     </ul>
   </div>
   <div class="Body_inner">
@@ -109,11 +120,11 @@ if (isset($_SESSION["user_data"])) {
         </div>
       </div>
     </div>
-	<div id="TMP" class="Preview_inner">
-      		<div class="Preview_box">
-        		<img src="" id="tmpImage" width="400" height="400">
-      		</div>
-    	</div>
+    <div id="TMP" class="Preview_inner">
+      <div class="Preview_box">
+        <img src="" id="tmpImage" width="400" height="400">
+      </div>
+    </div>
     <div class="Custom_inner">
       <div id="SW1">
         <!-- <p>これはSW1のエリアです。上記SW2をクリックすると消えます。</p> -->
@@ -191,7 +202,7 @@ if (isset($_SESSION["user_data"])) {
               </div>
             </div>
             <div id="Reset-inner">
-		    <input type="checkbox" id="hideNavi" checked=true>ナビを非表示にする
+              <input type="checkbox" id="hideNavi" checked=true>ナビを非表示にする
               <button class="Reset_buttun" id="resetBtn">画像をリセット</button>
               <button clsass="Reset_buttun" id="resetAllBtn">すべてリセット</button>
             </div>
