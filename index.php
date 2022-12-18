@@ -202,7 +202,7 @@ if (isset($_SESSION["user_data"])) {
               </div>
             </div>
             <div id="Reset-inner">
-              <input type="checkbox" id="hideNavi" checked=true>ナビを非表示にする
+              <input type="checkbox" id="hideNavi" checked=true>ナビを表示する
               <button class="Reset_buttun" id="resetBtn">画像をリセット</button>
               <button clsass="Reset_buttun" id="resetAllBtn">すべてリセット</button>
             </div>
