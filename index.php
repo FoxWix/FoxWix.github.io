@@ -65,7 +65,9 @@ if (isset($_SESSION["user_data"])) {
     </div>
   </div>
   <div class="MainVis_inner">
-    <h2 class="MainVis_headline">Bloc Deco (ブロック・デコ)ってなに？</h2>
+    <div class="register">
+      <h2 class="MainVis_headline">ブロック・デコってなに？</h2>
+    </div>
     <div class="MainVis_headline_flex">
       <p class="MainVis_headline_txt">Bloc Deco
         (ブロック・デコ)は、お客様のご指定「サイズ・形状」に合わせた段ボール箱を製作するオーダーメイド段ボールサービスです。<br><br>お客様の「プレゼントを入れる箱にもこだわりたい！」、「手軽に写真やデザインを箱にプリントしたい！」といった要望に応えるため、段ボールに、お客様のお好きなデザインをプリントする<span>「お客様プリント」</span>、ここでしか取り扱っていない特殊なデザインや形状から選択する<span>「デザインテンプレート」</span>の２種類をご用意しております。
@@ -128,7 +130,7 @@ if (isset($_SESSION["user_data"])) {
     </div>
     <div id="TMP" class="Preview_inner">
       <div class="Preview_box">
-        <img src="" id="tmpImage" width="400" height="400">
+        <img src="/images/Design01-A-preview.png" id="tmpImage" width="400" height="400">
       </div>
     </div>
     <div class="Custom_inner">
