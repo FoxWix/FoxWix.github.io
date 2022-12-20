@@ -88,15 +88,16 @@ $price = 0;
 $user_data = $_SESSION["user_data"];
 
 if($type=="C_order"){
-    //オリジナル
+    //お客様プリント
     $cardboard_data = [
         "cardboardID" => "P"       ,
+        "designNO"    => "P_1"     ,
         "length"      => $length   ,
         "width"       => $width    ,
         "depth"       => $depth    ,
         "thickness"   => $thickness,
-        "color"       => $color    ,
-        "imgpath"     => $img_name  ,
+        "color"       => ""        ,
+        "imgpath"     => $img_name ,
     ];
 
     $order_data = [
@@ -110,9 +111,9 @@ if($type=="C_order"){
 
     //段ボール登録
     //段ボールID取得
-    if(GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","")[0]["CardboardID"] !== null)
+    if(GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"] !== null)
         //最大ID + 1
-        $cardboard_id = "P".GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","")[0]["CardboardID"];
+        $cardboard_id = "P".GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","WHERE CardboardID LIKE 'P%'")[0]["CardboardID"];
     else
         $cardboard_id = "P0001";
     
@@ -123,33 +124,51 @@ if($type=="C_order"){
 
 }else{
     //テンプレート
-    $form_data = [
-        "cardboardID" => "T",
-        "tmpId"       => $tmpId,
-        "color"       => $color,
+    $cardboard_data = [
+        "cardboardID" => "T"       ,
+        "designNO"    => $tmpId    ,
+        "length"      => 0         ,
+        "width"       => 0         ,
+        "depth"       => 0         ,
+        "thickness"   => $thickness,
+        "color"       => $color    ,
+        "imgname"     => ""        ,
     ];
 
     $order_data = [
         "orderID"     => ""                ,
         "cardboardID" => ""                ,
         "mail"        => $user_data["Mail"],
-        "price"       => $price            ,
+        "price"       => 0                 ,
         "quantity"    => $quantity         ,
         "orderFlag"   => 0                 ,
     ];
 
+    // テンプレートデータ取得
+    $Tmp = GetData_SELECT("m_cardboard_hina","SelectdesignNO","'".$tmpId."'")[0];
+    $cardboard_data["length"] = $Tmp["Length"];
+    $cardboard_data["width" ] = $Tmp["Width"];
+    $cardboard_data["depth" ] = $Tmp["Depth"];
+    $cardboard_data["imgname"] = $Tmp["Image"];
+    $order_data    ["price" ] = $Tmp["Price"];
+    // ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊　　要修正　　＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+    $cardboard_data["thickness"] = 1;
+
     //段ボール登録
     //段ボールID取得
-    if(GetData_Increment_MaxID_LPAD("t_form","CardboardID","")[0]["CardboardID"] !== null)
+    if(GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","WHERE CardboardID LIKE 'T%'")[0]["CardboardID"] !== null)
         //最大ID + 1
-        $cardboard_id = "T".GetData_Increment_MaxID_LPAD("t_form","CardboardID","")[0]["CardboardID"];
+        $cardboard_id = "T".GetData_Increment_MaxID_LPAD("t_cardboard","CardboardID","WHERE CardboardID LIKE 'T%'")[0]["CardboardID"];
     else
         $cardboard_id = "T0001";
     
-    $form_data["cardboardID"] = $cardboard_id;
+    $cardboard_data["cardboardID"] = $cardboard_id;
+
+    var_export($cardboard_data);
+    var_export($order_data);
     
     //段ボール登録
-    Add("t_form",$form_data);
+    Add("t_cardboard",$cardboard_data);
 }
 
 //注文登録（カート）

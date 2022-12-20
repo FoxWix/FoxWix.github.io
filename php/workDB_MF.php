@@ -523,7 +523,6 @@
             $pdo = connectDB();
 
             $sql = "SELECT (MAX({$tableid}) +1) as {$tableid} FROM {$tablename} {$where};";
-            echo $sql;
             $stm = $pdo -> prepare($sql);
             $stm -> execute();
 
@@ -584,13 +583,13 @@
     //
     function GetData_Cart_CB($Mail){
         try{
-
             $pdo = connectDB_C();
 
-            $sql = "SELECT  o.CardboardID as cardboardID, c.Length as length, c.Width as width, 
+            $sql = "SELECT  o.CardboardID as cardboardID, c.SelectdesignNO as designNO, c.Length as length, c.Width as width, 
                             c.Depth as depth, c.Thickness as thickness, c.Color as color, 
-                            c.Image as imgpath, o.Price as price, o.Quantity as quantity 
+                            mc.Image as imgpath, o.Price as price, o.Quantity as quantity, mc.Name as name
                             FROM t_order as o INNER JOIN t_cardboard as c ON o.CardboardID = c.CardboardID 
+                            INNER JOIN m_cardboard_hina as mc ON c.SelectdesignNO = mc.SelectdesignNO
                             WHERE o.Mail = {$Mail} AND o.OrderFlag = 0;";
             $stm = $pdo -> prepare($sql);
             $stm -> execute();
@@ -610,37 +609,6 @@
         }
     }
 
-    //
-    // カートページ表示用データ取得（ユーザー毎）
-    //
-    function GetData_Cart_F($Mail){
-        try{
-
-            $pdo = connectDB_C();
-
-            $sql = "SELECT  o.CardboardID as cardboardID,
-                            f.SelectdesignNO as tmpid,
-                            f.Color as color, 
-                            o.Price as price, o.Quantity as quantity 
-                            FROM t_order as o INNER JOIN t_form as f ON o.CardboardID = f.CardboardID 
-                            WHERE o.Mail = {$Mail} AND o.OrderFlag = 0;";
-            $stm = $pdo -> prepare($sql);
-            $stm -> execute();
-
-            $value = $stm -> fetchAll(PDO::FETCH_ASSOC);
-
-            return $value;
-
-        }catch(Exception $e){
-
-            echo $e -> getMessage();
-
-        }finally{
-
-            $pdo = NULL;
-
-        }
-    }
 
     //
     // カートページ表示用データ　フラグ変更

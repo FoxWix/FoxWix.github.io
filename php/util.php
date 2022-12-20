@@ -57,6 +57,21 @@ function check_half_numeric($str){
     return false;
 }
 
+/////////////////////
+//  check_Kana()
+//  return: true 一致 false 不一致
+//  機能:全角カタカナのチェック
+/////////////////////
+function check_Kana($str){
+  $pattern = '/^[ァ-ヾ]+$/u';
+  if (preg_match($pattern, $str)){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
 
 /////////////////////
 //  error_list()
@@ -73,5 +88,36 @@ function error_list($errors, $error){
   return;
 }
 
+/////////////////////
+//  color_code_conversion()
+//  機能:色コードを変換
+/////////////////////
+function color_code_conversion($colorcode){
+  switch($colorcode){
+    case "#a9a9a9":
+        $color = "ダークグレー";
+        break;
+    case "#ff4500":
+        $color = "オレンジレッド";
+        break;
+    case "#ffd700":
+        $color = "ゴールド";
+        break;
+    case "#66cdaa":
+        $color = "ミディアムカーマイン";
+        break;
+    case "#4169e1":
+        $color = "ロイヤルブルー";
+        break;
+    case "#9932cc":
+        $color = "ダークオーキッド";
+        break;
+    default:
+        $color = "";
+        break;
+}
+
+return $color;
+}
 
 ?>

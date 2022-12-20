@@ -10,9 +10,8 @@ $payment = "現金";
 
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];
-$postage = $_SESSION["postage"];
-//　日付
-$date = date("Y-m-d H:i:s");
+$postage = $_SESSION["postage"];    //送料
+$date = date("Y-m-d H:i:s");    //　日付
 
 //　注文ID取得
 if(GetData_SELECT_Match("t_order","MAX(OrderID) as orderID",["Mail","OrderFlag"],["'{$user_data["Mail"]}'",0])[0]["orderID"] !== null){
@@ -45,9 +44,7 @@ Add_AUTO_INCREMENT("T_order_detail",$order_detail);
 //　注文データ確定
 GetData_Cart_UpdateFlag("'{$user_data["Mail"]}'","'%%'",1);
 
-/*
-    4.1.3 完了画面遷移
-*/
+/* 完了画面遷移 */
 
 //テスト用データ
 $from1 = "t_order as o INNER JOIN t_cardboard as c ON o.CardboardID = c.CardboardID";
