@@ -23,9 +23,6 @@ $cart = [];
 if(GetData_Cart_CB("'{$user_mail}'") !== null)
   $cart = GetData_Cart_CB("'{$user_mail}'");
 
-if(GetData_Cart_F("'{$user_mail}'") !== null)
-  $cart = array_merge($cart,GetData_Cart_F("'{$user_mail}'"));
-
 $prefecture_list = [
   ["北海道"],
   ["青森県","岩手県","宮崎県","山形県","福島県"],
@@ -176,35 +173,37 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
 
       <?php
       //カートデータをリスト表示
-      $file_path = "../images/designTextures/";
       $count = 0;
       $total = 0;
       foreach($cart as $data){
+
         if(mb_substr($data["cardboardID"],0,1) == "P"){
-          $name      = "お客様プリント";
+          $imgname = $data["imgpath"];
+          $name      = $data["name"];
           $ID        = $data["cardboardID"];
-          $tmpid     = "";
+          $designNO  = $data["designNO"];;
           $length    = $data["length"];
           $width     = $data["width"];
           $depth     = $data["depth"];
           $thickness = $data["thickness"];
           $quantity  = $data["quantity"];
-          $color     = $data["color"];
-          $imgpath   = $file_path . $data["imgpath"];
+          $color     = color_code_conversion($data["color"]);
+          $imgpath   = "../images/".$imgname;
           $price = $data["price"];
           $total = $total + $price * $quantity;
         }
         else{
-          $name      = "段ボールテンプレート";
+          $imgname = $data["imgpath"];
+          $name      = $data["name"];
           $ID        = $data["cardboardID"];
-          $tmpid     = $data["tmpid"];
-          $length    = "- ";
-          $width     = "- ";
-          $depth     = "- ";
-          $thickness = "- ";
+          $designNO  = $data["designNO"];
+          $length    = $data["length"];
+          $width     = $data["width"];
+          $depth     = $data["depth"];
+          $thickness = $data["thickness"];
           $quantity  = $data["quantity"];
-          $color     = $data["color"];
-          $imgpath   = "";
+          $color     = color_code_conversion($data["color"]);
+          $imgpath   = "../images/".$imgname;
           $price = $data["price"];
           $total = $total + $price * $quantity;
         }
@@ -225,7 +224,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
             echo '<div class="quantity">';
               echo '<input id="'.$ID.'" type="number" value="'.$quantity.'" min="1" max="10" class="quantity-field">';
             echo '</div>';
-            echo '<div class="subtotal">'.($price*$quantity).'</div>';
+            echo '<div class="subtotal">'.floor($price*$quantity*1.1).'</div>';
             echo '<div class="remove">';
               echo '<button id="'.$ID.'" >削除</button>';
             echo '</div>';
@@ -243,7 +242,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
         <div class="summary-subtotal">
           <div class="subtotal-title">小合計</div>
           <!-- 商品合計 -->
-          <div class="subtotal-value final-value" id="basket-subtotal"><?php echo $total ?></div>
+          <div class="subtotal-value final-value" id="basket-subtotal"><?php echo floor($total*1.1) ?></div>
           <div class="summary-promo hide">
             <div class="promo-title">Promotion</div>
             <div class="promo-value final-value" id="basket-promo"></div>
@@ -269,7 +268,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
         </div>
 
         <div class="summary-total">
-          <div class="total-title">合計（税込）</div>
+          <div class="total-title">合計</div>
           <!-- 送料込み合計 -->
           <div class="total-value final-value total-color" id="basket-total"><?php echo floor($total*1.1) + $postage ?></div>
         </div>
@@ -315,7 +314,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
       var data = [id,quantity]; 
       fetch('./php/cart_update.php',{
         method:'POST',
-        headers:{'Content-Type':'test/plain'},
+        headers:{'Content-Type':'text/plain'},
         body: data
       })
       /*
@@ -333,15 +332,9 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
       var id = $(this).attr("id");
       fetch('./php/cart_remove.php',{
         method:'POST',
-        headers:{'Content-Type':'test/plain'},
+        headers:{'Content-Type':'text/plain'},
         body: id
       })
-      /*
-      .then(response => response.text())
-      .then(res => {
-        console.log(res);
-      })
-      */
 
       removeItem(this);
     });
@@ -408,7 +401,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
         $('.final-value').fadeOut(fadeTime, function () {
           var postage = <?php echo $postage ?>;
           $('#basket-subtotal').html(subtotal.toFixed());
-          $('#basket-total').html(((total*1.1)+postage).toFixed());
+          $('#basket-total').html((total+postage).toFixed());
           if (total == 0) {
             $('.checkout-cta').fadeOut(fadeTime);
           } else {
@@ -425,7 +418,7 @@ jQuery('html, body').animate({scrollTop: 0}, duration);
       var productRow = $(quantityInput).parent().parent();
       var price = parseFloat(productRow.children('.price').text());
       var quantity = $(quantityInput).val();
-      var linePrice = Math.floor(price * quantity);
+      var linePrice = Math.floor(price * quantity * 1.1);
 
       /* Update line price display and recalc cart totals */
       productRow.children('.subtotal').each(function () {

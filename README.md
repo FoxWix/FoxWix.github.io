@@ -134,12 +134,17 @@ phpファイルにログイン処理を追加
 
 22/12/16
 [js/event/designSubmit.js]
-・デザインテンプレート注文で注文した際に厚みがセッションストレージに格納されていない問題を修正
-[js/event/designOrder.js]
-[order.php]
-・価格確認ページでのプレビュー機能を追加
+デザインテンプレート注文で注文した際に厚みがセッションストレージに格納されていない問題を修正
 
-22/12/18
-index.php
-style.css
-・最新版に更新
+22/12/16 [js/event/designSubmit.js] ・デザインテンプレート注文で注文した際に厚みがセッションストレージに格納されていない問題を修正 [js/event/designOrder.js] [order.php] ・価格確認ページでのプレビュー機能を追加
+
+22/12/18 index.php style.css ・最新版に更新
+
+22/12/13 ~ 22/12/20
+[designOrder.js] 修正
+[cart.php]
+[cart_add.php]
+[order_registration.php]
+[get_tmpdata.php] 追加
+[workDB_MF.php]
+[util.php]
