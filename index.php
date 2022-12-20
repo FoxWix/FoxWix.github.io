@@ -74,21 +74,21 @@ if (isset($_SESSION["user_data"])) {
     </div>
   </div>
   <div id="Guide">
-  <div class="register">
-    <h2>サイトの使い方</h2>
-  </div>
-  <div id="Lead-Wire">
-	<div class="Conductor-Element">
-      <img src="images/Lead-Wire.png" alt="サイトの導線" id="Image-Element" width="1100px">
-	  <div class="Member_registration_button">
-        <a href="register.php" class="Member_registration_txt btn--orange btn--radius">会員登録はこちら</a>
+    <div class="register">
+      <h2>サイトの使い方</h2>
+    </div>
+    <div id="Lead-Wire">
+      <div class="Conductor-Element">
+        <img src="images/Lead-Wire.png" alt="サイトの導線" id="Image-Element" width="1100px">
+        <div class="Member_registration_button">
+          <a href="register.php" class="Member_registration_txt btn--orange btn--radius">会員登録はこちら</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
   <div class="Selection_inner">
     <ul class="btns">
-      <li class="Selection_btn active "><a href="javascript:;" onclick="Display('no1')" class="btn" id="designCus"
+      <li class="Selection_btn active "><a href="javascript:;" onclick="Display('no1')" class="btn"
           id="btn1">お客様プリント</a></li>
       <li class="Selection_btn "><a href="javascript:;" onclick="Display('no2')" class="btn"
           id="designTemp">デザインテンプレート</a></li>
@@ -118,6 +118,12 @@ if (isset($_SESSION["user_data"])) {
           </style>
           <canvas id="canvas" width="" height=""></canvas>
         </div>
+        <p class="Display_bottun">
+          <label class="check-box" for="check01">
+            <input type="checkbox" id="check01">
+            <span class="check-text"></span>
+          </label>
+        </p>
       </div>
     </div>
     <div id="TMP" class="Preview_inner">
@@ -132,7 +138,7 @@ if (isset($_SESSION["user_data"])) {
           <div class="Image_selection_txt_box">
             <p class="Image_selection_txt">画像</p>
           </div>
-          <div>
+          <div class="Image_box_buttun_flex">
             <div class="Image_selection_inner">
               <div class="Image_selection_box">
                 <img src="images/PreviewInitImages/none6.png" alt="どこに画像がプリントされるかを示した画像" width="150px" id="preview0">
@@ -201,11 +207,18 @@ if (isset($_SESSION["user_data"])) {
                 </select>
               </div>
             </div>
+            <!-- ここからリセットボタン -->
             <div id="Reset-inner">
-              <input type="checkbox" id="hideNavi" checked=true>ナビを表示する
-              <button class="Reset_buttun" id="resetBtn">画像をリセット</button>
-              <button clsass="Reset_buttun" id="resetAllBtn">すべてリセット</button>
+              <p>
+                <img src="images/Reset-icon.png" alt="リセット" width="50" height="50" class="Reset_Single"
+                  id="resetImgBtn">
+              </p>
+              <p>
+                <img src="images/Reset-icon-all.png" alt="リセット" width="50" height="50" class="Reset_All"
+                  id="resetAllBtn">
+              </p>
             </div>
+            <!-- ここまで -->
           </div>
         </div>
         <hr width="100%">
@@ -429,15 +442,27 @@ if (isset($_SESSION["user_data"])) {
   </div>
   <!-- ここからデザインをダブルクリックするとポップアップする要素 -->
   <div class="modal_pop">
-    <div class="bg js-modal-close"></div>
+    　<div class="bg js-modal-close"></div>
     <div class="modal_pop_main">
-      <img src="images/Box-1.jpg" alt="ポップアップ01">
+      <img src="images/Box-1.png" alt="ポップアップ01">
     </div>
   </div>
   <div class="modal_pop02">
-    <div class="bg js-modal-close02"></div>
+    　<div class="bg js-modal-close02"></div>
     <div class="modal_pop_main02">
-      <img src="images/Box-2.jpg" alt="ポップアップ02">
+      <img src="images/Box-2.png" alt="ポップアップ02">
+    </div>
+  </div>
+  <div class="modal_pop03">
+    　<div class="bg js-modal-close03"></div>
+    <div class="modal_pop_main03">
+      <img src="images/Box-3.png" alt="ポップアップ03">
+    </div>
+  </div>
+  <div class="modal_pop04">
+    　<div class="bg js-modal-close04"></div>
+    <div class="modal_pop_main04">
+      <img src="images/Box-4.png" alt="ポップアップ04">
     </div>
   </div>
   <!-- ポップアップここまで -->
