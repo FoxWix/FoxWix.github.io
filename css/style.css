@@ -506,34 +506,110 @@ select {
 	border-radius: 10px;
 }
 
-.Reset_buttun {
-	/* text-decoration: none;
-	border-radius: 5px;
-    background: #f56500;
-    padding: 5px 10px;
-    color: white;
-	line-height: 40px;
-	height: 40px; */
+/* ここからリセットボタン */
+.Reset_Single {
 	text-decoration: none;
 	border-radius: 5px;
-    background: white;
-	border: 1px solid #f56500;
-    padding: 5px 10px;
-    color: #f56500;
-	line-height: 40px;
-	height: 40px;
+    /* background-image: url("../images/Reset-icon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+	border: 1px solid #FF942A;
+	display: block;
+	height: 50px;
+	width: 50px;
 }
 
-.Reset_buttun:hover {
-	background-color: white;
+.Reset_Single:hover {
 	opacity: 0.7;
+	background: none;
 }
+
+/* ここから全てリセットボタン */
+.Reset_All {
+	text-decoration: none;
+	border-radius: 5px;
+    /* background-image: url("../images/Reset-icon.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+	border: 1px solid #FF942A;
+	display: block;
+	height: 50px;
+	width: 50px;
+}
+
+.Reset_All:hover {
+	opacity: 0.7;
+	background: none;
+}
+
+/* ここからガイド表示非表示ボタン */
+.check-box {
+  cursor: pointer;
+}
+.check-text {
+  /* チェックボックスとテキストの上下を中央に */
+  align-items: center;
+  display: flex;
+}
+.check-box input {
+  display: none; /* デフォルトのチェックボックスを非表示 */
+}
+.check-box input + .check-text::before {
+  /* チェック入れる前のチェックボックス画像 */
+  background-image: url("../images/Eye-1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: 50px;
+  position: relative;
+  width: 50px;
+  border-top-left-radius : 5px;
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+border-bottom-left-radius : 0;
+-webkit-border-bottom-left-radius: 0;
+-moz-border-radius-bottomleft: 0;
+border-top-right-radius : 0px;
+-webkit-border-top-right-radius: 0px;
+-moz-border-radius-topright: 0px;
+border-bottom-right-radius : 0px;
+-webkit-border-bottom-right-radius: 0px;
+-moz-border-radius-bottomright: 0px;
+  border: 1px solid #FF942A;
+}
+.check-box input:checked + .check-text::before {
+  /* チェック入れた後のチェックボックス画像 */
+  background-image: url("../images/Eye-2.png");
+}
+
+.Preview_box {
+    position: relative;
+}
+
+.Display_bottun {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 
 #Reset-inner {
 	margin-top: 20px;
 	text-align: left;
 	padding: 0 1em 0 1em;
 	margin-left: 10px;
+	display: flex;
+}
+
+#Reset-inner p:first-child {
+	margin-right: 1rem;
+}
+
+#Reset-inner p:last-child {
+	margin-left: 1rem;
 }
 
 /*--------------------------------
@@ -1117,7 +1193,6 @@ input[type=radio][value="color06"]+label:before{
 	transform: translate(-50%,-50%);
 }
 
-
 /*--------------------------------
 厚み
 ---------------------------------*/
@@ -1682,6 +1757,15 @@ input[type=radio][value="Thickness03"]+label:before{
 /*--------------------------------
 画像sp
 ---------------------------------*/
+.Image_box_bottun_flex {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#Reset-inner {
+    margin-top: 2rem;
+}
+
     .Custom_inner {
 	    width: 100%;
 	    max-width: 1000px;
@@ -1737,6 +1821,11 @@ input[type=radio][value="Thickness03"]+label:before{
 		 width: 130px;
 		 height: 130px
 	}
+
+	#Reset-inner {
+		justify-content: space-evenly;
+	}
+
 /*--------------------------------
 形状sp
 ---------------------------------*/
@@ -1953,3 +2042,4 @@ input[type=radio]+.Color_label:before {
 		margin-top: 1rem;
 	}
 }
+
