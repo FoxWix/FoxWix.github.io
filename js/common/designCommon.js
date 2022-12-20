@@ -66,165 +66,165 @@ const Template = [
     DJ_0 = [
         A = {
             fullname: "DJ_0_A",
-            path: "images/Design01-A.png"
+            path: "images/Design01-A-preview.png"
         },
         B = {
             fullname: "DJ_0_B",
-            path: "images/Design01-B.png"
+            path: "images/Design01-B-preview.png"
         },
         C = {
             fullname: "DJ_0_C",
-            path: "images/Design01-C.png"
+            path: "images/Design01-C-preview.png"
         }
     ],
 
     DA_1 = [
         A = {
             fullname: "DA_1_A",
-            path: "images/Design02-A.png"
+            path: "images/Design02-A-preview.png"
         },
         B = {
             fullname: "DA_1_B",
-            path: "images/Design02-B.png"
+            path: "images/Design02-B-preview.png"
         },
         C = {
             fullname: "DA_1_C",
-            path: "images/Design02-C.png"
+            path: "images/Design02-C-preview.png"
         }
     ],
 
     DD_2 = [
         A = {
             fullname: "DD_2_A",
-            path: "images/Design03-A.png"
+            path: "images/Design03-A-preview.png"
         },
         B = {
             fullname: "DD_2_B",
-            path: "images/Design03-B.png"
+            path: "images/Design03-B-preview.png"
         },
         C = {
             fullname: "DD_2_C",
-            path: "images/Design03-C.png"
+            path: "images/Design03-C-preview.png"
         }
     ],
 
     DR_3 = [
         A = {
             fullname: "DR_3_A",
-            path: "images/Design04-A.png"
+            path: "images/Design04-A-preview.png"
         },
         B = {
             fullname: "DR_3_B",
-            path: "images/Design04-B.png"
+            path: "images/Design04-B-preview.png"
         },
         C = {
             fullname: "DR_3_C",
-            path: "images/Design04-C.png"
+            path: "images/Design04-C-preview.png"
         }
     ],
 
     DW_4 = [
         A = {
             fullname: "DW_4_A",
-            path: "images/Design05-A.png"
+            path: "images/Design05-A-preview.png"
         },
         B = {
             fullname: "DW_4_B",
-            path: "images/Design05-B.png"
+            path: "images/Design05-B-preview.png"
         },
         C = {
             fullname: "DW_4_C",
-            path: "images/Design05-C.png"
+            path: "images/Design05-C-preview.png"
         }
     ],
 
     DT_5 = [
         A = {
             fullname: "DT_5_A",
-            path: "images/Design06-A.png"
+            path: "images/Design06-A-preview.png"
         },
         B = {
             fullname: "DT_5_B",
-            path: "images/Design06-B.png"
+            path: "images/Design06-B-preview.png"
         },
         C = {
             fullname: "DT_5_C",
-            path: "images/Design06-C.png"
+            path: "images/Design06-C-preview.png"
         }
     ],
 
     DH_6 = [
         A = {
             fullname: "DH_6_A",
-            path: "images/Design07-A.png"
+            path: "images/Design07-A-preview.png"
         },
         B = {
             fullname: "DH_6_B",
-            path: "images/Design07-B.png"
+            path: "images/Design07-B-preview.png"
         },
         C = {
             fullname: "DH_6_C",
-            path: "images/Design07-C.png"
+            path: "images/Design07-C-preview.png"
         }
     ],
 
     KS_1 = [
         A = {
             fullname: "KS_1_A",
-            path: "images/Shape01-A.png"
+            path: "images/Shape01-A-preview.png"
         },
         B = {
             fullname: "KS_1_B",
-            path: "images/Shape01-B.png"
+            path: "images/Shape01-B-preview.png"
         },
         C = {
             fullname: "KS_1_C",
-            path: "images/Shape01-C.png"
+            path: "images/Shape01-C-preview.png"
         }
     ],
 
     KH_2 = [
         A = {
             fullname: "KH_2_A",
-            path: "images/Shape02-A.png"
+            path: "images/Shape02-A-preview.png"
         },
         B = {
             fullname: "KH_2_B",
-            path: "images/Shape02-B.png"
+            path: "images/Shape02-B-preview.png"
         },
         C = {
             fullname: "KH_2_C",
-            path: "images/Shape02-C.png"
+            path: "images/Shape02-C-preview.png"
         }
     ],
 
     KP_3 = [
         A = {
             fullname: "KP_3_A",
-            path: "images/Shape03-A.png"
+            path: "images/Shape03-A-preview.png"
         },
         B = {
             fullname: "KP_3_B",
-            path: "images/Shape03-B.png"
+            path: "images/Shape03-B-preview.png"
         },
         C = {
             fullname: "KP_3_C",
-            path: "images/Shape03-C.png"
+            path: "images/Shape03-C-preview.png"
         }
     ],
 
     KH_4 = [
         A = {
             fullname: "KS_4_A",
-            path: "images/Shape04-A.png"
+            path: "images/Shape04-A-preview.png"
         },
         B = {
             fullname: "KS_4_B",
-            path: "images/Shape04-B.png"
+            path: "images/Shape04-B-preview.png"
         },
         C = {
             fullname: "KS_4_C",
-            path: "images/Shape04-C.png"
+            path: "images/Shape04-C-preview.png"
         }
     ]
 
