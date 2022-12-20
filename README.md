@@ -148,3 +148,13 @@ phpファイルにログイン処理を追加
 [get_tmpdata.php] 追加
 [workDB_MF.php]
 [util.php]
+
+22/12/20
+[index.php]
+・指定された箇所を変更
+[style.css]
+・指定された箇所を変更
+[js/event/designEvent.js]
+・取得先タグ名の変更
+[images/*]
+・最新版のフォルダと交換
