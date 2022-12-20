@@ -116,12 +116,15 @@ document.getElementById('resetAllBtn').addEventListener('click', () => {
     //カメラの位置を初期化
     resetCameraPos();
 
+    //ナビゲーションの表示設定
+    hideNavi(!document.getElementById("check01").checked);
+
 }, false);
 
 //--------------------------------------------------------------------------
 //	画像を初期化
 //--------------------------------------------------------------------------
-document.getElementById('resetBtn').addEventListener('click', () => {
+document.getElementById('resetImgBtn').addEventListener('click', () => {
 
     const files = document.getElementsByClassName('Userimg');
     for (let index = 0; index < 6; ++index) {
@@ -142,6 +145,9 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 
     }
 
+    //ナビゲーションの表示設定
+    hideNavi(!document.getElementById('check01').checked);
+
     //none画像を設定
     document.getElementById('preview0').src = "../images/PreviewInitImages/none6.png"
     document.getElementById('preview1').src = "../images/PreviewInitImages/none5.png"
@@ -158,10 +164,10 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 //--------------------------------------------------------------------------
 //  ナビをの表示・非表示設定
 //--------------------------------------------------------------------------
-const NaviCheck = document.getElementById('hideNavi');
+const NaviCheck = document.getElementById('check01');
 NaviCheck.addEventListener('change', () => {
 
-    hideNavi(NaviCheck.checked);
+    hideNavi(!NaviCheck.checked);
 
 }, false);
 
@@ -255,7 +261,7 @@ for (let index = 0; index < objcolor.length; ++index) {
 //----------------------------------------------------------------------------
 //  タブ切り替え時にmain関数を実行
 //----------------------------------------------------------------------------
-document.getElementById("designCus").addEventListener("click", () => {
+document.getElementById("btn1").addEventListener("click", () => {
 
     main();
 
@@ -368,18 +374,36 @@ tabs[0].onclick();
 
 //01
 $('.modal_pop').hide();
-$('.show_pop').on('dblclick', function () {
-    $('.modal_pop').fadeIn();
-})
-$('.js-modal-close').on('click', function () {
-    $('.modal_pop').fadeOut();
-})
+ $('.show_pop').on('dblclick',function(){
+     $('.modal_pop').fadeIn();
+ })
+ $('.js-modal-close').on('click',function(){
+     $('.modal_pop').fadeOut();
+ })
 
 //02
 $('.modal_pop02').hide();
-$('.show_pop02').on('dblclick', function () {
-    $('.modal_pop02').fadeIn();
-})
-$('.js-modal-close02').on('click', function () {
-    $('.modal_pop02').fadeOut();
-})
+ $('.show_pop02').on('dblclick',function(){
+     $('.modal_pop02').fadeIn();
+ })
+ $('.js-modal-close02').on('click',function(){
+     $('.modal_pop02').fadeOut();
+ })
+
+//03
+$('.modal_pop03').hide();
+ $('.show_pop03').on('dblclick',function(){
+     $('.modal_pop03').fadeIn();
+ })
+ $('.js-modal-close03').on('click',function(){
+     $('.modal_pop03').fadeOut();
+ })
+
+//04
+$('.modal_pop04').hide();
+ $('.show_pop04').on('dblclick',function(){
+     $('.modal_pop04').fadeIn();
+ })
+ $('.js-modal-close04').on('click',function(){
+     $('.modal_pop04').fadeOut();
+ })
