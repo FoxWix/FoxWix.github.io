@@ -121,11 +121,7 @@ function DropListIsNone(tag) {
 
     let selectvalue = document.getElementById(tag).value;
 
-    if (selectvalue == 'none') {
-        return true;
-    } else {
-        return false;
-    }
+    return selectvalue == 'none' ? true : false;
 
 }
 
