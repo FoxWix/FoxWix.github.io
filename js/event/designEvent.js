@@ -145,9 +145,6 @@ document.getElementById('resetImgBtn').addEventListener('click', () => {
 
     }
 
-    //ナビゲーションの表示設定
-    hideNavi(!document.getElementById('check01').checked);
-
     //none画像を設定
     document.getElementById('preview0').src = "../images/PreviewInitImages/none6.png"
     document.getElementById('preview1').src = "../images/PreviewInitImages/none5.png"
@@ -158,6 +155,9 @@ document.getElementById('resetImgBtn').addEventListener('click', () => {
 
     //3Dオブジェクトの画像を初期化
     textureReset();
+    
+    //ナビゲーションの表示設定
+    hideNavi(!document.getElementById('check01').checked);
 
 }, false);
 
