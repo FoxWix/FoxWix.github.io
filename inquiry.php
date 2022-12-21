@@ -95,9 +95,9 @@ return false;
   <div class="Footer_inner">
 	<ul class="Footer_ul">
 	  <li class="Footer_li"><a href="index.php" class="Footer_a">HOME</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">よくある質問</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">お問い合わせ</a></li>
-	  <li class="Footer_li"><a href="" class="Footer_a">ご利用ガイド</a></li>
+	  <li class="Footer_li"><a href="question.php" class="Footer_a">よくある質問</a></li>
+	  <li class="Footer_li"><a href="inquiry.php" class="Footer_a">お問い合わせ</a></li>
+	  <li class="Footer_li"><a href="guide.php" class="Footer_a">ご利用ガイド</a></li>
     </ul>
 	<div class="Footer_logo">
 	  <img src="images/Logo-2.png" alt="ブロック・デコ" height="80px" class="Footer_img">
