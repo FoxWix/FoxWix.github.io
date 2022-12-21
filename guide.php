@@ -68,7 +68,7 @@ return false;
 <nav class="Breadcrumb">
     <ol class="Breadcrumb-ListGroup">
         <li class="Breadcrumb-ListGroup-Item">
-            <a class="Breadcrumb-ListGroup-Item-Link" href="index.html"><span>トップ</span></a>
+            <a class="Breadcrumb-ListGroup-Item-Link" href="index.php"><span>トップ</span></a>
         </li>
         <li class="Breadcrumb-ListGroup-Item">
             <a class="Breadcrumb-ListGroup-Item-Link"><span>ご利用ガイド</span></a>
