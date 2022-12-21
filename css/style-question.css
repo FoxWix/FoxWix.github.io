@@ -11,6 +11,9 @@ span {
 	color: #333333;
 }
 
+a {
+    transition : all 0.5s ease 0s;
+}
 
 /*--------------------------------
 ヘッダー
@@ -92,29 +95,138 @@ a:hover {
 	font-weight: bold;
 }
 
+.head-pr {
+	font-size: 0.8rem;
+}
+
+/*--------------------------------
+パンくずリスト
+---------------------------------*/
+.Breadcrumb {
+    background: #f56500;
+    color: #fff;
+    padding: 0.1em;
+    margin-top: 60px;
+	margin-bottom: 40px;
+}
+
+.Breadcrumb-ListGroup {
+    display: flex;
+}
+
+.Breadcrumb-ListGroup-Item-Link[href]:hover {
+    opacity: 0.5;
+}
+
+.Breadcrumb-ListGroup-Item-Link {
+	text-decoration: none;
+}
+
+.Breadcrumb-ListGroup-Item-Link span {
+	color: white;	
+}
+
+.Breadcrumb-ListGroup-Item {
+	list-style: none;
+	padding: 0.625rem 0;
+}
+
+.Breadcrumb-ListGroup > * + * {
+    margin-left: 0.5em;
+}
+
+.Breadcrumb-ListGroup > * + *::before {
+    content: ">";
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+	color: white;
+}
+
+/*--------------------------------
+ガイドリスト
+---------------------------------*/
+ol.Guide-list{
+    counter-reset:list;
+    list-style-type: none;
+    font: 14px/1.6 'arial narrow', sans-serif;
+    padding: 0;
+    z-index: 10;
+}
+
+ol.Guide-list li{
+    position: relative;
+    margin: 7px 0 7px 0px;
+    padding-left: 40px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 30px;
+    border-top: 2px solid #FF942A;
+    border-right: 2px solid #FF942A;
+    border-bottom: 2px solid #FF942A;
+    color: #756C67;
+    min-width: 140px;
+    background: #fff;
+}
+
+ol.Guide-list li:before{
+    counter-increment: list;
+    content: counter(list);
+    position: absolute;
+    left: 0px;
+    width: 32px;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    line-height:30px;
+    background: #FF942A;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.Guide-list {
+	width: 20%;
+	margin-left: 2rem;
+	position: fixed;
+}
+
+ol.Guide-list li a {
+	text-decoration: none;
+	color: #333333;
+	display: block;
+}
+
+ol.Guide-list li a:hover {
+	background-color: white;
+	opacity: 0.7;
+}
+
 /*--------------------------------
 よくある質問
 ---------------------------------*/
 h2 {
-	margin-top: 100px;
 	display: block;
 	text-align: center;
 	font-weight: bold;
 }
 
 #register {
-	width: 700px;
+	/* width: 700px; */
+	width:100%;
 	margin: 20px auto;
 	border-bottom: 5px solid #f56500;
 }
 
 h3 {
-	width: 60%;
+	width: 100%;
 	margin: 3rem auto 0.5rem auto;
 }
 
 dl {
-    width:60%;
+    width:100%;
     margin:0 auto 2rem;
 }
 
@@ -168,6 +280,33 @@ dt.active::after {
 	color: #E7402D;
 }
 
+.Btn-reg {
+	text-decoration: none;
+	border: 1px solid #f56500;
+	color: #f56500;
+	padding: 0.5rem 1rem;
+}
+
+.Btn-reg:hover {
+	background: none;
+	opacity: 0.7;
+}
+
+#Guide-delivery {
+	max-width: 1100px;
+}
+
+main div {
+	margin: 0 3% 0 auto;
+}
+
+.q-block::before {
+	content: "■";
+	width: 30px;
+	height: 30px;
+	color: #f56500;
+}
+
 /*--------------------------------
 フッター
 ---------------------------------*/
@@ -216,6 +355,18 @@ dt.active::after {
 /*--------------------------------
 ここからタブレット・sp
 ---------------------------------*/
+@media screen and (max-width: 1500px) {
+	/* 1300px以下に適用されるCSS（タブレット用） */
+
+/*--------------------------------
+配送
+---------------------------------*/
+    #Guide-delivery {
+	    max-width: 800px;
+    }
+
+}
+
 @media screen and (max-width: 1050px) {
 	/* 1050px以下に適用されるCSS（タブレット用） */
 
@@ -259,10 +410,33 @@ dt.active::after {
 よくある質問タブレット
 ---------------------------------*/
     #register {
-	    width: 500px;
+	    width: 95%;
 	    margin: 20px auto;
 	    border-bottom: 5px solid #f56500;
     }
+	
+	#Guide-delivery {
+		width: 95%;
+	}
+
+}
+
+@media screen and (max-width: 860px) {
+	/* 860px以下に適用されるCSS（スマホ用） */
+
+/*--------------------------------
+ガイドリスト
+---------------------------------*/
+	.Guide-list {
+		display: none;
+	}
+
+/*--------------------------------
+配送
+---------------------------------*/
+	main div {
+		margin: 0 auto;
+	}
 
 }
 
@@ -313,10 +487,16 @@ dt.active::after {
 	}
 
 /*--------------------------------
+パンくずリストsp
+---------------------------------*/
+	.Breadcrumb {
+		margin-top: 120px;
+	}
+
+/*--------------------------------
 会員登録sp
 ---------------------------------*/
     h2 {
-	    margin-top: 160px;
 	    display: block;
 	    text-align: center;
 	    font-weight: bold;
@@ -329,12 +509,42 @@ dt.active::after {
     }
 
 /*--------------------------------
+よくある質問sp
+---------------------------------*/
+	h3 {
+		width: 95%;
+		text-align: center;
+	}
+	
+	dl {
+		width: 95%;
+	}
+
+
+/*--------------------------------
 フッターsp
 ---------------------------------*/
     .Footer_a {
-	    font-size: 0.75rem;
+	    /* font-size: 0.75rem; */
+		/* width: 50%; */
+		display: block;
+		padding: 1rem 1rem;
+
     }
 
+	.Footer_ul {
+		flex-wrap: wrap;
+		/* justify-content: space-around; */
+	}
+	
+	.Footer_li {
+		width: 50%;
+		margin-top: 0;
+		/* padding: 0.5rem 1rem; */
+	}
+	
+	.Footer_img {
+		margin-top: 1rem;
+	}
+
 }
-
-
