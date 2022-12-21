@@ -63,6 +63,16 @@ return false;
 })
 });
 </script>
+<nav class="Breadcrumb">
+    <ol class="Breadcrumb-ListGroup">
+        <li class="Breadcrumb-ListGroup-Item">
+            <a class="Breadcrumb-ListGroup-Item-Link" href="index.php"><span>トップ</span></a>
+        </li>
+        <li class="Breadcrumb-ListGroup-Item">
+            <a class="Breadcrumb-ListGroup-Item-Link"><span>お問い合わせ</span></a>
+        </li>
+    </ol>
+</nav>
 <div id="register">
   <h2>お問い合わせ</h2>
 </div>
