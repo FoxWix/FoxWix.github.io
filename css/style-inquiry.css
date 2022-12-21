@@ -14,6 +14,49 @@ span {
 /*--------------------------------
 ヘッダー
 ---------------------------------*/
+/*--------------------------------
+パンくずリスト
+---------------------------------*/
+.Breadcrumb {
+    background: #f56500;
+    color: #fff;
+    padding: 0.1em;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.Breadcrumb-ListGroup {
+    display: flex;
+}
+
+.Breadcrumb-ListGroup-Item-Link[href]:hover {
+    opacity: 0.5;
+}
+
+.Breadcrumb-ListGroup-Item-Link {
+    text-decoration: none;
+}
+
+.Breadcrumb-ListGroup-Item-Link span {
+    color: white;
+}
+
+.Breadcrumb-ListGroup-Item {
+    list-style: none;
+    padding: 0.625rem 0;
+}
+
+.Breadcrumb-ListGroup > * + * {
+    margin-left: 0.5em;
+}
+
+.Breadcrumb-ListGroup > * + *::before {
+    content: ">";
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+    color: white;
+}
+
 #header {
 	height: 60px;
 	background: #fff;
