@@ -158,3 +158,15 @@ phpファイルにログイン処理を追加
 ・取得先タグ名の変更
 [images/*]
 ・最新版のフォルダと交換
+
+22/12/21
+[css/style-question.css]
+・内容を更新
+[css/style-guide.css]
+・新規追加
+[inquiry.php]
+・フッターのリンクを修正
+・パンくずリストを追加
+[question.php]
+[guide.php]
+・パンくずリストのリンクを修正
