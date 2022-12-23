@@ -2,8 +2,7 @@
 session_start();
 require_once("../php/util.php");
 require_once("../php/workDB_MF.php");
-
-/*  4.1 注文登録  */
+$errors = [];
 
 /* 
     受信するデータ
@@ -47,22 +46,22 @@ $type = "";
 if(isset ( $_POST["length" ]))
 $length = $_POST["length" ];
 else
-$length = "";
+$length = 0;
 
 if(isset ( $_POST["width" ]))
 $width = $_POST["width" ];
 else
-$width = "";
+$width = 0;
 
 if(isset ( $_POST["depth" ]))
 $depth = $_POST["depth" ];
 else
-$depth = "";
+$depth = 0;
 
 if(isset ( $_POST["thickness" ]))
 $thickness = $_POST["thickness"];
 else
-$thickness = "";
+$thickness = 0;
 
 if(isset ( $_POST["tmpId" ]))
 $tmpId = $_POST["tmpId" ];
@@ -77,12 +76,69 @@ $color = "";
 if(isset ( $_POST["quantity" ]))
 $quantity = $_POST["quantity" ];
 else
-$quantity = "";
+$quantity = 0;
 
 if(isset ( $_POST["f_price" ]))
-$price = $_POST["f_price" ];
+$f_price = $_POST["f_price" ];
 else
+$f_price = 0;
+
 $price = 0;
+
+//　チェック
+if($quantity < 1 || $quantity > 10){
+    error_page("?errorcode=E_D_001");
+}
+if($thickness != 3 && $thickness != 5 && $thickness != 8){
+    error_page("?errorcode=E_D_002");
+}
+
+//　数値
+if(!check_half_numeric($length + $width + $depth + $quantity + $thickness + $f_price)){
+    error_page("?errorcode=E_D_010");
+}
+//　特殊文字
+if(check_char(substr($color,1))){
+    error_page("?errorcode=E_D_011");
+}
+
+if($type=="C_order"){
+    if($length < 100 || $length > 500){
+        error_page("?errorcode=E_D_003");
+    }
+    if($width < 100 || $width > 500){
+        error_page("?errorcode=E_D_004");
+    }
+    if($depth < 100 || $depth > 500){
+        error_page("?errorcode=E_D_005");
+    }
+
+    $total = $length + $width + $depth;
+    
+    //  値段
+    if($total <= 600){
+        $price = 1000;
+    }
+    else if($total <= 800 && $total > 600){
+        $price = 2000;
+    }
+    else if($total <= 1000 && $total > 800){
+        $price = 10000;
+    }
+    else if($total <= 1200 && $total > 1000){
+        $price = 12000;
+    }
+    else if($total <= 1400 && $total > 1200){
+        $price = 13000;
+    }
+    else{
+        $price = 14000;
+    }
+
+    if($f_price != $price){
+        error_page("?errorcode=E_P_001");
+    }
+}
 
 //　ユーザーデータ取得
 $user_data = $_SESSION["user_data"];
@@ -122,7 +178,7 @@ if($type=="C_order"){
     //段ボール登録
     Add("t_cardboard",$cardboard_data);
 
-}else{
+}else if($type == "T_order"){
     //テンプレート
     $cardboard_data = [
         "cardboardID" => "T"       ,
@@ -146,13 +202,21 @@ if($type=="C_order"){
 
     // テンプレートデータ取得
     $Tmp = GetData_SELECT("m_cardboard_hina","SelectdesignNO","'".$tmpId."'")[0];
+    //ない場合
+    if(isset($Tmp)){
+        if(count($Tmp) == 0){
+            error_page("?errorcode=E_T_001");
+        }
+    }
+    else{
+        error_page("?errorcode=E_T_002");
+    }
     $cardboard_data["length"] = $Tmp["Length"];
     $cardboard_data["width" ] = $Tmp["Width"];
     $cardboard_data["depth" ] = $Tmp["Depth"];
     $cardboard_data["imgname"] = $Tmp["Image"];
     $order_data    ["price" ] = $Tmp["Price"];
-    // ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊　　要修正　　＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-    $cardboard_data["thickness"] = 1;
+    $cardboard_data["thickness"] = $thickness;
 
     //段ボール登録
     //段ボールID取得
@@ -163,12 +227,12 @@ if($type=="C_order"){
         $cardboard_id = "T0001";
     
     $cardboard_data["cardboardID"] = $cardboard_id;
-
-    var_export($cardboard_data);
-    var_export($order_data);
     
     //段ボール登録
     Add("t_cardboard",$cardboard_data);
+}
+else{
+    error_page("?errorcode=E_D_006");
 }
 
 //注文登録（カート）

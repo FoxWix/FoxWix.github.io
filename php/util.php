@@ -95,10 +95,20 @@ function check_char($str){
   $pattern = '/[\^\!\#\<\>\:\;\&\~\%\+\\\$\"\'\*\^\(\)\[\]\|\/\.\,\_\-]/';
   if(preg_match($pattern,$str)){
     return true;
+  }
+  else{
+      return false;
+  }
 }
-else{
-    return false;
-}
+
+/////////////////////
+//  error_page()
+//  機能:エラーページ遷移
+/////////////////////
+function error_page($GET){
+  $locate = "Location:../error.php".$GET;
+  header($locate);
+  exit();
 }
 
 /////////////////////
