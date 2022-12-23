@@ -173,3 +173,5 @@ phpファイルにログイン処理を追加
 [question.php]
 [guide.php]
 ・パンくずリストのリンクを修正
+
+[designOrder.js] 値段修正
