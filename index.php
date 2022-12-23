@@ -130,7 +130,7 @@ if (isset($_SESSION["user_data"])) {
     </div>
     <div id="TMP" class="Preview_inner">
       <div class="Preview_box">
-        <img src="/images/Design01-A-preview.png" id="tmpImage" width="400" height="400">
+        <img src="/images/Design01-A-preview.png" id="tmpImage" width="100%" height="100%">
       </div>
     </div>
     <div class="Custom_inner">
