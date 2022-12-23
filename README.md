@@ -177,6 +177,10 @@ phpファイルにログイン処理を追加
 12/23
 [designOrder.js] 
 ・値段修正
+[util.php]
+[user_register.php]
+・インジェクション対策処理追加（新規登録）
+
 [css/*]
 ・最新版に更新
 [index.php(133)]
