@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
             price = 12000;
         }
         else if(total <= 1400 && total > 1200){
-            price = 12000;
+            price = 13000;
         }
         else{
             price = 14000;
