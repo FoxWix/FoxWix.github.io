@@ -72,7 +72,6 @@ function check_Kana($str){
   }
 }
 
-
 /////////////////////
 //  error_list()
 //  機能:エラー一覧の表示
@@ -86,6 +85,20 @@ function error_list($errors, $error){
     echo "</ul>";
   }
   return;
+}
+
+/////////////////////
+//  check_char()
+//  機能:特殊文字の判定
+/////////////////////
+function check_char($str){
+  $pattern = '/[\^\!\#\<\>\:\;\&\~\%\+\\\$\"\'\*\^\(\)\[\]\|\/\.\,\_\-]/';
+  if(preg_match($pattern,$str)){
+    return true;
+}
+else{
+    return false;
+}
 }
 
 /////////////////////

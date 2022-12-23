@@ -20,6 +20,8 @@ if(isset($_POST["e-mail-address"])){
         $errors["email"][] = "メールアドレスは既に使用されています";
     if(mb_strlen($email) > 50)
         $errors["email"][] = "メールアドレスは50文字以下です";
+    if(check_char($email))
+        $errors["email"][] = "使用できない文字が入力されています";
 }
 else{
     $input_data["email"] = "";
@@ -32,6 +34,8 @@ if(isset($_POST["e-mail-address-confirmation"])){
         $errors["email-conf"][] = "確認メールアドレスが入力されていません";
     if($email !== $email_conf)
         $errors["email-conf"][] = "メールアドレスが確認メールアドレスと一致しません";
+    if(check_char($email_conf))
+        $errors["email_conf"][] = "使用できない文字が入力されています";
 }
 else{
     $input_data["email-conf"] = "";
@@ -42,8 +46,10 @@ if(isset($_POST["password"])){
     $input_data["password"] = $password;
     if($password == "")
         $errors["password"][] = "パスワードが入力されていません";
-    if(mb_strlen($password) > 19)
-        $errors["password"][] = "パスワードは19文字以下です";
+    if(mb_strlen($password) > 20)
+        $errors["password"][] = "パスワードは20文字以下です";
+    if(check_char($password))
+        $errors["password"][] = "使用できない文字が入力されています";
 }
 else{
     $input_data["password"] = "";
@@ -84,6 +90,8 @@ if($name == " ")
     $errors["name"][] = "名前が入力されていません";
 if(mb_strlen($name) > 20)
     $errors["name"][] = "名前は20文字以下です";
+if(check_char($name))
+    $errors["name"][] = "使用できない文字が入力されています";
 
 //名前カナ
 if(isset($_POST["name-3"])){
@@ -110,6 +118,8 @@ if(mb_strlen($name_kana) > 30)
     $errors["name-kana"][] = "フリガナは30文字以下です";
 if(!check_Kana($name_kana))
     $errors["name-kana"][] = "フリガナは全角カタカナです";
+if(check_char($name_kana))
+    $errors["name_kana"][] = "使用できない文字が入力されています";
 
 //電話番号
 if(isset($_POST["phone-number"])){
@@ -122,6 +132,8 @@ if(mb_strlen($phone_number) > 13)
     $errors["phone-number"][] = "電話番号は13文字以下です";
 if(!check_half_numeric($phone_number))
     $errors["phone-number"][] = "電話番号は半角数字です";
+if(check_char($phone_number))
+    $errors["phone_number"][] = "使用できない文字が入力されています";
 }
 else{
     $input_data["phone-number"] = "";
@@ -150,6 +162,8 @@ if(mb_strlen($postcode) != 7)
     $errors["postcode"][] = "郵便番号は7桁です";
 if(!check_half_numeric($postcode))
     $errors["postcode"][] = "郵便番号は半角数字です";
+if(check_char($postcode))
+    $errors["postcode"][] = "使用できない文字が入力されています";
 
 //都道府県
 if(isset($_POST["prefecture"])){
@@ -167,7 +181,7 @@ if(isset($_POST["citytown"])){
     $input_data["citytown"] = $citytown;
     if($citytown == "")
         $errors["citytown"][] = "市区町村が入力されていません";
-    if(strpos($citytown,"$"))
+    if(check_char($citytown))
         $errors["citytown"][] = "使用できない文字が入力されています";
 }
 else{
@@ -179,7 +193,7 @@ if(isset($_POST["addnumber"])){
     $input_data["addnumber"] = $addnumber;
     if($addnumber == "")
         $errors["addnumber"][] = "番地・建物名が入力されていません";
-    if(strpos($addnumber,"$"))
+    if(check_char($addnumber))
         $errors["addnumber"][] = "使用できない文字が入力されています";
 }
 else{
