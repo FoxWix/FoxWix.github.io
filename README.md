@@ -180,6 +180,9 @@ phpファイルにログイン処理を追加
 [util.php]
 [user_register.php]
 ・インジェクション対策処理追加（新規登録）
+[cart_add.php]
+[util.php]
+・セキュリティ対策処理追加（簡易的な）
 
 [css/*]
 ・最新版に更新
