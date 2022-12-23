@@ -59,7 +59,8 @@ else
       </div>
     </div>
   </header>
-<div class="error">
+<div class="MainVis"></div>
+<div class="MainVis">
     <div id="register">
         <h2>エラーが発生しました</h2>
     </div>
