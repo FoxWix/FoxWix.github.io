@@ -45,9 +45,22 @@ window.addEventListener('load', () => {
         if(total <= 600){
             price = 1000;
         }
-        else{
+        else if(total <= 800 && total > 600){
             price = 2000;
         }
+        else if(total <= 1000 && total > 800){
+            price = 10000;
+        }
+        else if(total <= 1200 && total > 1000){
+            price = 12000;
+        }
+        else if(total <= 1400 && total > 1200){
+            price = 12000;
+        }
+        else{
+            price = 14000;
+        }
+        
         document.getElementById('price').innerHTML = price + "<span> 円</span>";
         document.getElementById('total').innerHTML = (price*quantity) + "<span> 円</span>";
         document.getElementById('with-tax').innerHTML = Math.floor(price*quantity*1.1) + '<span class="total-last-span"> 円</span>';
