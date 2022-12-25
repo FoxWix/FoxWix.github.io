@@ -185,8 +185,13 @@ phpファイルにログイン処理を追加
 ・セキュリティ対策処理追加（簡易的な）
 [error.php]
 ・エラーが発生した時用
-
 [css/*]
 ・最新版に更新
 [index.php(133)]
 ・width, heightの値を100%に変更
+
+22/12/25
+[Completion.php]
+・新規作成（ログイン管理のコードは未実装）
+[css/style-Completion.css]
+・新規作成
