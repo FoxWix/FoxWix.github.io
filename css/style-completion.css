@@ -1,0 +1,461 @@
+@charset "UTF-8";
+/* CSS Document */
+/* text-color #777777
+   background-color #777777*/
+/* レスポンシブ 対応予定 */
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+	display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    min-height: 100vh;
+}
+
+p,
+h1,
+h2,
+span {
+	color: #333333;
+}
+
+a {
+    transition : all 0.5s ease 0s;
+}
+
+/*--------------------------------
+ヘッダー
+---------------------------------*/
+#header {
+	height: 60px;
+	background: #fff;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	/* border-bottom: 1px solid #C1C1C1 */;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Cart_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: white;
+	border: 3px solid #f56500;
+    padding: 10px 20px;
+    color: #f56500;
+	line-height: 40px;
+	height: 40px;
+	margin-right: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.Login_buttun {
+	text-decoration: none;
+	border-radius: 5px;
+    background: #f56500;
+    padding: 10px 20px;
+    color: white;
+	line-height: 40px;
+	height: 40px;
+	border: 3px solid #f56500;
+	font-weight: bold;
+}
+
+#header-btns {
+	margin-left: auto;
+	margin-right: 40px;
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+	margin-left: 20px;
+}
+
+/*Go to top*/
+a:hover {
+    background-color: #ed702b;
+}
+
+.Cart_buttun:hover {
+	background-color: white;
+	opacity: 0.7;
+}
+
+.Cart_buttun::before {
+	content: "";
+    /* background-image: url("../images/cart-icon.svg"); */
+    display: inline-block;
+    background-image: url("../images/cart-icon.svg");
+    height: 28px;
+    width: 28px;
+	position: relative;
+	top: 8px;
+}
+
+.User-inner {
+	margin-right: 10px;
+}
+
+#User-name {
+	font-weight: bold;
+}
+
+.head-pr {
+	font-size: 0.8rem;
+}
+
+.head-pr {
+	font-size: 0.8rem;
+}
+
+/*--------------------------------
+パンくずリスト
+---------------------------------*/
+/* .Breadcrumb {
+    background: #f56500;
+    color: #fff;
+    padding: 0.1em;
+    margin-top: 60px;
+	margin-bottom: 40px;
+}
+
+.Breadcrumb-ListGroup {
+    display: flex;
+}
+
+.Breadcrumb-ListGroup-Item-Link[href]:hover {
+    opacity: 0.5;
+}
+
+.Breadcrumb-ListGroup-Item-Link {
+	text-decoration: none;
+}
+
+.Breadcrumb-ListGroup-Item-Link span {
+	color: white;	
+}
+
+.Breadcrumb-ListGroup-Item {
+	list-style: none;
+	padding: 0.625rem 0;
+}
+
+.Breadcrumb-ListGroup > * + * {
+    margin-left: 0.5em;
+}
+
+.Breadcrumb-ListGroup > * + *::before {
+    content: ">";
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+	color: white;
+} */
+
+/*--------------------------------
+注文完了
+---------------------------------*/
+h2 {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	color: #f56500;
+}
+
+h2 {
+    display: flex;
+    align-items: center; /* 垂直中心 */
+    justify-content: center; /* 水平中心 */
+}
+
+h2:before, h2:after {
+    border-top: 3px solid;
+    content: "";
+    width: 3em; /* 線の長さ */
+}
+
+h2:before {
+    margin-right: 1em; /* 文字の右隣 */
+}
+
+h2:after {
+    margin-left: 1em; /* 文字の左隣 */
+}
+
+#register {
+	width: 460px;
+	margin: 20px auto;
+	/* border-bottom: 3px solid #f56500; */
+}
+
+#login-box {
+	border: 4px solid #f56500;
+	width: 60%;
+	margin: 200px auto 200px auto;
+	padding: 20px;
+}
+
+form {
+	padding: 10px 0;
+	text-align: center;
+}
+
+.Login_buttun2 {
+	text-decoration: none;
+	border-radius: 5px;
+    background: #f56500;
+    padding: 10px 40px;
+    color: white;
+	line-height: 40px;
+	height: 40px;
+	border: none;
+	margin-top: 60px;
+	font-weight: bold;
+}
+
+.mail-icon {
+	/* border: 1px solid #333333; */
+	width: 70px;
+	height: 70px;
+	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+    background: #fff;
+	margin: 0 auto;
+	border: 3px solid #f56500;
+}
+
+.Check-txt {
+	text-align: center;
+}
+
+#login-box form {
+	margin-top: 1rem;
+}
+
+/*--------------------------------
+フッター
+---------------------------------*/
+.Footer_ul {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.Footer_li {
+	margin-top: 40px;
+	width: 20%;
+	list-style: none;
+}
+
+.Footer_inner {
+	height: 240px;
+	background: #FF942A;
+}
+
+.Footer_a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+.Footer_img {
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.Footer_copy {
+	height: 30px;
+	background: #f56500;
+	text-align: center;
+}
+
+.Footer_copy_txt {
+	color: white;
+	line-height: 30px;
+}
+
+/*--------------------------------
+ここからタブレット・sp
+---------------------------------*/
+@media screen and (max-width: 1050px) {
+	/* 1050px以下に適用されるCSS（タブレット用） */
+
+/*--------------------------------
+ヘッダータブレット
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		height: 60px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin-right: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 840px) {
+	/* 840px以下に適用されるCSS（スマホ用） */
+
+/*--------------------------------
+ログインsp
+---------------------------------*/
+    #login-box {
+	    border: 4px solid #f56500;
+	    width: 600px;
+	    margin: 200px auto 200px auto;
+	    padding: 1rem;
+    }
+
+/*--------------------------------
+注文完了
+---------------------------------*/
+	h2 {
+		width: 100%;
+	}
+
+}
+
+@media screen and (max-width: 640px) {
+	/* 640px以下に適用されるCSS（スマホ用） */
+
+/*--------------------------------
+ヘッダーsp
+---------------------------------*/
+    h1 {
+	    margin-left: 0;
+    }
+
+    #header img {
+	    height: 3rem;
+	}
+
+	.head-pr {
+		display: none;
+	}
+
+	#header {
+		flex-direction: column;
+		height: 120px;
+	}
+	
+    .Cart_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+		margin-right: 0;
+    }
+
+    .Login_buttun {
+        padding: 0.5rem 1rem;
+	    line-height: 40px;
+	    height: 40px;
+    }
+
+    #header-btns {
+	    margin: 0 auto;
+		display: flex;
+		flex-direction: column-reverse;
+    }
+
+	.User-inner {
+		margin-top: 0.3rem;
+	}
+
+/*--------------------------------
+パンくずリストsp
+---------------------------------*/
+	.Breadcrumb {
+		margin-top: 120px;
+	}
+
+/*--------------------------------
+ログインsp
+---------------------------------*/
+    #register {
+	    width: 300px;
+	    margin: 10px auto;
+    }
+
+    #login-box {
+	    border: 4px solid #f56500;
+	    width: 95%;
+	    margin: 200px auto 200px auto;
+	    padding: 1rem;
+    }
+
+    form {
+	    padding: 10px 0;
+    }
+
+    .btn-box {
+	    width: 300px;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: baseline;
+    }
+
+	h2::before,h2::after {
+		width: 0;
+	}
+
+/*--------------------------------
+フッターsp
+---------------------------------*/
+    .Footer_a {
+	    /* font-size: 0.75rem; */
+		/* width: 50%; */
+		display: block;
+		padding: 1rem 1rem;
+
+    }
+
+	.Footer_ul {
+		flex-wrap: wrap;
+		/* justify-content: space-around; */
+	}
+	
+	.Footer_li {
+		width: 50%;
+		margin-top: 0;
+		/* padding: 0.5rem 1rem; */
+	}
+	
+	.Footer_img {
+		margin-top: 1rem;
+	}
+
+}
