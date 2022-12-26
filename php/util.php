@@ -63,7 +63,7 @@ function check_half_numeric($str){
 //  機能:全角カタカナのチェック
 /////////////////////
 function check_Kana($str){
-  $pattern = '/^[ァ-ヾ]+$/u';
+  $pattern = "/^[ァ-ヶー]+$/u";
   if (preg_match($pattern, $str)){
     return true;
   }
@@ -92,7 +92,21 @@ function error_list($errors, $error){
 //  機能:特殊文字の判定
 /////////////////////
 function check_char($str){
-  $pattern = '/[\^\!\#\<\>\:\;\&\~\%\+\\\$\"\'\*\^\(\)\[\]\|\/\.\,\_\-]/';
+  $pattern = '/[\^\@\!\#\<\>\:\;\&\~\%\+\\\$\"\'\*\^\(\)\[\]\|\/\.\,\_\-]/';
+  if(preg_match($pattern,$str)){
+    return true;
+  }
+  else{
+      return false;
+  }
+}
+
+/////////////////////
+//  check_char_mail()
+//  機能:特殊文字の判定（メール用　.[ドット]、@[アット]以外）
+/////////////////////
+function check_char_mail($str){
+  $pattern = '/[\^\!\#\<\>\:\;\&\~\%\+\\\$\"\'\*\^\(\)\[\]\|\/\,\-]/';
   if(preg_match($pattern,$str)){
     return true;
   }

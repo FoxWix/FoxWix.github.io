@@ -20,7 +20,7 @@ if(isset($_POST["e-mail-address"])){
         $errors["email"][] = "メールアドレスは既に使用されています";
     if(mb_strlen($email) > 50)
         $errors["email"][] = "メールアドレスは50文字以下です";
-    if(check_char($email))
+    if(check_char_mail($email))
         $errors["email"][] = "使用できない文字が入力されています";
 }
 else{
@@ -34,8 +34,6 @@ if(isset($_POST["e-mail-address-confirmation"])){
         $errors["email-conf"][] = "確認メールアドレスが入力されていません";
     if($email !== $email_conf)
         $errors["email-conf"][] = "メールアドレスが確認メールアドレスと一致しません";
-    if(check_char($email_conf))
-        $errors["email_conf"][] = "使用できない文字が入力されています";
 }
 else{
     $input_data["email-conf"] = "";
@@ -116,7 +114,7 @@ if($name_kana == " ")
     $errors["name-kana"][] = "フリガナが入力されていません";
 if(mb_strlen($name_kana) > 30)
     $errors["name-kana"][] = "フリガナは30文字以下です";
-if(!check_Kana($name_kana))
+if(!check_Kana(str_replace(" ","",$name_kana)))
     $errors["name-kana"][] = "フリガナは全角カタカナです";
 if(check_char($name_kana))
     $errors["name_kana"][] = "使用できない文字が入力されています";
@@ -243,12 +241,7 @@ if(isset($result)){
         $_SESSION["user_data"] = $row;
     }
 
-    if(isset($_SESSION["cardboard_flg"])){
-        header("Location:../order.php");
-        exit();
-    }
-
-    header("Location:../index.php");
+    header("Location:../Completion.php");
     exit();
     }
 }
