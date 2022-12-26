@@ -195,3 +195,10 @@ phpファイルにログイン処理を追加
 ・新規作成（ログイン管理のコードは未実装）
 [css/style-Completion.css]
 ・新規作成
+
+12/26
+[Completion.php]
+・php処理追加
+[user_register.php]
+[util.php]
+・内容修正
