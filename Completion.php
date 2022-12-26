@@ -1,3 +1,20 @@
+<?php
+session_start();
+require_once("./php/util.php");
+require_once("./php/workDB_MF.php");
+
+//ログイン情報
+if(isset($_SESSION["user_data"])){
+  $user_data = $_SESSION["user_data"];
+  $user_name = $user_data["Name"];
+  $Login_flg = true;
+}
+else{
+  $user_name = "";
+  $Login_flg = false;
+}
+?>
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -16,12 +33,20 @@
 <header id="header">
   <h1><a href="index.php"><img src="images/Logo.png" alt="ブロック・デコ" height="60px" width="auto"></a></h1><span class="head-pr">最短当日発送<br>プレゼントならブロック・デコにお任せ！</span>
   <div id="header-btns">
-    <span class="User-inner">ユーザー：<span id="User-name">大阪太郎</span></span>
-    <div id="flex-btns">
-	  <a href="" class="Cart_buttun">カート</a>
-      <a href="" class="Login_buttun">ログイン</a>
+      <!-- ログイン処理 -->
+      <?php if($Login_flg): ?>
+      <span class="User-inner">ユーザー：<span id="User-name"><?php echo $user_name ?></span></span>
+      <?php endif; ?>
+      <div id="flex-btns">
+        <a href="./cart.php" class="Cart_buttun">カート</a>
+        <?php if($Login_flg): ?>
+          <a href="./php/user_logout.php" class="Login_buttun">ログアウト</a>
+        <?php endif; ?>
+        <?php if(!$Login_flg): ?>
+          <a href="./login.php" class="Login_buttun">ログイン</a>
+        <?php endif; ?>
+      </div>
     </div>
-  </div>
 </header>
 <script>            
 jQuery(document).ready(function() {
