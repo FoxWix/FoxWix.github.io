@@ -202,3 +202,11 @@ phpファイルにログイン処理を追加
 [user_register.php]
 [util.php]
 ・内容修正
+
+1/1
+[designOrder.js]
+[cart_add.php]
+・値段の更新
+[error.php]
+[style-php_error.css]
+・エラーが発生した時の遷移先
