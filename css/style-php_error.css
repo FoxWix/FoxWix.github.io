@@ -1,0 +1,36 @@
+.php_error{
+    padding: 5px 0 0 0;
+}
+
+.php_error li {
+    list-style: none;
+    color: red;
+}
+
+.MainVisError {
+	margin-bottom: 420px;
+	margin-top: 60px;
+    padding-top: 80px;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#error {
+    width: 700px;
+    margin: 20px auto;
+    border-bottom: 5px solid #f56500;
+}
+
+.MainVisError a {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 60px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+.MainVisError a:hover {
+    opacity: 0.6;
+}
