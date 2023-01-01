@@ -32,6 +32,7 @@ else
     <meta name=”robots” content=”noindex”>
     <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-php_error.css">
   <link rel="icon" href="ico/favicon.ico">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>エラーページ</title>
@@ -59,11 +60,11 @@ else
       </div>
     </div>
   </header>
-<div class="MainVis"></div>
-<div class="MainVis">
-    <div id="register">
+<div class="MainVisError">
+    <div id="error">
         <h2>エラーが発生しました</h2>
     </div>
+    <a href="index.php">トップページへ戻る</a>
 </div>
 <footer id="Footer">
     <div class="Footer_inner">
