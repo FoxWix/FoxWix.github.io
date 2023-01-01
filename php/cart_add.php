@@ -117,22 +117,19 @@ if($type=="C_order"){
     
     //  値段
     if($total <= 600){
-        $price = 1000;
-    }
-    else if($total <= 800 && $total > 600){
-        $price = 2000;
-    }
-    else if($total <= 1000 && $total > 800){
-        $price = 10000;
-    }
-    else if($total <= 1200 && $total > 1000){
-        $price = 12000;
-    }
-    else if($total <= 1400 && $total > 1200){
         $price = 13000;
     }
-    else{
+    else if($total <= 1000 && $total > 600){
         $price = 14000;
+    }
+    else if($total <= 1400 && $total > 1000){
+        $price = 15000;
+    }
+    else if($total <= 1500 && $total > 1400){
+        $price = 16000;
+    }
+    else{
+        $price = 20000;
     }
 
     if($f_price != $price){
