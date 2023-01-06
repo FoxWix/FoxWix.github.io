@@ -312,6 +312,14 @@ function UpdateTexture_C(textureId, path) {
 //--------------------------------------------------------------------------
 function UpdateSize(length, width, depth) {
 
+    //サイズチェック
+    if (length < 100 || width < 100 || depth < 100) {
+        return;
+    }
+    if (length > 500 || width > 500 || depth > 500) {
+        return;
+    }
+    
     //現在のテクスチャをクリア
     scene.clear();
 
