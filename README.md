@@ -210,3 +210,9 @@ phpファイルにログイン処理を追加
 [error.php]
 [style-php_error.css]
 ・エラーが発生した時の遷移先
+
+23/1/6
+[js/event/designEvent.js]
+・すべてリセットボタンを押したとき寸法がリセットされない問題を修正
+[js/object/render.js]
+・範囲を超えた寸法でオブジェクトを描画できてしまう問題を修正
