@@ -109,6 +109,11 @@ document.getElementById('resetAllBtn').addEventListener('click', () => {
     document.getElementById('preview3').src = "../images/PreviewInitImages/none4.png"
     document.getElementById('preview4').src = "../images/PreviewInitImages/none1.png"
     document.getElementById('preview5').src = "../images/PreviewInitImages/none3.png"
+    
+    //寸法を初期化
+    document.getElementById('length').value = 300;
+    document.getElementById('width').value = 330;
+    document.getElementById('depth').value = 220;
 
     //3Dオブジェクトの画像を初期化
     textureReset();
