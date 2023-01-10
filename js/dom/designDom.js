@@ -4,13 +4,12 @@
     
 -------------------------------------------------------------------------*/
 
-
 //-------------------------------------------------------------------------
 //  長さを返却
 //-------------------------------------------------------------------------
 function GetLength() {
 
-    return parseInt(document.getElementById('length').value);
+    return Math.floor(parseInt(document.getElementById('length').value));
 
 }
 
@@ -19,7 +18,7 @@ function GetLength() {
 //-------------------------------------------------------------------------
 function GetWidth() {
 
-    return parseInt(document.getElementById('width').value);
+    return Math.floor(parseInt(document.getElementById('width').value));
 
 }
 
@@ -28,7 +27,7 @@ function GetWidth() {
 //-------------------------------------------------------------------------
 function GetDepth() {
 
-    return parseInt(document.getElementById('depth').value);
+    return Math.floor(parseInt(document.getElementById('depth').value));
 
 }
 
@@ -37,9 +36,9 @@ function GetDepth() {
 //-------------------------------------------------------------------------
 function GetSize() {
 
-    const l = parseInt(document.getElementById('length').value);
-    const w = parseInt(document.getElementById('width').value);
-    const d = parseInt(document.getElementById('depth').value);
+    const l = GetLength();
+    const w = GetWidth();
+    const d = GetDepth();
 
     let size = {
         length: l,
