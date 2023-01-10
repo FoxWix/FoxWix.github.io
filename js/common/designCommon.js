@@ -20,7 +20,13 @@ const Color = {
         color05: "images/Color_5.png",
         color06: "images/Color_6.png",
     },
-
+    
+    //1->darkgray
+    //2->orangered
+    //3->gold
+    //4->mediumaquamarine
+    //5->royalblue
+    //6->darkorchid
     TemplateColor: [
         [1],
         [1],
