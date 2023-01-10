@@ -33,7 +33,7 @@ document.getElementById('submit').addEventListener('click', async () => {
     }
 
     //数量を取得
-    const quan = parseInt(document.getElementById('quantity').value);
+    const quan = Math.floor(parseInt(document.getElementById('quantity').value));
     if (Check_e(quan)) {
 
         alert('数量は最大10個までです');
