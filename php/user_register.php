@@ -191,7 +191,7 @@ if(isset($_POST["addnumber"])){
     $input_data["addnumber"] = $addnumber;
     if($addnumber == "")
         $errors["addnumber"][] = "番地・建物名が入力されていません";
-    if(check_char($addnumber))
+    if(check_char(str_replace("-","",$addnumber)))
         $errors["addnumber"][] = "使用できない文字が入力されています";
 }
 else{
